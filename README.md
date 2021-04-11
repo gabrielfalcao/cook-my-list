@@ -28,7 +28,7 @@ yarn lint
 yarn test
 ```
 
-## Screens
+## Wireframe Screens
 
 <details>
   <summary>Home</summary>
