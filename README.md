@@ -1,5 +1,11 @@
 # Cook My List
 
+## 🔬 Technologies
+
+- Language: Typescript
+- Runtime Framework: [React Native](https://reactnative.dev/) via [Expo](http://expo.io/) (tested only on iPhone)
+- UI Framework: [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) for React Native
+
 ## 🚀 How to use
 
 #### 💻 Macbook Setup
@@ -21,4 +27,32 @@ yarn lint
 ```bash
 yarn test
 ```
+
+## Screens
+
+<details>
+  <summary>Home</summary>
+  ![](_telas/00.1_Home.jpg)
+</details>
+<details>
+  <summary>Home Detalhado</summary>
+  ![](_telas/00.2_Home_detalhado.jpg)
+</details>
+<details>
+  <summary>Home Detalhado Scroll</summary>
+  ![](_telas/00.2_Home_detalhado.jpg)
+</details>
+<details>
+  <summary>Home Detalhado</summary>
+  ![](_telas/00.3_Home_detalhado_scroll.jpg)
+</details>
+<details>
+  <summary>Receita</summary>
+  ![](_telas/01.0_Receita.jpg)
+</details>
+<details>
+  <summary>Menu (Drawer)</summary>
+  ![](_telas/02.0_Menu.jpg)
+</details>
+
 
