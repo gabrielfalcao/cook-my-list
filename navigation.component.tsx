@@ -36,8 +36,9 @@ const DrawerContent = ({ navigation, state }) => (
     style={styles.drawer}
     header={DrawerHeader}
     onSelect={(index) => {
-        console.log(`DrawerContent ${JSON.stringify(index)}`, state.routeNames)
-        navigation.navigate(state.routeNames[index.row])}}
+      console.log(`DrawerContent ${JSON.stringify(index)}`, state.routeNames);
+      navigation.navigate(state.routeNames[index.row]);
+    }}
   >
     <DrawerItem title="Cozinhar Agora" />
     <DrawerItem title="Minhas Receitas" />
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     justifyContent: "flex-start",
     alignItems: "center",
-    maxHeight: 80
+    maxHeight: 80,
   },
   avatar: {
     margin: 8,

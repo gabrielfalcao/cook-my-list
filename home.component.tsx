@@ -73,7 +73,9 @@ export const HomeScreen = ({ navigation }) => {
       <TopNav navigation={navigation} />
 
       <Divider />
-      <Layout style={{ flex: 1, justifyContent: "top", alignItems: "flex-start" }}>
+      <Layout
+        style={{ flex: 1, justifyContent: "top", alignItems: "flex-start" }}
+      >
         <Text category="s1" status="basic" style={styles.questionTitle}>
           O que temos para hoje?
         </Text>
