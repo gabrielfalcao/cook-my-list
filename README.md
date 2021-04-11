@@ -32,27 +32,27 @@ yarn test
 
 <details>
   <summary>Home</summary>
-  ![](_telas/00.1_Home.jpg)
+  ![Home](_telas/00.1_Home.jpg)
 </details>
 <details>
   <summary>Home Detalhado</summary>
-  ![](_telas/00.2_Home_detalhado.jpg)
+  ![Home Detalhado](_telas/00.2_Home_detalhado.jpg)
 </details>
 <details>
   <summary>Home Detalhado Scroll</summary>
-  ![](_telas/00.2_Home_detalhado.jpg)
+  ![Home Detalhado Scroll](_telas/00.2_Home_detalhado.jpg)
 </details>
 <details>
   <summary>Home Detalhado</summary>
-  ![](_telas/00.3_Home_detalhado_scroll.jpg)
+  ![Home Detalhado](_telas/00.3_Home_detalhado_scroll.jpg)
 </details>
 <details>
   <summary>Receita</summary>
-  ![](_telas/01.0_Receita.jpg)
+  ![Receita](_telas/01.0_Receita.jpg)
 </details>
 <details>
   <summary>Menu (Drawer)</summary>
-  ![](_telas/02.0_Menu.jpg)
+  ![Menu](_telas/02.0_Menu.jpg)
 </details>
 
 
