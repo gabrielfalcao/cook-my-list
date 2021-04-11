@@ -10,6 +10,7 @@ import brocolisComOvo from "./assets/recipe-images/brocolis-com-ovo.jpg";
 import lowCarbIcon from "./assets/icons/avocado.svg";
 import portionIcon from "./assets/icons/portion.svg";
 import timerIcon from "./assets/icons/timer.svg";
+import { RecipeTag, Ingredient, Recipe } from "./types";
 
 const knownIngredients = { egg, broccoli, cheese, shrimp };
 
@@ -21,16 +22,19 @@ const knownRecipes = {
 
 const knownTags = {
   "low-carb": lowCarbIcon,
-  "portion": portionIcon,
-  "timer": timerIcon,
+  portion: portionIcon,
+  timer: timerIcon,
 };
 
-export function getIngredientImage(imageName: string): any {
-  return knownIngredients[imageName];
+export function getIngredientImage(ingredient: Ingredient): any {
+  return knownIngredients[ingredient.imageName];
 }
 
-export function getRecipeImage(imageName: string): any {
-  return knownRecipes[imageName];
+export function getRecipeImage(recipe: Recipe): any {
+  return knownRecipes[recipe.imageName];
 }
 
+export function getTagImage(tag: RecipeTag): any {
+  return knownTags[tag.iconName];
+}
 export default { ...knownIngredients, ...knownRecipes };

@@ -36,7 +36,7 @@ export const recipes: Recipe[] = [
       },
       {
         name: "Low Carb",
-        iconName: "avocado",
+        iconName: "low-carb",
       },
     ],
   },

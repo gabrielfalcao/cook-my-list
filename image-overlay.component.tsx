@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  GestureResponderEvent,
   ImageBackground,
   ImageBackgroundProps,
   StyleProp,
@@ -15,6 +16,7 @@ interface OverlayImageStyle extends ViewStyle {
 export interface ImageOverlayProps extends ImageBackgroundProps {
   style?: StyleProp<OverlayImageStyle>;
   children?: React.ReactNode;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const DEFAULT_OVERLAY_COLOR = "rgba(0, 0, 0, 0.45)";
@@ -22,7 +24,7 @@ const DEFAULT_OVERLAY_COLOR = "rgba(0, 0, 0, 0.45)";
 export const ImageOverlay = (
   props?: ImageOverlayProps
 ): React.ReactElement<ImageBackgroundProps> => {
-  const { style, children, ...imageBackgroundProps } = props;
+  const { style, children, onPress, ...imageBackgroundProps } = props;
   const { overlayColor, ...imageBackgroundStyle } = StyleSheet.flatten(style);
 
   return (

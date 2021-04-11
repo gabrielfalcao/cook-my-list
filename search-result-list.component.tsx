@@ -7,13 +7,23 @@ import { recipes } from "./ingredients.constants";
 import RecipeCard from "./recipe-card.component";
 import { List, Text } from "@ui-kitten/components";
 
-const renderHorizontalTrainingItem = (
-  info: ListRenderItemInfo<Recipe>
-): React.ReactElement => (
-  <RecipeCard style={styles.horizontalItem} recipe={info.item} />
-);
-
-export const SearchResultList = ({ chosenIngredientNames, ...props }) => {
+export const SearchResultList = ({
+  chosenIngredientNames,
+  navigation,
+  ...props
+}) => {
+  const renderHorizontalTrainingItem = (
+    info: ListRenderItemInfo<Recipe>
+  ): React.ReactElement => (
+    <RecipeCard
+      style={styles.horizontalItem}
+      recipe={info.item}
+      onPress={() => {
+        console.log(`RecipeCard onPress`, info);
+        navigation.navigate("Details");
+      }}
+    />
+  );
   return (
     <React.Fragment>
       <Text style={styles.headerTitle} appearance="hint">

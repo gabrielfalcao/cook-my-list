@@ -56,7 +56,7 @@ export const IngredientSearch = ({
 
   const renderCloseIcon = (props) => (
     <TouchableWithoutFeedback onPress={clearInput}>
-      <Icon {...props} name="close" />
+      <Icon {...props} name="search-outline" />
     </TouchableWithoutFeedback>
   );
 

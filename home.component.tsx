@@ -11,6 +11,7 @@ import IngredientSearch from "./ingredient-input.component";
 import SearchResultList from "./search-result-list.component";
 import { getIngredientImage } from "./food-images";
 import { ingredients } from "./ingredients.constants";
+import { Ingredient } from "./types";
 const CloseIcon = ({ ...props }) => (
   <Icon {...props} name="close-circle-outline" />
 );
@@ -32,12 +33,12 @@ export const HomeScreen = ({ navigation }) => {
   };
 
   const renderFoodItem = ({ item }) => {
-    const { imageName, ...info } = item;
+    const ingredient: Ingredient = item;
     const ImageItem = ({ ...props }) => (
       <Avatar
         {...props}
         style={[props.style, { tintColor: null }]}
-        source={getIngredientImage(imageName)}
+        source={getIngredientImage(ingredient)}
       />
     );
 
@@ -56,8 +57,7 @@ export const HomeScreen = ({ navigation }) => {
     );
     return (
       <ListItem
-        title={info.name}
-        //description={info.description}
+        title={ingredient.name}
         accessoryLeft={ImageItem}
         accessoryRight={RemoveItem}
       />
@@ -93,6 +93,7 @@ export const HomeScreen = ({ navigation }) => {
         />
         <SearchResultList
           chosenIngredientNames={ingredients.data.map((i) => i.name)}
+          navigation={navigation}
         />
       </Layout>
     </SafeAreaView>
@@ -102,6 +103,7 @@ export const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   input: {
     marginHorizontal: 20,
+    width: "90%",
   },
   layout: { flex: 1, justifyContent: "space-evenly", alignItems: "center" },
   questionTitle: {
