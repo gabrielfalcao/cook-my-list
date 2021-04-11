@@ -8,7 +8,8 @@ import { Avatar, ListItem, Icon } from "@ui-kitten/components";
 import { Input } from "@ui-kitten/components";
 import TopNav from "./topnav.component";
 import IngredientSearch from "./ingredient-input.component";
-import foodImages from "./food-images";
+import SearchResultList from "./search-result-list.component";
+import { getIngredientImage } from "./food-images";
 import { ingredients } from "./ingredients.constants";
 const CloseIcon = ({ ...props }) => (
   <Icon {...props} name="close-circle-outline" />
@@ -36,7 +37,7 @@ export const HomeScreen = ({ navigation }) => {
       <Avatar
         {...props}
         style={[props.style, { tintColor: null }]}
-        source={foodImages[imageName]}
+        source={getIngredientImage(imageName)}
       />
     );
 
@@ -89,6 +90,9 @@ export const HomeScreen = ({ navigation }) => {
           contentContainerStyle={styles.contentContainer}
           data={ingredients.data}
           renderItem={renderFoodItem}
+        />
+        <SearchResultList
+          chosenIngredientNames={ingredients.data.map((i) => i.name)}
         />
       </Layout>
     </SafeAreaView>

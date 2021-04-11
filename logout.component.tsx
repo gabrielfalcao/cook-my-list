@@ -2,24 +2,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native";
-import {
-  Divider,
-  Layout,
-  Button,
-  Text,
-  TopNavigationAction,
-} from "@ui-kitten/components";
+import { Divider, Layout, Button, Text } from "@ui-kitten/components";
 import TopNav from "./topnav.component";
 
 export const LogoutScreen = ({ navigation }) => {
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
-  );
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNav navigation={navigation} />

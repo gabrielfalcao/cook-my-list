@@ -36,7 +36,7 @@ const DrawerContent = ({ navigation, state }) => (
     style={styles.drawer}
     header={DrawerHeader}
     onSelect={(index) => {
-      console.log(`DrawerContent ${JSON.stringify(index)}`, state.routeNames);
+      //console.log(`DrawerContent ${JSON.stringify(index)}`, state.routeNames);
       navigation.navigate(state.routeNames[index.row]);
     }}
   >
