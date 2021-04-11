@@ -30,7 +30,6 @@ export const RecipeCard = (props: RecipeCardProps): CardElement => {
       underlayColor="#DDDDDD"
       onPress={() => {
         console.log(`RecipeCard onPress`, info);
-
         onPress();
       }}
     >

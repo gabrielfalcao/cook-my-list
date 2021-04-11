@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     width: "100%",
+
   },
   container: {
     maxHeight: "100%",

@@ -91,6 +91,8 @@ export const HomeScreen = ({ navigation }) => {
           data={ingredients.data}
           renderItem={renderFoodItem}
         />
+      <Divider />
+
         <SearchResultList
           chosenIngredientNames={ingredients.data.map((i) => i.name)}
           navigation={navigation}
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     width: "90%",
   },
-  layout: { flex: 1, justifyContent: "space-evenly", alignItems: "center" },
+  layout: { flex: 0, justifyContent: "space-evenly", alignItems: "center" },
   questionTitle: {
     paddingTop: 15,
     paddingBottom: 15,
