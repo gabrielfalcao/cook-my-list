@@ -17,7 +17,7 @@ export const SearchResultList = ({ chosenIngredientNames, ...props }) => {
   return (
     <React.Fragment>
       <Text style={styles.headerTitle} appearance="hint">
-        MOST POPULAR
+        Encontramos 120 receitas
       </Text>
       <List
         contentContainerStyle={styles.horizontalList}
@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     marginHorizontal: 16,
+    textAlign: "left",
+    width: "100%",
+    fontSize: 15,
   },
   horizontalList: {
     marginVertical: 16,

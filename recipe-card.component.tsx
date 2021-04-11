@@ -25,7 +25,7 @@ export const RecipeCard = (props: RecipeCardProps): CardElement => {
         style={styles.image}
         source={getRecipeImage(recipe.imageName)}
       >
-        <Text style={styles.title} category="h2" status="control">
+        <Text style={styles.title} category="h6" status="control">
           {recipe.title}
         </Text>
       </ImageOverlay>
