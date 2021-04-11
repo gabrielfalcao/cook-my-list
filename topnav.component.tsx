@@ -9,7 +9,6 @@ import {
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
-
 const MenuIcon = (props) => <Icon {...props} name="menu-outline" />;
 
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
@@ -20,7 +19,8 @@ export const TopNav = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
+    navigation.openDrawer();
+    //setMenuVisible(!menuVisible);
   };
 
   const renderMenuAction = () => (
