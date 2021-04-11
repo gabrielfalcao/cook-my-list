@@ -66,8 +66,7 @@ export const IngredientSearch = ({
       value={value}
       accessoryRight={renderCloseIcon}
       onChangeText={onChangeText}
-      style={styles.input}
-      size="medium"
+      size="large"
       onSelect={onSelect}
       {...props}
     >
@@ -77,9 +76,6 @@ export const IngredientSearch = ({
 };
 
 const styles = StyleSheet.create({
-  input: {
-    marginHorizontal: 20,
-  },
   questionTitle: {
     paddingTop: 15,
     paddingBottom: 15,

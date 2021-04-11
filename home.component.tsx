@@ -73,9 +73,7 @@ export const HomeScreen = ({ navigation }) => {
       <TopNav navigation={navigation} />
 
       <Divider />
-      <Layout
-        style={{ flex: 1, justifyContent: "top", alignItems: "flex-start" }}
-      >
+      <Layout style={styles.layout}>
         <Text category="s1" status="basic" style={styles.questionTitle}>
           O que temos para hoje?
         </Text>
@@ -83,7 +81,6 @@ export const HomeScreen = ({ navigation }) => {
           addIngredient={addIngredient}
           chosenIngredientNames={ingredients.data.map((i) => i.name)}
           style={styles.input}
-          size="medium"
           placeholder="Adicionar ingrediente"
           {...mediumInputState}
         />
@@ -102,6 +99,7 @@ const styles = StyleSheet.create({
   input: {
     marginHorizontal: 20,
   },
+  layout: { flex: 1, justifyContent: "space-evenly", alignItems: "center" },
   questionTitle: {
     paddingTop: 15,
     paddingBottom: 15,

@@ -4,16 +4,12 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native";
 import {
   Divider,
-  Icon,
   Layout,
-  ButtonGroup,
   Button,
   Text,
-  TopNavigation,
   TopNavigationAction,
 } from "@ui-kitten/components";
-
-const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+import TopNav from "./topnav.component";
 
 export const LogoutScreen = ({ navigation }) => {
   const navigateBack = () => {
@@ -26,11 +22,8 @@ export const LogoutScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <TopNavigation
-        title="MyApp"
-        alignment="center"
-        accessoryLeft={BackAction}
-      />
+      <TopNav navigation={navigation} />
+
       <Divider />
       <Layout style={styles.layout}>
         <Text style={styles.title} category="h4">
