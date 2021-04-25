@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, ListRenderItemInfo } from "react-native";
 
-import { TouchableWithoutFeedback } from "react-native";
-import { Recipe } from "./types";
-import { recipes } from "./ingredients.constants";
+import { Recipe } from "../types";
+import { recipes } from "../ingredients.constants";
 import RecipeCard from "./recipe-card.component";
 import { List, Text } from "@ui-kitten/components";
 

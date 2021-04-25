@@ -8,7 +8,7 @@ import {
   Icon,
   Avatar,
 } from "@ui-kitten/components";
-import { ingredients } from "./ingredients.constants";
+import { ingredients } from "../ingredients.constants";
 import foodImages from "./food-images";
 
 const filter = (item, query) =>

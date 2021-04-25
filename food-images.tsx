@@ -1,16 +1,16 @@
-import egg from "./assets/food-icons/egg.jpg";
-import broccoli from "./assets/food-icons/broccoli.jpg";
-import cheese from "./assets/food-icons/cheese.jpg";
-import shrimp from "./assets/food-icons/shrimp.jpg";
+import egg from "cook-my-list/assets/food-icons/egg.jpg";
+import broccoli from "cook-my-list/assets/food-icons/broccoli.jpg";
+import cheese from "cook-my-list/assets/food-icons/cheese.jpg";
+import shrimp from "cook-my-list/assets/food-icons/shrimp.jpg";
 
-import empanadaoCamaraoLegumes from "./assets/recipe-images/empanadao-camarao-legumes.jpg";
-import souffleDeBroccoli from "./assets/recipe-images/souffle-de-brocoli.jpg";
-import brocolisComOvo from "./assets/recipe-images/brocolis-com-ovo.jpg";
+import empanadaoCamaraoLegumes from "cook-my-list/assets/recipe-images/empanadao-camarao-legumes.jpg";
+import souffleDeBroccoli from "cook-my-list/assets/recipe-images/souffle-de-brocoli.jpg";
+import brocolisComOvo from "cook-my-list/assets/recipe-images/brocolis-com-ovo.jpg";
 
-import lowCarbIcon from "./assets/icons/avocado.svg";
-import portionIcon from "./assets/icons/portion.svg";
-import timerIcon from "./assets/icons/timer.svg";
-import { RecipeTag, Ingredient, Recipe } from "./types";
+import lowCarbIcon from "cook-my-list/assets/icons/avocado.svg";
+import portionIcon from "cook-my-list/assets/icons/portion.svg";
+import timerIcon from "cook-my-list/assets/icons/timer.svg";
+import { RecipeTag, Ingredient, Recipe } from "cook-my-list/types";
 
 const knownIngredients = { egg, broccoli, cheese, shrimp };
 

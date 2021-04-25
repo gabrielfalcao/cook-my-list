@@ -7,7 +7,6 @@ import {
   TopNavigationAction,
 } from "@ui-kitten/components";
 
-const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
 const MenuIcon = (props) => <Icon {...props} name="menu-outline" />;
 

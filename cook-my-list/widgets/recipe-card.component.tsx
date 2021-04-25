@@ -1,19 +1,17 @@
 import React from "react";
 import { GestureResponderEvent, StyleSheet } from "react-native";
 import {
-  Avatar,
   Card,
   CardElement,
   CardProps,
   Text,
-  Layout,
 } from "@ui-kitten/components";
 import { View } from "react-native";
 import { TouchableHighlight } from "react-native";
 
 import { ImageOverlay } from "./image-overlay.component";
-import { Recipe } from "./types";
-import { getRecipeImage, getTagImage } from "./food-images";
+import { Recipe } from "../types";
+import { getRecipeImage } from "./food-images";
 export interface RecipeCardProps extends Omit<CardProps, "children"> {
   recipe: Recipe;
   onPress?: (event: GestureResponderEvent) => void;

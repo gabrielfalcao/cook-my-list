@@ -1,8 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { HomeScreen } from "./home.component";
-import { DetailsScreen } from "./details.component";
-import { LogoutScreen } from "./logout.component";
+import { HomeScreen } from "cook-my-list/screens/home.component";
+import { RecipeDetailsScreen } from "cook-my-list/screens/details.component";
+import { LogoutScreen } from "cook-my-list/screens/logout.component";
+import { RootStackParamList } from "cook-my-list/types";
 import { StyleSheet } from "react-native";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -15,9 +16,9 @@ import {
   IndexPath,
 } from "@ui-kitten/components";
 
-const { Navigator, Screen } = createDrawerNavigator();
+const { Navigator, Screen } = createDrawerNavigator<RootStackParamList>();
 
-const DrawerHeader = ({ ...props }) => (
+const DrawerHeader = () => (
   <Layout style={styles.container} level="1">
     <Avatar
       style={styles.avatar}
@@ -49,7 +50,7 @@ const DrawerContent = ({ navigation, state }) => (
 const HomeNavigator = () => (
   <Navigator drawerContent={(props) => <DrawerContent {...props} />}>
     <Screen name="Home" component={HomeScreen} />
-    <Screen name="Receita" component={DetailsScreen} />
+    <Screen name="RecipeDetails" component={RecipeDetailsScreen} />
     <Screen name="Logout" component={LogoutScreen} />
   </Navigator>
 );

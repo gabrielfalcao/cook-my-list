@@ -4,14 +4,17 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native";
 import { Button, List, Divider, Layout, Text } from "@ui-kitten/components";
 import { Avatar, ListItem, Icon } from "@ui-kitten/components";
+import { RouteProp } from '@react-navigation/native';
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { RootStackParamList } from "cook-my-list/types";
 
-import { Input } from "@ui-kitten/components";
-import TopNav from "./topnav.component";
-import IngredientSearch from "./ingredient-input.component";
-import SearchResultList from "./search-result-list.component";
-import { getIngredientImage } from "./food-images";
-import { ingredients } from "./ingredients.constants";
-import { Ingredient } from "./types";
+import TopNav from "../widgets/topnav.component";
+import IngredientSearch from "../widgets/ingredient-input.component";
+import SearchResultList from "../widgets/search-result-list.component";
+import { getIngredientImage } from "../widgets/food-images";
+import { ingredients } from "../ingredients.constants";
+import { Ingredient } from "../types";
+
 const CloseIcon = ({ ...props }) => (
   <Icon {...props} name="close-circle-outline" />
 );
@@ -25,12 +28,20 @@ const useInputState = (initialValue = "") => {
   return { value, onChangeText: setValue };
 };
 
-export const HomeScreen = ({ navigation }) => {
+
+type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
+type HomeScreenNavigationProp = DrawerNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
+type Props = {
+  route: HomeScreenRouteProp,
+  navigation: HomeScreenNavigationProp
+}
+
+export const HomeScreen = ({ navigation }: Props): JSX.Element => {
   const mediumInputState = useInputState();
   const ingredients = useIngredientData();
-  const navigateDetails = () => {
-    navigation.navigate("Details");
-  };
 
   const renderFoodItem = ({ item }) => {
     const ingredient: Ingredient = item;

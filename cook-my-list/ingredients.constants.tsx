@@ -1,4 +1,4 @@
-import { Ingredient, Recipe } from "./types";
+import { Ingredient, Recipe } from "cook-my-list/types";
 
 export const ingredients: Ingredient[] = [
   { name: "Ovo", imageName: "egg" },
