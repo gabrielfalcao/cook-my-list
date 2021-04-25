@@ -13,7 +13,7 @@ import IngredientSearch from "../widgets/ingredient-input.component";
 import SearchResultList from "../widgets/search-result-list.component";
 import { getIngredientImage } from "../widgets/food-images";
 import { ingredients } from "../ingredients.constants";
-import { Ingredient } from "../types";
+import { Ingredient, HomeScreenProps } from "../types";
 
 const CloseIcon = ({ ...props }) => (
   <Icon {...props} name="close-circle-outline" />
@@ -29,17 +29,9 @@ const useInputState = (initialValue = "") => {
 };
 
 
-type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
-type HomeScreenNavigationProp = DrawerNavigationProp<
-  RootStackParamList,
-  'Home'
->;
-type Props = {
-  route: HomeScreenRouteProp,
-  navigation: HomeScreenNavigationProp
-}
 
-export const HomeScreen = ({ navigation }: Props): JSX.Element => {
+
+export const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
   const mediumInputState = useInputState();
   const ingredients = useIngredientData();
 

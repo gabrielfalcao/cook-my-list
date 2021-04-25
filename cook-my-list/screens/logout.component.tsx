@@ -3,22 +3,11 @@ import { StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native";
 import { Divider, Layout, Button, Text } from "@ui-kitten/components";
-import { RouteProp } from '@react-navigation/native';
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { RootStackParamList } from "../types";
+import { LogoutScreenProps } from "../types";
 
 import TopNav from "../widgets/topnav.component";
-type LogoutScreenRouteProp = RouteProp<RootStackParamList, 'Logout'>;
-type LogoutScreenNavigationProp = DrawerNavigationProp<
-  RootStackParamList,
-  'Logout'
->;
-type Props = {
-  route: LogoutScreenRouteProp,
-  navigation: LogoutScreenNavigationProp
-}
 
-export const LogoutScreen = ({ navigation }: Props): JSX.Element => {
+export const LogoutScreen = ({ navigation }: LogoutScreenProps): JSX.Element => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNav navigation={navigation} />

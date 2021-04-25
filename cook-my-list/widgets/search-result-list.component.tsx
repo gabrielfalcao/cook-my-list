@@ -1,16 +1,21 @@
 import React from "react";
 import { StyleSheet, ListRenderItemInfo } from "react-native";
 
-import { Recipe } from "../types";
+import { Recipe, WidgetNavigationProp} from "../types";
 import { recipes } from "../ingredients.constants";
 import RecipeCard from "./recipe-card.component";
 import { List, Text } from "@ui-kitten/components";
+
+type Props = {
+  navigation: WidgetNavigationProp;
+  chosenIngredientNames: Array<string>;
+}
 
 export const SearchResultList = ({
   chosenIngredientNames,
   navigation,
   ...props
-}) => {
+}: Props): JSX.Element => {
   const renderHorizontalTrainingItem = (
     info: ListRenderItemInfo<Recipe>
   ): React.ReactElement => (
@@ -26,7 +31,10 @@ export const SearchResultList = ({
   return (
     <React.Fragment>
       <Text style={styles.headerTitle} appearance="hint">
-        Encontramos 120 receitas
+        Encontramos 3 receitas com:
+      </Text>
+      <Text style={styles.headerTitle} appearance="hint">
+        {chosenIngredientNames.join(", ")}
       </Text>
       <List
         contentContainerStyle={styles.horizontalList}
@@ -61,9 +69,11 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     marginHorizontal: 16,
-    textAlign: "left",
+    textAlign: "center",
     width: "100%",
     fontSize: 15,
+    padding: 5,
+    textAlignVertical: "center",
   },
   horizontalList: {
     marginVertical: 16,

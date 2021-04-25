@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { RouteProp } from '@react-navigation/native';
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { RootStackParamList, RecipeDetailsParams } from "cook-my-list/types";
+import { RecipeDetailsProps, RecipeDetailsParams } from "cook-my-list/types";
 
 import { SafeAreaView } from "react-native";
 import {
@@ -12,17 +10,9 @@ import {
 } from "@ui-kitten/components";
 import TopNav from "cook-my-list/widgets/topnav.component";
 
-type RecipeDetailsScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
-type RecipeDetailsScreenNavigationProp = DrawerNavigationProp<
-  RootStackParamList,
-  'RecipeDetails'
->;
-type Props = {
-  route: RecipeDetailsScreenRouteProp,
-  navigation: RecipeDetailsScreenNavigationProp
-}
 
-export const RecipeDetailsScreen = ({ navigation, route }: Props): JSX.Element => {
+
+export const RecipeDetailsScreen = ({ navigation, route }: RecipeDetailsProps): JSX.Element => {
   const {recipeId}: RecipeDetailsParams = route.params
   return (
     <SafeAreaView style={{ flex: 1 }}>

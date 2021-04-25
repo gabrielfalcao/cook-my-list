@@ -26,15 +26,15 @@ const knownTags = {
   timer: timerIcon,
 };
 
-export function getIngredientImage(ingredient: Ingredient): any {
+export function getIngredientImage(ingredient: Ingredient): unknown {
   return knownIngredients[ingredient.imageName];
 }
 
-export function getRecipeImage(recipe: Recipe): any {
+export function getRecipeImage(recipe: Recipe): unknown {
   return knownRecipes[recipe.imageName];
 }
 
-export function getTagImage(tag: RecipeTag): any {
+export function getTagImage(tag: RecipeTag): unknown {
   return knownTags[tag.iconName];
 }
 export default { ...knownIngredients, ...knownRecipes };
