@@ -1,11 +1,12 @@
+
 import React from "react";
 import { StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native";
 import { Divider, Layout, Button, Text } from "@ui-kitten/components";
-import { LogoutScreenProps } from "../types";
+import { LogoutScreenProps } from "../../types";
 
-import TopNav from "../widgets/topnav.component";
+import TopNav from "../../widgets/topnav.component";
 
 export const LogoutScreen = ({ navigation }: LogoutScreenProps): JSX.Element => {
   return (

@@ -1,10 +1,11 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { HomeScreen } from "cook-my-list/screens/home.component";
-import { RecipeDetailsScreen } from "cook-my-list/screens/details.component";
-import { LogoutScreen } from "cook-my-list/screens/logout.component";
-import { RootStackParamList } from "cook-my-list/types";
-import { StyleSheet } from "react-native";
+import { HomeScreen } from "../home";
+import { RecipeDetailsScreen } from "../recipe-details";
+import { MyRecipesScreen } from "../my-recipes";
+import { LogoutScreen } from "../logout";
+import { RootStackParamList } from "../../types";
+import styles from "./styles";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
@@ -50,6 +51,7 @@ const DrawerContent = ({ navigation, state }) => (
 const HomeNavigator = () => (
   <Navigator drawerContent={(props) => <DrawerContent {...props} />}>
     <Screen name="Home" component={HomeScreen} />
+    <Screen name="MyRecipes" component={MyRecipesScreen} />
     <Screen name="RecipeDetails" component={RecipeDetailsScreen} />
     <Screen name="Logout" component={LogoutScreen} />
   </Navigator>
@@ -61,33 +63,3 @@ export const AppNavigator = () => (
   </NavigationContainer>
 );
 
-const styles = StyleSheet.create({
-  drawer: {
-    paddingTop: 40,
-  },
-  topContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  card: {
-    flex: 1,
-    margin: 2,
-  },
-  container: {
-    flex: 1,
-    marginTop: 50,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    maxHeight: 80,
-  },
-  avatar: {
-    margin: 8,
-  },
-  footerContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
-  footerControl: {
-    marginHorizontal: 2,
-  },
-});

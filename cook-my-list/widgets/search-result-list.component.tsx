@@ -14,11 +14,10 @@ type Props = {
 export const SearchResultList = ({
   chosenIngredientNames,
   navigation,
-  ...props
 }: Props): JSX.Element => {
   const renderHorizontalTrainingItem = (
     info: ListRenderItemInfo<Recipe>
-  ): React.ReactElement => (
+  ): JSX.Element => (
     <RecipeCard
       style={styles.horizontalItem}
       recipe={info.item}

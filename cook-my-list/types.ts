@@ -4,6 +4,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 export type RecipeDetailsParams = { recipeId : string}
 export type RootStackParamList = {
     Home: undefined;
+    MyRecipes: undefined;
     Logout: undefined;
     RecipeDetails: RecipeDetailsParams;
     Profile: { userId: string };
@@ -16,6 +17,7 @@ export interface Ingredient {
 }
 
 export interface Recipe {
+    id: string,
     title: string,
     imageName: string,
     tags: RecipeTag[]
@@ -57,6 +59,19 @@ export type LogoutScreenProps = {
   route: LogoutScreenRouteProp,
   navigation: LogoutScreenNavigationProp
 }
+export type MyRecipesScreenRouteProp = RouteProp<RootStackParamList, 'MyRecipes'>;
+export type MyRecipesScreenNavigationProp = DrawerNavigationProp<
+  RootStackParamList,
+  'MyRecipes'
+>;
+export type MyRecipesScreenProps = {
+  route: MyRecipesScreenRouteProp,
+  navigation: MyRecipesScreenNavigationProp
+}
 
 
-export type WidgetNavigationProp = HomeScreenNavigationProp | RecipeDetailsScreenNavigationProp | LogoutScreenNavigationProp
+export type WidgetNavigationProp = HomeScreenNavigationProp | RecipeDetailsScreenNavigationProp | LogoutScreenNavigationProp | MyRecipesScreenNavigationProp
+
+export type TopNavProps = {
+    navigation: WidgetNavigationProp,
+}

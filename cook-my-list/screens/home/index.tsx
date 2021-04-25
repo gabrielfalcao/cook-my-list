@@ -4,16 +4,13 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native";
 import { Button, List, Divider, Layout, Text } from "@ui-kitten/components";
 import { Avatar, ListItem, Icon } from "@ui-kitten/components";
-import { RouteProp } from '@react-navigation/native';
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { RootStackParamList } from "cook-my-list/types";
 
-import TopNav from "../widgets/topnav.component";
-import IngredientSearch from "../widgets/ingredient-input.component";
-import SearchResultList from "../widgets/search-result-list.component";
-import { getIngredientImage } from "../widgets/food-images";
-import { ingredients } from "../ingredients.constants";
-import { Ingredient, HomeScreenProps } from "../types";
+import TopNav from "../../widgets/topnav.component";
+import IngredientSearch from "../../widgets/ingredient-input.component";
+import SearchResultList from "../../widgets/search-result-list.component";
+import { getIngredientImage } from "../../widgets/food-images";
+import { ingredients } from "../../ingredients.constants";
+import { Ingredient, HomeScreenProps } from "../../types";
 
 const CloseIcon = ({ ...props }) => (
   <Icon {...props} name="close-circle-outline" />

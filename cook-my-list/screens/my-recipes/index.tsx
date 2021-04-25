@@ -1,31 +1,32 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { RecipeDetailsProps, RecipeDetailsParams } from "cook-my-list/types";
 
 import { SafeAreaView } from "react-native";
-import {
-  Divider,
-  Layout,
-  Text,
-} from "@ui-kitten/components";
-import TopNav from "cook-my-list/widgets/topnav.component";
+import { Divider, Layout, Text } from "@ui-kitten/components";
+import { MyRecipesScreenProps } from "../../types";
 
+import TopNav from "../../widgets/topnav.component";
 
-
-export const RecipeDetailsScreen = ({ navigation, route }: RecipeDetailsProps): JSX.Element => {
-  const {recipeId}: RecipeDetailsParams = route.params
+export const MyRecipesScreen = ({ navigation }: MyRecipesScreenProps): JSX.Element => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNav navigation={navigation} />
+
       <Divider />
       <Layout style={styles.layout}>
-        <Text category="h1">Recipe {recipeId}</Text>
+        <Text style={styles.title} category="h4">
+          Minhas Receitas
+        </Text>
       </Layout>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+  },
+  title: { marginTop: 100 },
   layout: {
     flex: 1,
     justifyContent: "center",

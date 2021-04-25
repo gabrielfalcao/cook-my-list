@@ -7,14 +7,14 @@ import {
   TopNavigationAction,
 } from "@ui-kitten/components";
 
-
+import {TopNavProps} from '../types'
 const MenuIcon = (props) => <Icon {...props} name="menu-outline" />;
 
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
 
 const LogoutIcon = (props) => <Icon {...props} name="log-out" />;
 
-export const TopNav = ({ navigation }) => {
+export const TopNav = ({ navigation }: TopNavProps): JSX.Element => {
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   const toggleMenu = () => {
@@ -27,6 +27,7 @@ export const TopNav = ({ navigation }) => {
   );
   /*<TopNavigationAction icon={EditIcon}/> */
 
+  // TODO: remove menu renderDrawerMenu as well as the menuVisible boolean state
   const renderDrawerMenu = () => (
     <React.Fragment>
       <OverflowMenu
