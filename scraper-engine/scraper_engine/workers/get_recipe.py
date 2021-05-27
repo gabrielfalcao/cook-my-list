@@ -34,7 +34,7 @@ class GetRecipeWorker(PullerWorker):
             self.logger.info(f"scraping recipe {url}")
             recipe = self.api.get_recipe(url)
         except Exception as e:
-            self.logger.exception(f"failed to retrieve recipe {recipe_url}")
+            self.logger.exception(f"failed to retrieve recipe {url}")
             return
 
         recipe.save()

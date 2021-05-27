@@ -41,6 +41,20 @@ with_client = scenario(prepare_client, disconnect_client)
 
 @vcr.use_cassette
 @with_client
+def test_recipe_with_h3_for_direction_steps(context):
+    "TudoGostosoClient.get_recipe() with a recipe that uses <h3> for direction titles"
+
+    # Given that I request a single recipe
+    recipe = context.client.get_recipe(
+        "https://www.tudogostoso.com.br/receita/235-mousse-tentacao.html"
+    )
+
+    recipe.ingredients.should.have.length_of(6)
+    recipe.directions.should.have.length_of(4)
+
+
+@vcr.use_cassette
+@with_client
 def test_recipe_without_steps(context):
     "TudoGostosoClient.get_recipe() with a recipe without steps"
 

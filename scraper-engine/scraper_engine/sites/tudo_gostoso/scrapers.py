@@ -12,10 +12,14 @@ from datetime import datetime
 from uiclasses import Model
 from .models import Recipe, Ingredient, Direction, Picture
 
+from scraper_engine.logs import get_logger
 from scraper_engine.http.exceptions import ElementNotFound
 from scraper_engine.http.exceptions import TooManyElementsFound
 
 recipe_id_regex = re.compile(r"[/](?P<id>\d+)[-][^/]+")
+
+
+logger = get_logger(__name__)
 
 
 class Element(Model):
@@ -57,6 +61,11 @@ class Element(Model):
 
     def getchildren(self):
         return Element.List(map(Element, self.dom.getchildren()))
+
+    def getprevious(self):
+        element = self.dom.getprevious()
+        if element is not None:
+            return Element(element)
 
     def query_many(self, selector, fail: bool = False):
         found = self.dom.cssselect(selector)
@@ -115,6 +124,8 @@ class RecipeScraper(object):
                 continue
 
             paragraph = li.query_one("p") or li.query_one("span")
+            if not paragraph.text:
+                logger.warning(f"failed to parse ingredient from {paragraph.to_html()}")
             if paragraph:
                 ingredients.append(
                     Ingredient(
@@ -123,30 +134,43 @@ class RecipeScraper(object):
                     )
                 )
 
+        if len(ingredients) == 0:
+            logger.warning(f"could not find ingredients in recipe {self.url}")
         return ingredients
 
     @lru_cache()
     def get_directions(self):
-        ol = self.dom.query_one(".directions-card ol")
         directions = Direction.List([])
         current_step = self.get_title()
 
-        index = 0
-        for li in ol.getchildren():
-            strong = li.query_one("strong")
-            if strong:
+        for ol in self.dom.query_many(".directions-card ol"):
+            h3 = ol.getprevious()
+            if h3 and h3.text:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
-                current_step = strong.text.rstrip(":")
-                continue
-            paragraph = li.query_one("p") or li.query_one("span")
-            if paragraph:
-                directions.append(
-                    Direction(
-                        step=current_step,
-                        name=paragraph.text,
-                    )
-                )
+                current_step = h3.text.rstrip(":")
 
+            index = 0
+            for li in ol.getchildren():
+                strong = li.query_one("strong")
+                if strong:
+                    # remove trailing colon (e.g.: "Molho:" becomes "Molho")
+                    current_step = strong.text.rstrip(":")
+                    continue
+                paragraph = li.query_one("p") or li.query_one("span")
+                if not paragraph.text:
+                    logger.warning(
+                        f"failed to parse direction from {paragraph.to_html()}"
+                    )
+
+                if paragraph:
+                    directions.append(
+                        Direction(
+                            step=current_step,
+                            name=paragraph.text,
+                        )
+                    )
+            if len(directions) == 0:
+                logger.warning(f"could not find ingredients in recipe {self.url}")
         return directions
 
     @lru_cache()
