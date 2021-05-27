@@ -1,13 +1,16 @@
 import re
+from typing import Tuple, Optional
 from requests import Response
-from urllib.parse import urlparse
+from functools import lru_cache
+from decimal import Decimal
+from urllib.parse import urlparse, parse_qsl
 from collections import defaultdict
 from lxml import html
 
 from datetime import datetime
 
 from uiclasses import Model
-from .models import Recipe, Ingredient
+from .models import Recipe, Ingredient, Direction, Picture
 
 from scraper_engine.http.exceptions import ElementNotFound
 from scraper_engine.http.exceptions import TooManyElementsFound
@@ -35,7 +38,7 @@ class Element(Model):
             "tag": self.tag,
         }
         if self.attributes:
-            data["attributes"] = attributes
+            data["attributes"] = self.attributes
 
         return data
 
@@ -117,11 +120,86 @@ class RecipeScraper(object):
 
         return ingredients
 
+    def get_directions(self):
+        ol = self.dom.query_one(".directions-card ol")
+        directions = Direction.List([])
+        current_step = None
+        index = 0
+        for li in ol.getchildren():
+            strong = li.query_one("strong")
+            if strong:
+                # remove trailing colon (e.g.: "Molho:" becomes "Molho")
+                current_step = strong.text.rstrip(":")
+                continue
+            paragraph = li.query_one("p")
+            if paragraph:
+                directions.append(
+                    Direction(
+                        step=current_step,
+                        name=paragraph.text,
+                    )
+                )
+
+        return directions
+
+    def get_pictures(self):
+        pictures = Picture.List([])
+        for img in self.dom.query_many("picture img.pic"):
+            url = img.attrib.get("src")
+            width, height = extract_image_size_from_url(url)
+            pictures.append(
+                Picture(
+                    description=img.attrib.get("alt"),
+                    url=url,
+                    width=width,
+                    height=height,
+                )
+            )
+        return pictures
+
+    @lru_cache()
+    def get_rating_tuple(self) -> Tuple[int, Decimal]:
+        parts = [x.text for x in self.dom.query_many("#rating-average span")]
+        if not parts:
+            return -1, Decimal("-1")
+
+        return int(parts[0]), Decimal(parts[-1])
+
+    def get_total_ratings(self) -> int:
+        return self.get_rating_tuple()[0]
+
+    def get_rating(self) -> Decimal:
+        return self.get_rating_tuple()[-1]
+
     def get_recipe(self) -> Recipe:
         data = {
             "id": self.get_recipe_id(),
             "title": self.get_title(),
             "url": self.url,
             "ingredients": self.get_ingredients(),
+            "directions": self.get_directions(),
+            "pictures": self.get_pictures(),
+            "total_ratings": self.get_total_ratings(),
+            "rating": self.get_rating(),
         }
         return Recipe(**data)
+
+
+def parse_url_params(url):
+    result = urlparse(url)
+    qsl = parse_qsl(result.query)
+    return dict(qsl)
+
+
+def try_int(value) -> int:
+    try:
+        return int(value)
+    except ValueError:
+        return -1
+
+
+def extract_image_size_from_url(url):
+    params = parse_url_params(url)
+    width = try_int(params.get("width"))
+    height = try_int(params.get("height"))
+    return width, height

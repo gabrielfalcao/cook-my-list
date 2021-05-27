@@ -3,10 +3,11 @@ import httpretty
 from vcr import VCR
 from sure import scenario
 from pathlib import Path
+from decimal import Decimal
 
 from scraper_engine import sql
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
-from scraper_engine.sites.tudo_gostoso import Recipe, Ingredient
+from scraper_engine.sites.tudo_gostoso import Recipe, Ingredient, Direction, Picture
 
 
 functional_tests_path = Path(__file__).parent.absolute()
@@ -27,25 +28,8 @@ def disconnect_client(context):
 
 with_client = scenario(prepare_client, disconnect_client)
 
-
-# @vcr.use_cassette
-# @with_client
-# def test_tudogostoso_get_empty_recipe(context):
-#     "TudoGostosoClient.get_recipe() with a recipe pending submission"
-
-#     # Given that I request the list of recipes
-#     recipe = context.client.get_recipe(
-#         "https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html"
-#     )
-
-#     # Then it should return a Recipe
-#     recipe.should.be.a(Recipe)
-
-#     # And it should have an id and url
-#     recipe.should.have.property("id").being.equal("137721")
-#     recipe.should.have.property("url").being.equal(
-#         "https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html"
-#     )
+# TODO:
+# - recipe without pictures "https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html"
 
 
 @vcr.use_cassette
@@ -62,13 +46,17 @@ def test_tudogostoso_get_single_recipe(context):
     recipe.should.be.a(Recipe)
 
     # And it should have an id and url
-    recipe.should.have.property("id").being.equal("80799")
-    recipe.should.have.property("url").being.equal(
+    recipe.id.should.equal("80799")
+    recipe.url.should.equal(
         "https://www.tudogostoso.com.br/receita/80799-almondega-ao-molho-de-tomate-rapida-pratica-e-gostosa.html"
     )
     recipe.title.should.equal(
         "Almôndega ao molho de tomate - rápida, prática e gostosa"
     )
+
+    recipe.rating.should.equal(Decimal("4.5"))
+    recipe.total_ratings.should.equal(200)
+
     recipe.ingredients.should.be.an(Ingredient.List)
     recipe.ingredients.should.have.length_of(13)
 
@@ -88,5 +76,84 @@ def test_tudogostoso_get_single_recipe(context):
             {"step": "Molho", "name": "1 cubo de caldo de galinha"},
             {"step": "Molho", "name": "1 pitada de açúcar"},
             {"step": "Molho", "name": "sal, pimenta, salsinha a gosto"},
+        ]
+    )
+
+    recipe.directions.should.be.an(Direction.List)
+    recipe.directions.should.have.length_of(8)
+
+    directions = [i.to_dict() for i in recipe.directions]
+    directions.should.equal(
+        [
+            {
+                "step": "Almôndegas",
+                "name": "Junte todos os ingredientes em uma vasilha e misture bem.",
+            },
+            {
+                "step": "Almôndegas",
+                "name": "Pegue uma colher de sobremesa como medida e faça as bolinhas (rende em torno de umas 45 unidades).",
+            },
+            {
+                "step": "Almôndegas",
+                "name": "Esquente uma panela com 2 a 3 dedos de óleo e frite as almôndegas até que fiquem levemente douradas (dentro poderá ficar crú, pois elas terminarão de cozinhar junto ao molho de tomate e ficarão mais suculentas).",
+            },
+            {"step": "Almôndegas", "name": "Reserve-as."},
+            {"step": "Molho", "name": "Refogue a cebola e o alho no óleo."},
+            {
+                "step": "Molho",
+                "name": "Junte o molho de tomate, a água, o caldo de galinha, os temperos a gosto e deixe ferventar em fogo médio.",
+            },
+            {
+                "step": "Molho",
+                "name": "Assim que o molho começar a borbulhar, junte as almôndegas (coloque também o caldinho que elas devem ter soltado no recipiente em que ficaram reservadas), tampe a panela e deixe em fogo baixo/médio por mais 5 minutos.",
+            },
+            {
+                "step": "Molho",
+                "name": "Coloque em um prato, decore com salsinha desidratada e bom apetite!",
+            },
+        ]
+    )
+    recipe.pictures.should.be.an(Picture.List)
+    recipe.pictures.should.have.length_of(6)
+
+    pictures = [i.to_dict() for i in recipe.pictures]
+    pictures.should.equal(
+        [
+            {
+                "description": "Imagem enviada por TudoGostoso",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/98762/98762_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
+            {
+                "description": "Imagem enviada por Thayna",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/92787/92787_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
+            {
+                "description": "Imagem enviada por Tiago Veras Falangola",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/86896/86896_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
+            {
+                "description": "Imagem enviada por Isabel Kede",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/60081/60081_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
+            {
+                "description": "Imagem enviada por Cíntia Aparecida de Souza",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/78053/78053_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
+            {
+                "description": "Imagem enviada por Isabel Kede",
+                "url": "https://img.itdg.com.br/tdg/images/recipes/000/080/799/60080/60080_original.jpg?mode=crop&width=710&height=400",
+                "width": 710,
+                "height": 400,
+            },
         ]
     )

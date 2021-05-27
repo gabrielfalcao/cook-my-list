@@ -1,4 +1,5 @@
 from typing import Union, Optional
+from decimal import Decimal
 from itertools import chain
 from uiclasses import Model
 from uiclasses.typing import Property
@@ -14,6 +15,20 @@ class Ingredient(Model):
     step: str
 
 
+class Direction(Model):
+
+    description: str
+    step: str
+
+
+class Picture(Model):
+
+    description: str
+    url: str
+    width: int
+    height: int
+
+
 class Recipe(Model):
     __id_attributes__ = ["id", "url"]
 
@@ -22,6 +37,11 @@ class Recipe(Model):
     title: str
 
     ingredients: Ingredient.List
+    directions: Direction.List
+    pictures: Picture.List
+
+    total_ratings: int
+    rating: Decimal
 
     def __ui_attributes__(self):
         return {
