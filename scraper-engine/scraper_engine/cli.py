@@ -69,24 +69,20 @@ def worker_queue(ctx, rep_bind_address, push_bind_address):
     worker.run()
 
 
-@main.command("recipes")
-@click.option("-d", "--days", default=5, type=int)
+@main.command("crawler")
+@click.option("-m", "--max-pages", default=2, type=int)
 @click.option("-c", "--rep-connect-address", default=DEFAULT_QUEUE_ADDRESS)
 @click.pass_context
-def get_recipes(ctx, rep_connect_address, days):
-    client = TudoGostosoClient(
-        url=ctx.obj["drone_url"],
-        access_token=ctx.obj["access_token"],
-    )
-    recipes = client.get_recipes()
-    count = len(recipes)
-    print(f"found {count} failed recipes in the last {days} days")
-    for i, recipe in enumerate(recipes, start=1):
-        worker = QueueClient(rep_connect_address)
-        worker.connect()
-        print(
-            f" -> enqueing recipe {i} of {count} for output analysis (#{recipe.number} by {recipe.author_login})"
-        )
-        worker.send({"recipe_id": recipe.number})
-        worker.close()
-    return
+def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages):
+    client = TudoGostosoClient()
+    recipe_urls = client.crawl_sitemap(max_pages=max_pages)
+    count = len(recipe_urls)
+    print(f"found {count} failed recipes")
+    worker = QueueClient(rep_connect_address)
+    worker.connect()
+
+    for i, url in enumerate(recipe_urls, start=1):
+        print(f" -> enqueing recipe {i} of {count} -> {url}")
+        worker.send({"recipe_url": url})
+
+    worker.close()

@@ -18,6 +18,8 @@ from .base import context
 
 
 class QueueClient(object):
+    __connected__ = False
+
     def __init__(
         self,
         rep_connect_address: str,

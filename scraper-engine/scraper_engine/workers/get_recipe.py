@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta
+from scraper_engine.sql.models import ScrapedRecipe
+
 from .puller import PullerWorker
 
 
@@ -19,12 +22,20 @@ class GetRecipeWorker(PullerWorker):
         self.fetch_data(recipe_url)
 
     def fetch_data(self, url: str):
-        try:
-            recipe = self.api.get_recipe(owner, repo, recipe_url)
-        except Exception as e:
-            self.logger.exception(
-                f"failed to retrieve recipe {owner}/{repo} {recipe_url}"
+        existing_recipe = ScrapedRecipe.find_one_by(url=url)
+        some_time_ago = datetime.utcnow() - timedelta(days=1)
+        if existing_recipe and existing_recipe.last_updated > some_time_ago:
+            self.logger.info(
+                f"skipping recipe {existing_recipe.id} already downloaded: {url}"
             )
             return
 
-        self.logger.info(f"retrieved recipe {recipe}")
+        try:
+            self.logger.info(f"scraping recipe {url}")
+            recipe = self.api.get_recipe(url)
+        except Exception as e:
+            self.logger.exception(f"failed to retrieve recipe {recipe_url}")
+            return
+
+        recipe.save()
+        self.logger.info(f"saved recipe {recipe}")

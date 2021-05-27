@@ -3,7 +3,7 @@ import zmq.green as zmq
 from collections import defaultdict
 
 from scraper_engine.logs import get_logger
-from scraper_engine.http import HttpClient
+from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 
 from .base import context
 
@@ -26,10 +26,7 @@ class PullerWorker(object):
         self.queue.set_hwm(high_watermark)
 
         self.poller.register(self.queue, zmq.POLLIN)
-        self.api = HttpClient(
-            url=drone_url,
-            access_token=access_token,
-        )
+        self.api = TudoGostosoClient()
 
     def handle_exception(self, e):
         self.logger.exception(f"{self.__class__.__name__} interrupted by error")

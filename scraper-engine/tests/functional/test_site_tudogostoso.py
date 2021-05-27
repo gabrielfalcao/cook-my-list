@@ -8,7 +8,13 @@ from decimal import Decimal
 from scraper_engine import sql
 from scraper_engine.sql.models import ScrapedRecipe
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
-from scraper_engine.sites.tudo_gostoso import Recipe, Ingredient, Direction, Picture
+from scraper_engine.sites.tudo_gostoso import (
+    Recipe,
+    Ingredient,
+    Direction,
+    Picture,
+    SiteMap,
+)
 
 
 functional_tests_path = Path(__file__).parent.absolute()
@@ -38,7 +44,7 @@ with_client = scenario(prepare_client, disconnect_client)
 def test_tudogostoso_get_single_recipe(context):
     "TudoGostosoClient.get_recipe() with a basic recipe"
 
-    # Given that I request the list of recipes
+    # Given that I request a single recipe
     recipe = context.client.get_recipe(
         "https://www.tudogostoso.com.br/receita/80799-almondega-ao-molho-de-tomate-rapida-pratica-e-gostosa.html"
     )
@@ -164,3 +170,44 @@ def test_tudogostoso_get_single_recipe(context):
     )
     scraped = recipe.save()
     scraped.should.be.a(ScrapedRecipe)
+
+
+@vcr.use_cassette
+@with_client
+def test_tudogostoso_get_recipe_urls_from_sitemap(context):
+    "TudoGostosoClient.get_recipe_urls() from a valid sitemap url"
+
+    # Given that I request the list of recipes
+    recipe_urls = context.client.get_recipe_urls(
+        "https://www.tudogostoso.com.br/sitemap-42.xml"
+    )
+
+    # When it should contain a list of strings with valid urls
+    recipe_urls.should.have.length_of(2000)
+
+
+@vcr.use_cassette
+@with_client
+def test_tudogostoso_get_sitemap(context):
+    "TudoGostosoClient.get_sitemap() paginates"
+
+    # Given that I get the root sitemap
+    sitemaps = context.client.get_sitemap(max_pages=5)
+
+    # Then it should return a list of urls
+    sitemaps.should.be.a(SiteMap.List.Type)
+
+    sitemaps.should.have.length_of(5)
+
+
+@vcr.use_cassette
+@with_client
+def test_tudogostoso_crawl_sitemap(context):
+    "TudoGostosoClient.crawl_sitemap() retrieves thousands of recipes"
+
+    # Given that I crawl the root sitemap
+    recipe_urls = context.client.crawl_sitemap(max_pages=5)
+
+    # Then it should return a list of urls
+    recipe_urls.should.be.a(list)
+    recipe_urls.should.have.length_of(10_000)

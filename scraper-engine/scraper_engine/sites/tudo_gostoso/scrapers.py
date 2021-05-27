@@ -85,6 +85,7 @@ class RecipeScraper(object):
         self.response = response
         self.dom = Element(html.fromstring(response.text))
 
+    @lru_cache()
     def get_recipe_id(self):
         parsed = urlparse(self.url)
         found = recipe_id_regex.search(parsed.path)
@@ -94,14 +95,16 @@ class RecipeScraper(object):
 
         return found.group("id")
 
+    @lru_cache()
     def get_title(self):
         h1 = self.dom.query_one(".recipe-title h1")
         return h1.text.strip()
 
+    @lru_cache()
     def get_ingredients(self):
         ul = self.dom.query_one(".ingredients-card ul")
         ingredients = Ingredient.List([])
-        current_step = None
+        current_step = self.get_title()
         index = 0
         for li in ul.getchildren():
             strong = li.query_one("strong")
@@ -120,10 +123,12 @@ class RecipeScraper(object):
 
         return ingredients
 
+    @lru_cache()
     def get_directions(self):
         ol = self.dom.query_one(".directions-card ol")
         directions = Direction.List([])
-        current_step = None
+        current_step = self.get_title()
+
         index = 0
         for li in ol.getchildren():
             strong = li.query_one("strong")
@@ -142,6 +147,7 @@ class RecipeScraper(object):
 
         return directions
 
+    @lru_cache()
     def get_pictures(self):
         pictures = Picture.List([])
         for img in self.dom.query_many("picture img.pic"):
@@ -165,9 +171,11 @@ class RecipeScraper(object):
 
         return int(parts[0]), Decimal(parts[-1])
 
+    @lru_cache()
     def get_total_ratings(self) -> int:
         return self.get_rating_tuple()[0]
 
+    @lru_cache()
     def get_rating(self) -> Decimal:
         return self.get_rating_tuple()[-1]
 
@@ -178,12 +186,15 @@ class RecipeScraper(object):
 
         return ""
 
+    @lru_cache()
     def get_servings(self) -> str:
         return self.get_data_item("recipeYield")
 
+    @lru_cache()
     def get_total_cooking_time(self) -> str:
         return self.get_data_item("totalTime").lower()
 
+    @lru_cache()
     def get_author_name(self) -> str:
         return self.get_data_item("name")
 

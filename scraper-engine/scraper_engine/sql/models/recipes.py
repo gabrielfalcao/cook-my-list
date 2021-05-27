@@ -2,6 +2,7 @@ import json
 import io
 import requests
 from chemist import Model, db
+from dateutil.parser import parse as parse_date
 from datetime import datetime
 from .base import metadata
 
@@ -24,4 +25,18 @@ class ScrapedRecipe(Model):
         db.Column("rating", db.Numeric),
         db.Column("created_at", db.DateTime, default=datetime.utcnow),
         db.Column("updated_at", db.DateTime, default=datetime.utcnow),
+    )
+
+    @property
+    def last_updated(self):
+        return parse_date(self.updated_at)
+
+
+class ScrapedSiteMap(Model):
+    table = db.Table(
+        "scraped_sitemap",
+        metadata,
+        db.Column("id", db.Integer, primary_key=True),
+        db.Column("url", db.String(255), nullable=False, unique=True),
+        db.Column("last_modified", db.DateTime),
     )

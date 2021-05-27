@@ -58,8 +58,8 @@ functional:| $(VENV)/bin/nosetests  # runs functional tests
 	@$(VENV)/bin/nosetests tests/functional
 
 # run main command-line tool
-run: | $(VENV)/bin/python
-	@$(MAIN_CLI_PATH) --help
+workers crawler: | $(MAIN_CLI_PATH)
+	@$(MAIN_CLI_PATH) $@
 
 # Pushes release of this package to pypi
 push-release:  # pushes distribution tarballs of the current version

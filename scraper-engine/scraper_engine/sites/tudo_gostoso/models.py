@@ -3,11 +3,20 @@ from decimal import Decimal
 from itertools import chain
 from uiclasses import Model
 from uiclasses.typing import Property
+from dateutil.parser import parse as parse_date
 from lxml import html
+from defusedxml.lxml import RestrictedElement
 
 from datetime import datetime
 from scraper_engine import events
-from scraper_engine.sql.models import ScrapedRecipe
+from scraper_engine.sql.models import ScrapedRecipe, ScrapedSiteMap
+
+
+def try_parse_date(value: str) -> Optional[datetime]:
+    try:
+        return parse_date(value)
+    except Exception:
+        return value
 
 
 class Ingredient(Model):
@@ -81,3 +90,24 @@ class Recipe(Model):
             updated_at=datetime.utcnow(), **data
         )
         return sql
+
+
+class SiteMap(Model):
+    url: str
+    last_modified: datetime
+
+    @classmethod
+    def from_element(cls, element: RestrictedElement):
+        lastmod = element.xpath("lastmod")
+        loc = element.xpath("loc")
+        url = len(loc) and loc[0].text.strip() or None
+        last_modified = (
+            len(lastmod)
+            and try_parse_date(lastmod[0].text.strip())
+            or datetime.utcnow().date()
+        )
+        return cls(url=url, last_modified=last_modified)
+
+    def sql(self) -> Optional[ScrapedSiteMap]:
+        if self.url:
+            return ScrapedSiteMap.get_or_create(url=self.url)
