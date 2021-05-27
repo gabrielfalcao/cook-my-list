@@ -36,6 +36,10 @@ class Recipe(Model):
     url: str
     title: str
 
+    author_name: str
+    total_cooking_time: str
+    servings: str
+
     ingredients: Ingredient.List
     directions: Direction.List
     pictures: Picture.List

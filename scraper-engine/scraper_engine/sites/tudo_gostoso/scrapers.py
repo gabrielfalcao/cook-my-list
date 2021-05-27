@@ -171,6 +171,22 @@ class RecipeScraper(object):
     def get_rating(self) -> Decimal:
         return self.get_rating_tuple()[-1]
 
+    def get_data_item(self, prop: str) -> str:
+        element = self.dom.query_one(f'[itemprop="{prop}"]')
+        if element:
+            return re.sub(r"\s+", " ", element.text)
+
+        return ""
+
+    def get_servings(self) -> str:
+        return self.get_data_item("recipeYield")
+
+    def get_total_cooking_time(self) -> str:
+        return self.get_data_item("totalTime").lower()
+
+    def get_author_name(self) -> str:
+        return self.get_data_item("name")
+
     def get_recipe(self) -> Recipe:
         data = {
             "id": self.get_recipe_id(),
@@ -181,6 +197,9 @@ class RecipeScraper(object):
             "pictures": self.get_pictures(),
             "total_ratings": self.get_total_ratings(),
             "rating": self.get_rating(),
+            "servings": self.get_servings(),
+            "total_cooking_time": self.get_total_cooking_time(),
+            "author_name": self.get_author_name(),
         }
         return Recipe(**data)
 

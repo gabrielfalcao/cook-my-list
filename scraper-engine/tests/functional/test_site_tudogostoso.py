@@ -57,6 +57,10 @@ def test_tudogostoso_get_single_recipe(context):
     recipe.rating.should.equal(Decimal("4.5"))
     recipe.total_ratings.should.equal(200)
 
+    recipe.total_cooking_time.should.equal("20 min")
+    recipe.servings.should.equal("4 porções")
+    recipe.author_name.should.equal("Carol Ariat")
+
     recipe.ingredients.should.be.an(Ingredient.List)
     recipe.ingredients.should.have.length_of(13)
 
