@@ -1,2 +1,0 @@
-class TudoGostosoScraper(object):
-    pass

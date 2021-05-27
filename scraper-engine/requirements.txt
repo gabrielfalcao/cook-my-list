@@ -1,0 +1,13 @@
+alembic==1.6.3
+blinker==1.4
+chemist==1.6.4
+click==8.0.1
+colorlog==5.0.1
+cssselect==1.1.0
+defusedxml==0.7.1
+gevent==21.1.2
+lxml==4.6.3
+psycopg2==2.8.6
+pyzmq==22.1.0
+requests==2.25.1
+uiclasses==2.3.2
