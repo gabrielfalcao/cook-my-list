@@ -57,6 +57,10 @@ class Recipe(Model):
     total_ratings: int
     rating: Decimal
 
+    @classmethod
+    def from_sql_model(cls, model: ScrapedRecipe):
+        return cls(**model.to_ui_dict())
+
     def __ui_attributes__(self):
         return {
             "id": self.id,

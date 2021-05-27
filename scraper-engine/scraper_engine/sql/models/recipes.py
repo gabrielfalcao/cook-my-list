@@ -27,6 +27,10 @@ class ScrapedRecipe(Model):
         db.Column("updated_at", db.DateTime, default=datetime.utcnow),
     )
 
+    def to_ui_dict(self):
+        if self.json_data:
+            return json.loads(self.json_data)
+
     @property
     def last_updated(self):
         return parse_date(self.updated_at)

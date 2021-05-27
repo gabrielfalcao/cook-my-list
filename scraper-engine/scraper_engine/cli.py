@@ -13,7 +13,7 @@ from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine import sql
 from scraper_engine.logs import logger
 from scraper_engine.sites.tudo_gostoso.models import Recipe
-
+from scraper_engine.web import app
 from scraper_engine.workers import GetRecipeWorker
 from scraper_engine.workers import QueueServer, QueueClient
 
@@ -86,3 +86,12 @@ def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages):
         worker.send({"recipe_url": url})
 
     worker.close()
+
+
+@main.command("web")
+@click.option("-p", "--port", default=3000, type=int)
+@click.option("-h", "--host", default="0.0.0.0")
+@click.option("-d", "--debug", is_flag=True, default=False)
+@click.pass_context
+def web_server(ctx, host, port, debug):
+    app.run(host=host, port=port, debug=debug)

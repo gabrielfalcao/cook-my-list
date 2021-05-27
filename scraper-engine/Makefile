@@ -58,7 +58,7 @@ functional:| $(VENV)/bin/nosetests  # runs functional tests
 	@$(VENV)/bin/nosetests tests/functional
 
 # run main command-line tool
-workers crawler: | $(MAIN_CLI_PATH)
+web workers crawler: | $(MAIN_CLI_PATH)
 	@$(MAIN_CLI_PATH) $@
 
 # Pushes release of this package to pypi
