@@ -41,6 +41,29 @@ with_client = scenario(prepare_client, disconnect_client)
 
 @vcr.use_cassette
 @with_client
+def test_recipe_without_steps(context):
+    "TudoGostosoClient.get_recipe() with a recipe without steps"
+
+    # Given that I request a single recipe
+    recipe = context.client.get_recipe(
+        "https://www.tudogostoso.com.br/receita/1542-peras-ao-vinho.html"
+    )
+
+    # Then it should return a Recipe
+    recipe.should.be.a(Recipe)
+
+    # And it should have an id and url
+    recipe.id.should.equal("1542")
+    recipe.url.should.equal(
+        "https://www.tudogostoso.com.br/receita/1542-peras-ao-vinho.html"
+    )
+    recipe.title.should.equal("Pêras ao vinho")
+    recipe.ingredients.should.have.length_of(4)
+    recipe.directions.should.have.length_of(1)
+
+
+@vcr.use_cassette
+@with_client
 def test_tudogostoso_get_single_recipe(context):
     "TudoGostosoClient.get_recipe() with a basic recipe"
 

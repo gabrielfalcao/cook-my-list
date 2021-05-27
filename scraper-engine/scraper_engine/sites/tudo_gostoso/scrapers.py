@@ -107,12 +107,14 @@ class RecipeScraper(object):
         current_step = self.get_title()
         index = 0
         for li in ul.getchildren():
+
             strong = li.query_one("strong")
             if strong:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
                 current_step = strong.text.rstrip(":")
                 continue
-            paragraph = li.query_one("p")
+
+            paragraph = li.query_one("p") or li.query_one("span")
             if paragraph:
                 ingredients.append(
                     Ingredient(
@@ -136,7 +138,7 @@ class RecipeScraper(object):
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
                 current_step = strong.text.rstrip(":")
                 continue
-            paragraph = li.query_one("p")
+            paragraph = li.query_one("p") or li.query_one("span")
             if paragraph:
                 directions.append(
                     Direction(
