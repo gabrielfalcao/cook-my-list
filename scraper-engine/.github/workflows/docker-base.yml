@@ -1,0 +1,24 @@
+name: ⚙️ Base Docker Image
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: K8S Docker Image (Kubernetes Deployment)
+      uses: docker/build-push-action@v1.1.0
+      working-directory: ./scraper-engine
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: gabrielfalcao/cookmylist-server-base
+        tag_with_ref: true
+        tag_with_sha: true
+        dockerfile: Dockerfile.base
+        tags: "${{ github.sha }}"
