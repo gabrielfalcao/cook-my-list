@@ -1,0 +1,2 @@
+class TudoGostosoScraper(object):
+    pass
