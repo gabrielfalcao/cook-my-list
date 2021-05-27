@@ -109,41 +109,51 @@ class RecipeScraper(object):
         h1 = self.dom.query_one(".recipe-title h1")
         return h1.text.strip()
 
-    @lru_cache()
     def get_ingredients(self):
-        ul = self.dom.query_one(".ingredients-card ul")
         ingredients = Ingredient.List([])
         current_step = self.get_title()
-        index = 0
-        for li in ul.getchildren():
 
-            strong = li.query_one("strong")
-            if strong:
+        for ol in self.dom.query_many(".ingredients-card ol") or self.dom.query_many(
+            ".ingredients-card ul"
+        ):
+            h3 = ol.getprevious()
+            if h3 and h3.text:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
-                current_step = strong.text.rstrip(":")
-                continue
+                current_step = h3.text.rstrip(":")
 
-            paragraph = li.query_one("p") or li.query_one("span")
-            if not paragraph.text:
-                logger.warning(f"failed to parse ingredient from {paragraph.to_html()}")
-            if paragraph:
-                ingredients.append(
-                    Ingredient(
-                        step=current_step,
-                        name=paragraph.text,
+            index = 0
+            for li in ol.getchildren():
+
+                strong = li.query_one("strong")
+                if strong:
+                    # remove trailing colon (e.g.: "Molho:" becomes "Molho")
+                    current_step = strong.text.rstrip(":")
+                    continue
+                paragraph = li.query_one("p") or li.query_one("span")
+                if not paragraph.text:
+                    logger.warning(
+                        f"failed to parse ingredient from {paragraph.to_html()}"
                     )
-                )
 
+                if paragraph:
+                    ingredients.append(
+                        Ingredient(
+                            step=current_step,
+                            name=paragraph.text,
+                        )
+                    )
         if len(ingredients) == 0:
             logger.warning(f"could not find ingredients in recipe {self.url}")
+
         return ingredients
 
-    @lru_cache()
     def get_directions(self):
         directions = Direction.List([])
         current_step = self.get_title()
 
-        for ol in self.dom.query_many(".directions-card ol"):
+        for ol in self.dom.query_many(".directions-card ol") or self.dom.query_many(
+            ".directions-card ul"
+        ):
             h3 = ol.getprevious()
             if h3 and h3.text:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
@@ -169,11 +179,10 @@ class RecipeScraper(object):
                             name=paragraph.text,
                         )
                     )
-            if len(directions) == 0:
-                logger.warning(f"could not find ingredients in recipe {self.url}")
+        if len(directions) == 0:
+            logger.warning(f"could not find ingredients in recipe {self.url}")
         return directions
 
-    @lru_cache()
     def get_pictures(self):
         pictures = Picture.List([])
         for img in self.dom.query_many("picture img.pic"):

@@ -55,6 +55,20 @@ def test_recipe_with_h3_for_direction_steps(context):
 
 @vcr.use_cassette
 @with_client
+def test_recipe_with_h3_for_ingredient_steps(context):
+    "TudoGostosoClient.get_recipe() with a recipe that uses <h3> for ingredient titles"
+
+    # Given that I request a single recipe
+    recipe = context.client.get_recipe(
+        "https://www.tudogostoso.com.br/receita/17-torta-alema-de-maca.html"
+    )
+
+    recipe.ingredients.should.have.length_of(8)
+    recipe.directions.should.have.length_of(2)
+
+
+@vcr.use_cassette
+@with_client
 def test_recipe_without_steps(context):
     "TudoGostosoClient.get_recipe() with a recipe without steps"
 
