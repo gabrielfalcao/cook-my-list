@@ -1,2 +1,2 @@
-from .models import HttpInteraction
+from .models import HttpInteraction, ScrapedRecipe
 from .models import context, metadata

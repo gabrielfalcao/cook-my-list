@@ -7,6 +7,7 @@ from lxml import html
 
 from datetime import datetime
 from scraper_engine import events
+from scraper_engine.sql.models import ScrapedRecipe
 
 
 class Ingredient(Model):
@@ -52,3 +53,31 @@ class Recipe(Model):
             "id": self.id,
             "title": self.title,
         }
+
+    def to_sql_data(self) -> dict:
+        return {
+            "title": self.title,
+            "url": self.url,
+            "servings": self.servings,
+            "author_name": self.author_name,
+            "picture_count": len(self.pictures),
+            "directions_count": len(self.directions),
+            "ingredients_count": len(self.ingredients),
+            "total_ratings": self.total_ratings,
+            "rating": self.rating,
+            "total_cooking_time": self.total_cooking_time,
+            "json_data": self.to_json(),
+        }
+
+    def save(self) -> ScrapedRecipe:
+        if not self.url or not self.title:
+            logger.warning(
+                f"cannot save recipe {self} because it does not have enough data"
+            )
+            return
+
+        data = self.to_sql_data()
+        sql = ScrapedRecipe.get_or_create(url=self.url).update_and_save(
+            updated_at=datetime.utcnow(), **data
+        )
+        return sql

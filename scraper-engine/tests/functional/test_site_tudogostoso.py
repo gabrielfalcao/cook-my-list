@@ -6,6 +6,7 @@ from pathlib import Path
 from decimal import Decimal
 
 from scraper_engine import sql
+from scraper_engine.sql.models import ScrapedRecipe
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine.sites.tudo_gostoso import Recipe, Ingredient, Direction, Picture
 
@@ -161,3 +162,5 @@ def test_tudogostoso_get_single_recipe(context):
             },
         ]
     )
+    scraped = recipe.save()
+    scraped.should.be.a(ScrapedRecipe)
