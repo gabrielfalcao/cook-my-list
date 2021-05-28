@@ -12,12 +12,12 @@ jobs:
 
     - name: K8S Docker Image (Kubernetes Deployment)
       uses: docker/build-push-action@v1.1.0
-      working-directory: ./scraper-engine
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gabrielfalcao/k8s-cookmylist-server
+        file: ./scraper-engine/Dockerfile
+
         # tag_with_ref: false  # prevent pushing "latest" tag
         tag_with_sha: true
-        dockerfile: Dockerfile
         tags: "${{ github.sha }}"
