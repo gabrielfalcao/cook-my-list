@@ -17,7 +17,8 @@ jobs:
     strategy:
       matrix:
         python:
-          - 3.9.5
+          - 3.7.5
+
 
     # services:
     #   # Label used to access the service container
