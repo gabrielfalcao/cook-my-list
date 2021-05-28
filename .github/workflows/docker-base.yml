@@ -1,4 +1,7 @@
 name: ⚙️ Base Docker Image
+defaults:
+  run:
+    working-directory: ./scraper-engine
 
 on:
   push:
@@ -17,7 +20,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gabrielfalcao/cookmylist-server-base
-        dockerfile: ./scraper-engine/Dockerfile.base
+        dockerfile: Dockerfile.base
         tag_with_ref: true
         tag_with_sha: true
         tags: "${{ github.sha }}"

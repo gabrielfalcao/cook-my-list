@@ -1,5 +1,9 @@
 name: 🐍 Scraper Engine
 
+defaults:
+  run:
+    working-directory: ./scraper-engine
+
 on:
   push:
     branches: [ main ]
@@ -42,25 +46,21 @@ jobs:
 
     - name: setup pyenv
       uses: gabrielfalcao/pyenv-action@v7
-      working-directory: ./scraper-engine
       with:
         default: "${{ matrix.python }}"
 
     - name: Cache VirtualEnv
       id: cache-venv
       uses: actions/cache@v1
-      working-directory: ./scraper-engine
       with:
         path: .venv
         key: ${{ runner.os }}-${{ hashFiles('*.txt') }}-python3.7
 
     - name: Unit Tests
       run: make unit
-      working-directory: ./scraper-engine
 
     - name: Functional Tests
       run: make functional
-      working-directory: ./scraper-engine
       # env:
       #     # The hostname used to communicate with the PostgreSQL service container
       #     POSTGRES_HOST: postgres
@@ -72,6 +72,5 @@ jobs:
 
     - name: "Upload coverage results to codecov.io"
       uses: codecov/codecov-action@v1
-      working-directory: ./scraper-engine
       with:
         file: ./coverage.xml # optional

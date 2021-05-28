@@ -1,5 +1,9 @@
 name: 🚢 K8S Docker Image
 
+defaults:
+  run:
+    working-directory: ./scraper-engine
+
 on:
   - push
 
@@ -16,7 +20,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gabrielfalcao/k8s-cookmylist-server
-        dockerfile: ./scraper-engine/Dockerfile
+        dockerfile: Dockerfile
         # tag_with_ref: false  # prevent pushing "latest" tag
         tag_with_sha: true
         tags: "${{ github.sha }}"
