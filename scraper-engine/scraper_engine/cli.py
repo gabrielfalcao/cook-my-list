@@ -1,3 +1,4 @@
+import multiprocessing
 import gevent.monkey
 
 gevent.monkey.patch_all()
@@ -20,6 +21,7 @@ from scraper_engine.workers import QueueServer, QueueClient
 
 DEFAULT_QUEUE_ADDRESS = "tcp://127.0.0.1:5000"
 DEFAULT_PUSH_ADDRESS = "tcp://127.0.0.1:6000"
+DEFAULT_MAX_WORKERS = multiprocessing.cpu_count()
 
 
 @click.group()
@@ -32,7 +34,7 @@ def main(ctx):
 
 @main.command("workers")
 @click.option("-s", "--queue-address", default=DEFAULT_QUEUE_ADDRESS)
-@click.option("-m", "--max-workers", default=2, type=int)
+@click.option("-m", "--max-workers", default=DEFAULT_MAX_WORKERS, type=int)
 @click.pass_context
 def workers(ctx, queue_address, max_workers):
     pool = Pool()

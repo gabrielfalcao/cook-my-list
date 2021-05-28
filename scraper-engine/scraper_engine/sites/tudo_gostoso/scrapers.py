@@ -7,6 +7,8 @@ from urllib.parse import urlparse, parse_qsl
 from collections import defaultdict
 from lxml import html
 
+from itertools import chain
+
 from datetime import datetime
 
 from uiclasses import Model
@@ -53,7 +55,12 @@ class Element(Model):
     def text(self):
         if self.dom.text:
             return self.dom.text.strip()
-        return self.dom.text
+
+        children = self.getchildren()
+        if children:
+            return "\n".join([c.text for c in children])
+
+        return html.tostring(self.dom)
 
     @property
     def attrib(self):
@@ -113,9 +120,9 @@ class RecipeScraper(object):
         ingredients = Ingredient.List([])
         current_step = self.get_title()
 
-        for ol in self.dom.query_many(".ingredients-card ol") or self.dom.query_many(
-            ".ingredients-card ul"
-        ):
+        elements = self.dom.query_many(".ingredients-card ol")
+        elements.extend(self.dom.query_many(".ingredients-card ul"))
+        for ol in elements:
             h3 = ol.getprevious()
             if h3 and h3.text:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
@@ -132,10 +139,9 @@ class RecipeScraper(object):
                 paragraph = li.query_one("p") or li.query_one("span")
                 if not paragraph.text:
                     logger.warning(
-                        f"failed to parse ingredient from {paragraph.to_html()}"
+                        f"failed to parse ingredient from {self.url} {paragraph.to_html()}"
                     )
-
-                if paragraph:
+                else:
                     ingredients.append(
                         Ingredient(
                             step=current_step,
@@ -151,9 +157,9 @@ class RecipeScraper(object):
         directions = Direction.List([])
         current_step = self.get_title()
 
-        for ol in self.dom.query_many(".directions-card ol") or self.dom.query_many(
-            ".directions-card ul"
-        ):
+        elements = self.dom.query_many(".directions-card ol")
+        elements.extend(self.dom.query_many(".directions-card ul"))
+        for ol in elements:
             h3 = ol.getprevious()
             if h3 and h3.text:
                 # remove trailing colon (e.g.: "Molho:" becomes "Molho")
@@ -169,10 +175,9 @@ class RecipeScraper(object):
                 paragraph = li.query_one("p") or li.query_one("span")
                 if not paragraph.text:
                     logger.warning(
-                        f"failed to parse direction from {paragraph.to_html()}"
+                        f"failed to parse direction from {self.url} {paragraph.to_html()}"
                     )
-
-                if paragraph:
+                else:
                     directions.append(
                         Direction(
                             step=current_step,

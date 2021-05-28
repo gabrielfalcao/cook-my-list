@@ -52,6 +52,89 @@ def test_recipe_with_h3_for_direction_steps(context):
     recipe.ingredients.should.have.length_of(6)
     recipe.directions.should.have.length_of(4)
 
+    ingredients = [i.to_dict() for i in recipe.ingredients]
+    ingredients.should.equal(
+        [
+            {
+                "step": "Mousse tentação",
+                "name": "1/2 garrafa de suco concentrado de maracujá",
+            },
+            {"step": "Mousse tentação", "name": "3 latas leite moça"},
+            {"step": "Mousse tentação", "name": "4 latas creme de leite"},
+            {"step": "Mousse tentação", "name": "2 caixas de brigadeirão"},
+            {"step": "Mousse tentação", "name": "2 colheres de maisena"},
+            {"step": "Mousse tentação", "name": "1 litro de leite"},
+        ]
+    )
+    directions = [i.to_dict() for i in recipe.directions]
+    directions.should.equal(
+        [
+            {
+                "step": "Mousse de maracujá",
+                "name": "Junte 2 leite moça, 2 creme de leite e o suco de maracujá, bata tudo no liquidificador, e reserve.",
+            },
+            {
+                "step": "Mousse de chocolate",
+                "name": "Leve o leite para esquentar, junte 1 leite moça, 2 colheres de maisena, e as caixas de pudim com um pouco de leite e misture com o leite quase fervido.",
+            },
+            {
+                "step": "Mousse de chocolate",
+                "name": "Mexa sempre até engrossar, quando estiver frio, bata na batedeira com os 2 creme de leite, e reserve.",
+            },
+            {
+                "step": "Montagem",
+                "name": "Faça camadas com os dois mousses, enfeite com sementes de maracujá ou raspas de chocolate, sirva gelado.",
+            },
+        ]
+    )
+
+
+@vcr.use_cassette
+@with_client
+def test_recipe_with_links_in_directions(context):
+    "TudoGostosoClient.get_recipe() with a recipe that contains <a> for direction step"
+
+    # Given that I request a single recipe
+    recipe = context.client.get_recipe(
+        "https://www.tudogostoso.com.br/receita/125-cuca-da-tia-dalila.html"
+    )
+    # TODO: Fix parsing of ingredients and directions that contain links
+    recipe.ingredients.should.have.length_of(10)
+    recipe.directions.should.have.length_of(4)
+    ingredients = [i.to_dict() for i in recipe.ingredients]
+    ingredients.should.equal(
+        [
+            {"step": "Cuca da tia Dalila", "name": "4 xícaras de farinha de trigo"},
+            {"step": "Cuca da tia Dalila", "name": "2 xícaras de açúcar"},
+            {"step": "Cuca da tia Dalila", "name": "1 xícara de leite"},
+            {"step": "Cuca da tia Dalila", "name": "4 ovos"},
+            {"step": "Cuca da tia Dalila", "name": "2 colheres (sopa) de"},
+            {"step": "Cuca da tia Dalila", "name": "2 colheres (sopa)"},
+            {"step": "Farofa", "name": "1 xícara de açúcar"},
+            {"step": "Farofa", "name": "1/2 xícara de farinha de trigo"},
+            {"step": "Farofa", "name": "canela em pó"},
+            {"step": "Farofa", "name": "1 ou 2 colheres de"},
+        ]
+    )
+    directions = [i.to_dict() for i in recipe.directions]
+    directions.should.equal(
+        [
+            {
+                "step": "Cuca da tia Dalila",
+                "name": "Bata os ovos com o açúcar e misture os outros ingredientes até formar uma massa homogênea.",
+            },
+            {
+                "step": "Cuca da tia Dalila",
+                "name": "Para a farofa: basta colocar tudo em uma tigelona e amassar até ficar com cara de farofa.",
+            },
+            {"step": "Cuca da tia Dalila", "name": "Unte uma forma com margarina"},
+            {
+                "step": "Cuca da tia Dalila",
+                "name": "Leve ao forno preaquecido para assar por aproximadamente 40 minutos.",
+            },
+        ]
+    )
+
 
 @vcr.use_cassette
 @with_client
@@ -65,6 +148,32 @@ def test_recipe_with_h3_for_ingredient_steps(context):
 
     recipe.ingredients.should.have.length_of(8)
     recipe.directions.should.have.length_of(2)
+    ingredients = [i.to_dict() for i in recipe.ingredients]
+    ingredients.should.equal(
+        [
+            {"step": "MASSA", "name": "300 gr de farinha"},
+            {"step": "MASSA", "name": "200 gr de manteiga"},
+            {"step": "MASSA", "name": "100 gr de açúcar"},
+            {"step": "MASSA", "name": "1 gema"},
+            {"step": "MASSA", "name": "1 colher (sopa) de vinho tinto"},
+            {"step": "RECHEIO", "name": "6 maçãs vermelhas ácidas (1kg)"},
+            {"step": "RECHEIO", "name": "1 colher (sopa) de vinho tinto"},
+            {"step": "RECHEIO", "name": "100 gr de uva passa branca sem semente"},
+        ]
+    )
+    directions = [i.to_dict() for i in recipe.directions]
+    directions.should.equal(
+        [
+            {
+                "step": "MASSA",
+                "name": "Misture bem a manteiga com o açúcar, junte a gema e acrescente o vinho. Adicione a farinha e amasse até obter uma massa homogênea, mas gordurosa e pegajosa. Divida a massa em duas porções na proporção 2/3 e 1/3. Leve à geladeira, por ½ hora.",
+            },
+            {
+                "step": "RECHEIO",
+                "name": "Descasque as maçãs e corte em fatias médias. Misture as maçãs, o vinho e a uva-passa. Cozinhe no vapor até amolecer. Forre o fundo e as laterais de uma forma desmontável com os 2/3 da massa. Coloque o recheio. Com o restante da massa, faça rolinhos bem finos e monte uma grade sobre o recheio. Asse, em forno médio, até a massa estar dourada.",
+            },
+        ]
+    )
 
 
 @vcr.use_cassette
