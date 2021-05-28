@@ -72,7 +72,7 @@ def worker_queue(ctx, rep_bind_address, push_bind_address):
 
 
 @main.command("crawler")
-@click.option("-m", "--max-pages", default=2, type=int)
+@click.option("-m", "--max-pages", default=100, type=int)
 @click.option("-c", "--rep-connect-address", default=DEFAULT_QUEUE_ADDRESS)
 @click.pass_context
 def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages):

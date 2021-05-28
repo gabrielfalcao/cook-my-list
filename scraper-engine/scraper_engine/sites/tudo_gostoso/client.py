@@ -19,6 +19,7 @@ class TudoGostosoClient(HttpClient):
         return scraper.get_recipe()
 
     def get_sitemap_element(self, sitemap_url, **kw) -> Optional[RestrictedElement]:
+        logger.info(f"retrieving sitemap {sitemap_url}")
         response = self.request("GET", sitemap_url, **kw)
         try:
             return xml.fromstring(bytes(response.text, "utf-8"))
@@ -40,7 +41,6 @@ class TudoGostosoClient(HttpClient):
         for i, element in enumerate(root_element.xpath("//sitemap")):
             if i == max_pages:
                 break
-
             sitemap = SiteMap.from_element(element)
             items.append(sitemap)
         return SiteMap.List(items)
