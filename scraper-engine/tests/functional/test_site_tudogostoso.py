@@ -36,7 +36,12 @@ def disconnect_client(context):
 with_client = scenario(prepare_client, disconnect_client)
 
 # TODO:
-# - recipe without pictures "https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html"
+# - https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html - missing picture
+# - https://www.tudogostoso.com.br/receita/2649-torta-de-abacaxi.html - missing ingredient and video
+# - https://www.tudogostoso.com.br/receita/2525-panetone-de-doce-de-leite.html
+# - https://www.tudogostoso.com.br/receita/2442-aperitivo-de-caranguejo.html
+# - https://www.tudogostoso.com.br/receita/2320-pao-de-panela-de-pressao.html
+# - https://www.tudogostoso.com.br/receita/2278-bolo-de-sorvete-caseiro.html
 
 
 @vcr.use_cassette
