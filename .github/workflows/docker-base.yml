@@ -21,6 +21,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gabrielfalcao/cookmylist-server-base
         dockerfile: scraper-engine/Dockerfile.base
+        path: scraper-engine
         tag_with_ref: true
         tag_with_sha: true
         tags: "${{ github.sha }}"
