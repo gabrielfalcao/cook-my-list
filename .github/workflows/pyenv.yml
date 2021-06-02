@@ -47,6 +47,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: cache .venv
+      id: cache-venv
+      uses: actions/cache@v2
+      with:
+        path: ~/.venv
+        key: ${{ runner.os }}-pip-${{ hashFiles('**.txt') }}-${{ matrix.python }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
     - name: update apt
       run: sudo apt-get update
 
@@ -60,13 +69,6 @@ jobs:
 
     - name: install dependencies
       run: make develop setup
-
-    - name: cache .venv
-      id: cache-venv
-      uses: actions/cache@v1
-      with:
-        path: .venv
-        key: ${{ runner.os }}-${{ hashFiles('*.txt') }}-python3.7
 
     - name: run unit tests
       run: make unit
