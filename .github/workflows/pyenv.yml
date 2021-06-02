@@ -47,10 +47,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: setup pyenv
+    - name: Setup pyenv
       uses: gabrielfalcao/pyenv-action@v7
       with:
         default: "${{ matrix.python }}"
+
+    - name: Install Dependencies
+      run: make develop setup
 
     - name: Cache VirtualEnv
       id: cache-venv
