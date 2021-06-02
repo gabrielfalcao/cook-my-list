@@ -9,7 +9,16 @@ REQUIREMENTS_FILE	:= development.txt
 PACKAGE_PATH		:= $(GIT_ROOT)/$(PACKAGE_NAME)
 REQUIREMENTS_PATH	:= $(GIT_ROOT)/$(REQUIREMENTS_FILE)
 MAIN_CLI_PATH		:= $(VENV_ROOT)/bin/$(MAIN_CLI_NAME)
+
+# database env vars
+ALEMBIC_CONFIG		?= $(PACKAGE_PATH)/alembic.ini
+POSTGRES_USER		?= scraper_engine
+POSTGRES_PASSWORD	?= scraper_engine
+POSTGRES_DB		?= scraper_engine
+SQLALCHEMY_URI		?= postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost/$(POSTGRES_DB)
 export VENV		?= $(VENV_ROOT)
+export SQLALCHEMY_URI
+export ALEMBIC_CONFIG
 
 ######################################################################
 # Phony targets (only exist for typing convenience and don't represent
@@ -19,14 +28,20 @@ export VENV		?= $(VENV_ROOT)
 # default target when running `make` without arguments
 all: | $(MAIN_CLI_PATH)
 
-db-create:
-	@2>/dev/null dropdb scraper_engine > /dev/null || echo "database does not exist yet"
-	@2>/dev/null dropuser scraper_engine > /dev/null || echo "user does not exist yet"
-	@echo "creating postgresql user and database from scratch"
-	-@createuser scraper_engine
-	-@createdb --owner=scraper_engine scraper_engine
+$(ALEMBIC_CONFIG): | $(VENV)/bin/python $(VENV)/bin/alembic
+	$(VENV)/bin/python tools/create-alembic-ini.py
 
-db-migrate: | $(VENV)/bin/alembic
+db-create:
+	-@2>/dev/null dropdb $(POSTGRES_DB) > /dev/null || echo "database does not exist yet"
+	-@2>/dev/null dropuser $(POSTGRES_USER) > /dev/null || echo "user does not exist yet"
+	@echo "creating postgresql user and database from scratch"
+	@createuser $(POSTGRES_USER)
+	@createdb --owner=$(POSTGRES_USER) $(POSTGRES_DB)
+	@echo "setting password for postgresql user $(POSTGRES_USER)"
+	@psql -U scraper_engine -c "ALTER USER $(POSTGRES_USER) WITH PASSWORD '$(POSTGRES_PASSWORD)';"
+
+
+db-migrate: | $(ALEMBIC_CONFIG) $(VENV)/bin/alembic
 	@echo "running migrations"
 	@(cd $(PACKAGE_PATH) && $(VENV)/bin/alembic upgrade head)
 
