@@ -48,7 +48,11 @@ class Recipe(Model):
 
     author_name: str
     total_cooking_time: str
+    total_cooking_time_value: Decimal
+    total_cooking_time_unit: str
     servings: str
+    servings_value: Decimal
+    servings_unit: str
 
     ingredients: Ingredient.List
     directions: Direction.List
@@ -72,6 +76,8 @@ class Recipe(Model):
             "title": self.title,
             "url": self.url,
             "servings": self.servings,
+            "servings_value": self.servings_value,
+            "servings_unit": self.servings_unit,
             "author_name": self.author_name,
             "picture_count": len(self.pictures),
             "directions_count": len(self.directions),
@@ -79,6 +85,8 @@ class Recipe(Model):
             "total_ratings": self.total_ratings,
             "rating": self.rating,
             "total_cooking_time": self.total_cooking_time,
+            "total_cooking_time_value": self.total_cooking_time_value,
+            "total_cooking_time_unit": self.total_cooking_time_unit,
             "json_data": self.to_json(),
         }
 

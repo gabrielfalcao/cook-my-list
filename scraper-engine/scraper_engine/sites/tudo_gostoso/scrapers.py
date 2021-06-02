@@ -20,6 +20,9 @@ from scraper_engine.http.exceptions import TooManyElementsFound
 
 recipe_id_regex = re.compile(r"[/](?P<id>\d+)[-][^/]+")
 
+total_cooking_time_regex = re.compile(r"(?P<value>[\d.]+)?(\s*(?P<unit>\S*))?")
+servings_regex = re.compile(r"(?P<value>[\d.]+)?(\s*(?P<unit>\S*))?")
+
 
 logger = get_logger(__name__)
 
@@ -231,8 +234,44 @@ class RecipeScraper(object):
         return self.get_data_item("recipeYield")
 
     @lru_cache()
+    def get_servings_value(self) -> Decimal:
+        servings = self.get_servings()
+        found = servings_regex.search(servings)
+        if found:
+            return Decimal(found.group("value"))
+
+        return Decimal("-1")
+
+    @lru_cache()
+    def get_servings_unit(self) -> str:
+        servings = self.get_servings()
+        found = servings_regex.search(servings)
+        if found:
+            return found.group("unit")
+
+        return servings
+
+    @lru_cache()
     def get_total_cooking_time(self) -> str:
         return self.get_data_item("totalTime").lower()
+
+    @lru_cache()
+    def get_total_cooking_time_value(self) -> Decimal:
+        total_cooking_time = self.get_total_cooking_time()
+        found = total_cooking_time_regex.search(total_cooking_time)
+        if found:
+            return Decimal(found.group("value"))
+
+        return Decimal("-1")
+
+    @lru_cache()
+    def get_total_cooking_time_unit(self) -> str:
+        total_cooking_time = self.get_total_cooking_time()
+        found = total_cooking_time_regex.search(total_cooking_time)
+        if found:
+            return found.group("unit")
+
+        return total_cooking_time
 
     @lru_cache()
     def get_author_name(self) -> str:
@@ -249,7 +288,11 @@ class RecipeScraper(object):
             "total_ratings": self.get_total_ratings(),
             "rating": self.get_rating(),
             "servings": self.get_servings(),
+            "servings_value": self.get_servings_value(),
+            "servings_unit": self.get_servings_unit(),
             "total_cooking_time": self.get_total_cooking_time(),
+            "total_cooking_time_value": self.get_total_cooking_time_value(),
+            "total_cooking_time_unit": self.get_total_cooking_time_unit(),
             "author_name": self.get_author_name(),
         }
         return Recipe(**data)

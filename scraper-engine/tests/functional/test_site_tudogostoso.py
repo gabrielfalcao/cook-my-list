@@ -54,6 +54,12 @@ def test_recipe_with_h3_for_direction_steps(context):
         "https://www.tudogostoso.com.br/receita/235-mousse-tentacao.html"
     )
 
+    recipe.servings.should.equal("20 porções")
+    recipe.servings_value.should.equal(Decimal("20"))
+    recipe.servings_unit.should.equal("porções")
+    recipe.total_cooking_time.should.equal("120 min")
+    recipe.total_cooking_time_value.should.equal(Decimal(120))
+    recipe.total_cooking_time_unit.should.equal("min")
     recipe.ingredients.should.have.length_of(6)
     recipe.directions.should.have.length_of(4)
 
@@ -106,6 +112,16 @@ def test_recipe_with_links_in_directions(context):
     # TODO: Fix parsing of ingredients and directions that contain links
     recipe.ingredients.should.have.length_of(10)
     recipe.directions.should.have.length_of(4)
+
+    recipe.servings.should.equal("12 porções")
+    recipe.servings_value.should.equal(Decimal("12"))
+    recipe.servings_unit.should.equal("porções")
+    recipe.total_cooking_time.should.equal("60 min")
+    recipe.total_cooking_time_value.should.equal(Decimal(60))
+    recipe.total_cooking_time_unit.should.equal("min")
+    recipe.ingredients.should.have.length_of(10)
+    recipe.directions.should.have.length_of(4)
+
     ingredients = [i.to_dict() for i in recipe.ingredients]
     ingredients.should.equal(
         [
@@ -227,7 +243,7 @@ def test_tudogostoso_get_single_recipe(context):
     )
 
     recipe.rating.should.equal(Decimal("4.5"))
-    recipe.total_ratings.should.equal(202)
+    recipe.total_ratings.should.equal(200)
 
     recipe.total_cooking_time.should.equal("20 min")
     recipe.servings.should.equal("4 porções")
