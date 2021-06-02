@@ -13,6 +13,7 @@ RUN apk --update --no-cache add \
     musl-dev \
     libxml2-dev \
     libxslt-dev \
+    libzmq \
     postgresql-dev \
     postgresql-libs \
     python3-dev
