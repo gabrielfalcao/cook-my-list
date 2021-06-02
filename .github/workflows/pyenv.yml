@@ -32,6 +32,12 @@ jobs:
 
       postgres:
         image: postgres:13
+        env:  # env needs to be duplicated here or else github fails
+          POSTGRES_PASSWORD: scraper_engine
+          POSTGRES_USER: scraper_engine
+          POSTGRES_DB: scraper_engine
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
         options: >-
           --health-cmd pg_isready
           --health-interval 1s
