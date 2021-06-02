@@ -4,9 +4,9 @@ from humanfriendly.text import pluralize
 
 from scraper_engine.logs import get_logger
 from scraper_engine.sites.tudo_gostoso.models import Recipe
-from elasticsearch import Elasticsearch
+from scraper_engine.es import connect_to_elasticsearch
 
-es = Elasticsearch()
+es = connect_to_elasticsearch()
 
 http_cache_hit = signal("http-cache-hit")
 http_cache_miss = signal("http-cache-miss")

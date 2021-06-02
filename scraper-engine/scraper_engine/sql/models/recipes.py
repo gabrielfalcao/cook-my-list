@@ -4,10 +4,10 @@ import requests
 from chemist import Model, db
 from dateutil.parser import parse as parse_date
 from datetime import datetime
-from elasticsearch import Elasticsearch
+from scraper_engine.es import connect_to_elasticsearch
 from .base import metadata
 
-es = Elasticsearch()
+es = connect_to_elasticsearch()
 
 
 class ScrapedRecipe(Model):

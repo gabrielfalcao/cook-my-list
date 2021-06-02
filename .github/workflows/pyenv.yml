@@ -20,20 +20,21 @@ jobs:
       POSTGRES_DB: scraper_engine
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
+      ELASTICSEARCH_HOST: elasticsearch
 
     strategy:
       matrix:
         python:
           - 3.7.5
     services:
-      # Label used to access the service container
+      elasticsearch:
+        image: elasticsearch:7.12.1
+
       postgres:
-        # Docker Hub image
         image: postgres:13
-        # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
+          --health-interval 1s
           --health-timeout 5s
           --health-retries 5
 
