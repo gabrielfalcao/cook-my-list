@@ -1,10 +1,20 @@
 import os
+import socket
 from pathlib import Path
 
 path_to_module = Path(__file__).joinpath("..", "scraper_engine").absolute()
 
-SQLALCHEMY_URI = os.getenv("SQLALCHEMY_URI")
+
+POSTGRES_HOST = socket.gethostbyname(os.getenv("POSTGRES_HOST") or "localhost")
+POSTGRES_USER = os.getenv("POSTGRES_USER") or "scraper_engine"
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD") or "scraper_engine"
+POSTGRES_DB = os.getenv("POSTGRES_DB") or "scraper_engine"
+
+SQLALCHEMY_URI = (
+    f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DB}"
+)
 ALEMBIC_CONFIG = os.getenv("ALEMBIC_CONFIG")
+socket.gethostbyname
 
 
 if not SQLALCHEMY_URI:
