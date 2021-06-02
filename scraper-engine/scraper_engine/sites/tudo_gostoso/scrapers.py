@@ -60,7 +60,7 @@ class Element(Model):
         if children:
             return "\n".join([c.text for c in children])
 
-        return html.tostring(self.dom)
+        return self.to_html()
 
     @property
     def attrib(self):

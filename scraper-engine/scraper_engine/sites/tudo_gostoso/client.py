@@ -20,7 +20,11 @@ class TudoGostosoClient(HttpClient):
 
     def get_sitemap_element(self, sitemap_url, **kw) -> Optional[RestrictedElement]:
         logger.info(f"retrieving sitemap {sitemap_url}")
-        response = self.request("GET", sitemap_url, **kw)
+        try:
+            response = self.request("GET", sitemap_url, **kw)
+        except Exception:
+            logger.exception(f"failed request {sitemap_url}")
+
         try:
             return xml.fromstring(bytes(response.text, "utf-8"))
         except Exception:
@@ -50,4 +54,4 @@ class TudoGostosoClient(HttpClient):
         for sitemap in self.get_sitemap(max_pages=max_pages):
             recipe_urls.extend(self.get_recipe_urls(sitemap.url))
 
-        return recipe_urls
+        return sorted(recipe_urls, reverse=True)

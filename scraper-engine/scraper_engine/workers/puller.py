@@ -57,4 +57,10 @@ class PullerWorker(object):
     def process_queue(self):
         info = self.pull_queue()
         self.logger.debug(f"processing job")
-        self.process_job(info)
+        try:
+            self.process_job(info)
+        except Exception:
+            self.logger.exception(f"failed to process job {info}")
+
+    def process_job(self, job):
+        raise NotImplementedError

@@ -17,6 +17,8 @@ from scraper_engine.sites.tudo_gostoso.models import Recipe
 from scraper_engine.web import app
 from scraper_engine.workers import GetRecipeWorker
 from scraper_engine.workers import QueueServer, QueueClient
+from scraper_engine.es import es
+from scraper_engine.sql import config
 
 
 DEFAULT_QUEUE_ADDRESS = "tcp://127.0.0.1:5000"
@@ -28,7 +30,7 @@ DEFAULT_MAX_WORKERS = multiprocessing.cpu_count()
 @click.pass_context
 def main(ctx):
     print("Cook-My-List Scraper Engine")
-    sql.context.set_default_uri("postgresql://scraper_engine@localhost/scraper_engine")
+    sql.context.set_default_uri(config.SQLALCHEMY_URI)
     ctx.obj = {}
 
 
@@ -97,3 +99,11 @@ def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages):
 @click.pass_context
 def web_server(ctx, host, port, debug):
     app.run(host=host, port=port, debug=debug)
+
+
+@main.command("purge")
+def purge_elasticsearch():
+    try:
+        print(es.indices.delete(index="recipes"))
+    except Exception as e:
+        logger.error(f'failed to purge index "recipes": {e}')

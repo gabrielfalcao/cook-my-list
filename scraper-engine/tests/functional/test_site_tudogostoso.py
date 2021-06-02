@@ -20,12 +20,12 @@ from scraper_engine.sites.tudo_gostoso import (
 functional_tests_path = Path(__file__).parent.absolute()
 vcr = VCR(
     cassette_library_dir=str(functional_tests_path.joinpath(".cassetes")),
-    # record_mode="once",
+    record_mode="new_episodes",
 )
 
 
 def prepare_client(context):
-    sql.context.set_default_uri("postgresql://scraper_engine@localhost/scraper_engine")
+    sql.context.set_default_uri(sql.config.SQLALCHEMY_URI)
     context.client = TudoGostosoClient()
 
 
@@ -227,7 +227,7 @@ def test_tudogostoso_get_single_recipe(context):
     )
 
     recipe.rating.should.equal(Decimal("4.5"))
-    recipe.total_ratings.should.equal(200)
+    recipe.total_ratings.should.equal(202)
 
     recipe.total_cooking_time.should.equal("20 min")
     recipe.servings.should.equal("4 porções")

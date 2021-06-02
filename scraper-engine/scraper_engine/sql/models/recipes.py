@@ -4,7 +4,10 @@ import requests
 from chemist import Model, db
 from dateutil.parser import parse as parse_date
 from datetime import datetime
+from elasticsearch import Elasticsearch
 from .base import metadata
+
+es = Elasticsearch()
 
 
 class ScrapedRecipe(Model):
@@ -27,9 +30,22 @@ class ScrapedRecipe(Model):
         db.Column("updated_at", db.DateTime, default=datetime.utcnow),
     )
 
+    def pre_save(self):
+        self.updated_at = datetime.utcnow()
+
+    def post_save(self):
+        """called right after executing a save.
+        This method can be overwritten by subclasses in order to take any domain-related action
+        """
+        data = self.to_ui_dict()
+        data.update(self.to_dict())
+        data.pop("json_data", None)
+        es.index(index="recipes", id=self.id, body=data)
+
     def to_ui_dict(self):
         if self.json_data:
-            return json.loads(self.json_data)
+            return json.loads(self.json_data) or {}
+        return {}
 
     @property
     def last_updated(self):
