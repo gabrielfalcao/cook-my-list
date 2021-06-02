@@ -47,6 +47,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: update apt
+      run: sudo apt-get update
+
+    - name: install dependencies
+      run: sudo apt-get install -y build-essential libxml2-dev libxslt1-dev libffi-dev
+
     - name: setup pyenv
       uses: gabrielfalcao/pyenv-action@v7
       with:
