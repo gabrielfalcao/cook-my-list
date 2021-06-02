@@ -17,7 +17,7 @@ from scraper_engine.sites.tudo_gostoso.models import Recipe
 from scraper_engine.web import app
 from scraper_engine.workers import GetRecipeWorker
 from scraper_engine.workers import QueueServer, QueueClient
-from scraper_engine.es import es
+from scraper_engine.es import connect_to_elasticsearch
 from scraper_engine.sql import config
 
 
@@ -103,6 +103,7 @@ def web_server(ctx, host, port, debug):
 
 @main.command("purge")
 def purge_elasticsearch():
+    es = connect_to_elasticsearch()
     try:
         print(es.indices.delete(index="recipes"))
     except Exception as e:
