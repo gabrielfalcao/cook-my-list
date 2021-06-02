@@ -127,7 +127,7 @@ $(VENV)/bin/black: | $(VENV)/bin/pip
 
 # installs this package in "edit" mode after ensuring its requirements are installed
 $(VENV)/bin/alembic $(VENV)/bin/nosetests $(MAIN_CLI_PATH): | $(VENV) $(VENV)/bin/pip $(VENV)/bin/python $(REQUIREMENTS_PATH)
-	$(VENV)/bin/pip install --force-reinstall -r $(REQUIREMENTS_PATH)
+	$(VENV)/bin/pip install -r $(REQUIREMENTS_PATH)
 	$(VENV)/bin/pip install -e .
 
 # ensure that REQUIREMENTS_PATH exists
