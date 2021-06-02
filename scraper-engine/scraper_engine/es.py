@@ -1,10 +1,13 @@
 import os
+import socket
 import multiprocessing
 from elasticsearch import Elasticsearch
 
 
 hosts = [
-    os.getenv("ELASTICSEARCH_HOST") or "localhost",
+    socket.gethostbyname(
+        os.getenv("ELASTICSEARCH_HOST") or "localhost",
+    )
 ]
 
 
