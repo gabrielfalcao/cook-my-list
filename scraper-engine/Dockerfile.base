@@ -14,6 +14,7 @@ RUN apk --update --no-cache add \
     libxml2-dev \
     libxslt-dev \
     libzmq \
+    cargo \
     rust \
     postgresql-dev \
     postgresql-libs \
