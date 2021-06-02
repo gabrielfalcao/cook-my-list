@@ -12,13 +12,18 @@ MAIN_CLI_PATH		:= $(VENV_ROOT)/bin/$(MAIN_CLI_NAME)
 
 # database env vars
 ALEMBIC_CONFIG		?= $(PACKAGE_PATH)/alembic.ini
+POSTGRES_HOST		?= localhost
 POSTGRES_USER		?= scraper_engine
 POSTGRES_PASSWORD	?= scraper_engine
 POSTGRES_DB		?= scraper_engine
-SQLALCHEMY_URI		?= postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost/$(POSTGRES_DB)
+SQLALCHEMY_URI		?= postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)
 export VENV		?= $(VENV_ROOT)
 export SQLALCHEMY_URI
 export ALEMBIC_CONFIG
+export POSTGRES_HOST
+export POSTGRES_USER
+export POSTGRES_PASSWORD
+export POSTGRES_DB
 
 ######################################################################
 # Phony targets (only exist for typing convenience and don't represent
