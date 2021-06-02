@@ -11,6 +11,8 @@ RUN apk --update --no-cache add \
     openssl-dev \
     make \
     musl-dev \
+    libxml2 \
+    libxslt \
     postgresql-dev \
     postgresql-libs \
     python3-dev
