@@ -18,7 +18,22 @@ jobs:
       matrix:
         python:
           - 3.7.5
-
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres@13
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: scraper_engine
+          POSTGRES_USER: scraper_engine
+          POSTGRES_DB: scraper_engine
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     # services:
     #   # Label used to access the service container
@@ -60,16 +75,23 @@ jobs:
     - name: Unit Tests
       run: make unit
 
+    - name: DB Migrations
+      run: make db-migrate
+      env:
+        POSTGRES_PASSWORD: scraper_engine
+        POSTGRES_USER: scraper_engine
+        POSTGRES_DB: scraper_engine
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: 5432
+
     - name: Functional Tests
       run: make functional
-      # env:
-      #     # The hostname used to communicate with the PostgreSQL service container
-      #     POSTGRES_HOST: postgres
-      #     POSTGRES_USERNAME: postgres
-      #     POSTGRES_PASSWORD: postgres
-      #     POSTGRES_DATABASE: test
-      #     # The default PostgreSQL port
-      #     POSTGRES_PORT: 5432
+      env:
+        POSTGRES_PASSWORD: scraper_engine
+        POSTGRES_USER: scraper_engine
+        POSTGRES_DB: scraper_engine
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: 5432
 
     - name: "Upload coverage results to codecov.io"
       uses: codecov/codecov-action@v1
