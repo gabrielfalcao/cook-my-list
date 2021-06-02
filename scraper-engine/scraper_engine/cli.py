@@ -4,6 +4,7 @@ import gevent.monkey
 gevent.monkey.patch_all()
 
 import time
+import json
 import click
 from gevent.pool import Pool
 from typing import Optional
@@ -75,11 +76,29 @@ def worker_queue(ctx, rep_bind_address, push_bind_address):
 
 @main.command("crawler")
 @click.option("-m", "--max-pages", default=100, type=int)
+@click.option("-f", "--urls-file", default=f"recipe-urls.json")
 @click.option("-c", "--rep-connect-address", default=DEFAULT_QUEUE_ADDRESS)
 @click.pass_context
-def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages):
+def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages, urls_file):
     client = TudoGostosoClient()
-    recipe_urls = client.crawl_sitemap(max_pages=max_pages)
+    urls_file = Path(urls_file)
+    recipe_urls = []
+
+    if urls_file.is_file():
+        with urls_file.open("r") as fd:
+            try:
+                recipe_urls = json.load(fd)
+                print(f"loaded recipe urls from {urls_file}")
+            except Exception as e:
+                print(f"failed to load recipe urls from {urls_file}: {e}")
+
+    if not recipe_urls:
+        recipe_urls = client.crawl_sitemap(max_pages=max_pages)
+
+        with urls_file.open("w") as fd:
+            json.dump(recipe_urls, fd)
+            print(f"stored recipe urls in {urls_file}")
+
     count = len(recipe_urls)
     print(f"found {count} failed recipes")
     worker = QueueClient(rep_connect_address)
