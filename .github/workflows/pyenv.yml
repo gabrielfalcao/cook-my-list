@@ -63,10 +63,10 @@ jobs:
     - name: install dependencies
       run: apt-get install -y build-essential libxml2-dev libxslt1-dev libffi-dev libzmq3-dev
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - name: setup pyenv
+      uses: gabrielfalcao/pyenv-action@v7
       with:
-        python-version: ${{ matrix.python }}
+        default: "${{ matrix.python }}"
 
     - name: install dependencies
       run: make develop setup
