@@ -31,4 +31,4 @@ ENV PIP_CACHE_DIR /pip/cache
 
 RUN /venv/bin/pip install -U pip
 RUN /venv/bin/pip install -U setuptools wheel
-RUN /venv/bin/pip install -r development.txt
+RUN /venv/bin/pip install --no-binary :all: -r development.txt

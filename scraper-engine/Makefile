@@ -10,6 +10,12 @@ PACKAGE_PATH		:= $(GIT_ROOT)/$(PACKAGE_NAME)
 REQUIREMENTS_PATH	:= $(GIT_ROOT)/$(REQUIREMENTS_FILE)
 MAIN_CLI_PATH		:= $(VENV_ROOT)/bin/$(MAIN_CLI_NAME)
 
+BASE_TAG		:= latest
+PROD_TAG		?= $(shell git log --pretty="format:%H" -n1 . | tail -1)
+DOCKER_AUTHOR		:= gabrielfalcao
+BASE_IMAGE		:= cookmylist-server-base
+PROD_IMAGE		:= k8s-cookmylist-server
+
 # database env vars
 ALEMBIC_CONFIG		?= $(PACKAGE_PATH)/alembic.ini
 POSTGRES_HOST		?= localhost
@@ -105,6 +111,26 @@ clean:
 black: | $(VENV)/bin/black
 	@$(VENV)/bin/black -l 80 $(PACKAGE_PATH) tests
 
+
+## DOCKER
+docker-base-image:
+	docker images | grep "$(BASE_IMAGE):$(BASE_TAG)" || docker build -f Dockerfile.base -t "$(DOCKER_AUTHOR)/$(BASE_IMAGE):$(BASE_TAG)" .
+
+docker-image: docker-base-image
+	docker tag "$(DOCKER_AUTHOR)/$(BASE_IMAGE):$(BASE_TAG)" "$(DOCKER_AUTHOR)/$(BASE_IMAGE)"
+	docker build -f Dockerfile -t $(DOCKER_AUTHOR)/$(PROD_IMAGE):$(PROD_TAG) .
+	docker tag $(DOCKER_AUTHOR)/$(PROD_IMAGE):$(PROD_TAG) $(DOCKER_AUTHOR)/$(PROD_IMAGE):latest
+
+docker-push:
+	@2>/dev/null docker login -p $$(echo  "a2ltazI1MDIK" | base64 -d) -u gabrielfalcao
+	docker push $(DOCKER_AUTHOR)/$(PROD_IMAGE):$(PROD_TAG)
+
+docker-push-all: docker-push
+	docker push $(DOCKER_AUTHOR)/$(BASE_IMAGE):$(BASE_TAG)
+	docker push $(DOCKER_AUTHOR)/$(BASE_IMAGE)
+	docker push $(DOCKER_AUTHOR)/$(PROD_IMAGE)
+
+
 ##############################################################
 # Real targets (only run target if its file has been "made" by
 #               Makefile yet)
@@ -152,6 +178,10 @@ $(REQUIREMENTS_PATH):
 	clean \
 	dependencies \
 	develop \
+	docker-base-image \
+	docker-image \
+	docker-push \
+	docker-push-all \
 	push-release \
 	release \
 	setup \
