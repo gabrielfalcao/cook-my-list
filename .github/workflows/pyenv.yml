@@ -47,28 +47,28 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup pyenv
+    - name: setup pyenv
       uses: gabrielfalcao/pyenv-action@v7
       with:
         default: "${{ matrix.python }}"
 
-    - name: Install Dependencies
+    - name: install dependencies
       run: make develop setup
 
-    - name: Cache VirtualEnv
+    - name: cache .venv
       id: cache-venv
       uses: actions/cache@v1
       with:
         path: .venv
         key: ${{ runner.os }}-${{ hashFiles('*.txt') }}-python3.7
 
-    - name: Unit Tests
+    - name: run unit tests
       run: make unit
 
-    - name: DB Migrations
+    - name: run db migrations
       run: make db-migrate
 
-    - name: Functional Tests
+    - name: run functional tests
       run: make functional
 
     - name: "Upload coverage results to codecov.io"
