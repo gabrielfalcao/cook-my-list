@@ -14,11 +14,14 @@ RUN apk --update --no-cache add \
     libxml2-dev \
     libxslt-dev \
     libzmq \
+    libzmq-static \
     cargo \
     rust \
     postgresql-dev \
     postgresql-libs \
     py3-openssl \
+    py3-pyzmq \
+    zeromq-dev \
     python3-dev
 
 RUN mkdir -p /app /pip/cache
