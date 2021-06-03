@@ -2,10 +2,12 @@ import multiprocessing
 import gevent.monkey
 
 gevent.monkey.patch_all()
-
+import os
 import time
 import json
 import click
+import logging
+import requests
 from gevent.pool import Pool
 from typing import Optional
 from uiclasses import Model
@@ -13,7 +15,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine import sql
-from scraper_engine.logs import logger
+from scraper_engine.logs import logger, get_logger
 from scraper_engine.sites.tudo_gostoso.models import Recipe
 from scraper_engine.web import app
 from scraper_engine.workers import GetRecipeWorker
@@ -127,3 +129,22 @@ def purge_elasticsearch():
         print(es.indices.delete(index="recipes"))
     except Exception as e:
         logger.error(f'failed to purge index "recipes": {e}')
+
+
+@main.command("cleanup-workflows")
+def cleanup_workflows():
+    get_logger("requests").setLevel(logging.DEBUG)
+    http = requests.Session()
+    GITHUB_API_TOKEN = os.environ["GITHUB_API_TOKEN"]
+    http.headers = {
+        "Authorization": f"Bearer {GITHUB_API_TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+    }
+    runs = http.get(
+        "https://api.github.com/repos/gabrielfalcao/cook-my-list/actions/runs"
+    ).json()["workflow_runs"]
+    for failure in [r for r in runs if "failure" in (r["conclusion"] or "")]:
+        url = f"https://api.github.com/repos/gabrielfalcao/cook-my-list/actions/runs/{failure['id']}"
+
+        res = http.delete(url)
+        logger.warning(f"DELETE {url}: {res}")
