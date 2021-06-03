@@ -2,9 +2,15 @@ alembic==1.6.3
 blinker==1.4
 chemist==1.6.4
 click==8.0.1
+cmreshandler==1.0.0
 colorlog==5.0.1
 cssselect==1.1.0
 defusedxml==0.7.1
+elasticsearch==7.13.0
+flask-cors==3.0.10
+flask-restful==0.3.9
+flask-session==0.3.2
+flask==2.0.1
 gevent==21.1.2
 lxml==4.6.3
 psycopg2==2.8.6
@@ -12,8 +18,3 @@ python-dateutil==2.8.1
 pyzmq==22.1.0
 requests==2.25.1
 uiclasses==2.3.2
-elasticsearch==7.13.0
-flask-cors==3.0.10
-flask-restful==0.3.9
-flask-session==0.3.2
-flask==2.0.1
