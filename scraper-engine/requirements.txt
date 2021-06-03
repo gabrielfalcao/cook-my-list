@@ -17,4 +17,4 @@ python-dateutil==2.8.1
 pyzmq==22.1.0
 requests==2.25.1
 uiclasses==2.3.2
-cmreshandler==1.0.0
+CMRESHandler==1.0.0
