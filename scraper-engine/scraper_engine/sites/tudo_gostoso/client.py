@@ -52,5 +52,5 @@ class TudoGostosoClient(HttpClient):
         recipe_urls = []
         for sitemap in self.get_sitemap(max_pages=max_pages):
             recipe_urls.extend(self.get_recipe_urls(sitemap.url))
-            break
+
         return sorted(recipe_urls, reverse=True)

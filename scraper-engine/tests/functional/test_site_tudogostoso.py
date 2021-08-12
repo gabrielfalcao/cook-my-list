@@ -1,21 +1,19 @@
-import httpretty
-
-from vcr import VCR
-from sure import scenario
-from pathlib import Path
 from decimal import Decimal
+from pathlib import Path
 
+import httpretty
 from scraper_engine import sql
-from scraper_engine.sql.models import ScrapedRecipe
-from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine.sites.tudo_gostoso import (
-    Recipe,
-    Ingredient,
     Direction,
+    Ingredient,
     Picture,
+    Recipe,
     SiteMap,
+    TudoGostosoClient,
 )
-
+from scraper_engine.sql.models import ScrapedRecipe
+from sure import scenario
+from vcr import VCR
 
 functional_tests_path = Path(__file__).parent.absolute()
 vcr = VCR(
@@ -243,7 +241,7 @@ def test_tudogostoso_get_single_recipe(context):
     )
 
     recipe.rating.should.equal(Decimal("4.5"))
-    recipe.total_ratings.should.equal(200)
+    recipe.total_ratings.should.equal(202)
 
     recipe.total_cooking_time.should.equal("20 min")
     recipe.servings.should.equal("4 porções")
@@ -376,7 +374,7 @@ def test_tudogostoso_get_sitemap(context):
     sitemaps = context.client.get_sitemap(max_pages=5)
 
     # Then it should return a list of urls
-    sitemaps.should.be.a(SiteMap.List.Type)
+    sitemaps.should.be.a(SiteMap.List)
 
     sitemaps.should.have.length_of(5)
 

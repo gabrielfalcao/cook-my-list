@@ -39,7 +39,7 @@ class ScrapedRecipe(Model):
     def pre_save(self):
         self.updated_at = datetime.utcnow()
 
-    def post_save(self):
+    def post_save(self, transaction):
         """called right after executing a save.
         This method can be overwritten by subclasses in order to take any domain-related action
         """

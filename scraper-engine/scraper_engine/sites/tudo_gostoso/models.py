@@ -1,15 +1,15 @@
-from typing import Union, Optional
+from datetime import datetime
 from decimal import Decimal
 from itertools import chain
-from uiclasses import Model
-from uiclasses.typing import Property
-from dateutil.parser import parse as parse_date
-from lxml import html
-from defusedxml.lxml import RestrictedElement
+from typing import Optional, Union
 
-from datetime import datetime
+from dateutil.parser import parse as parse_date
+from defusedxml.lxml import RestrictedElement
+from lxml import html
 from scraper_engine import events
 from scraper_engine.sql.models import ScrapedRecipe, ScrapedSiteMap
+from uiclasses import Model
+from uiclasses.typing import Property
 
 
 def try_parse_date(value: str) -> Optional[datetime]:
@@ -97,10 +97,9 @@ class Recipe(Model):
             )
             return
 
+        sql = ScrapedRecipe.get_or_create(url=self.url)
         data = self.to_sql_data()
-        sql = ScrapedRecipe.get_or_create(url=self.url).update_and_save(
-            updated_at=datetime.utcnow(), **data
-        )
+        sql.update_and_save(updated_at=datetime.utcnow(), **data)
         return sql
 
 

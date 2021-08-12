@@ -1905,4 +1905,59 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: "{\"id\":21122,\"title\":\"Alm\xF4ndega ao molho de tomate - r\xE1pida,
+      pr\xE1tica e gostosa\",\"url\":\"https://www.tudogostoso.com.br/receita/80799-almondega-ao-molho-de-tomate-rapida-pratica-e-gostosa.html\",\"ingredients\":[{\"step\":\"Alm\xF4ndega\",\"name\":\"500g
+      de carne mo\xEDda (cox\xE3o mole)\"},{\"step\":\"Alm\xF4ndega\",\"name\":\"2
+      ovos\"},{\"step\":\"Alm\xF4ndega\",\"name\":\"3 colheres (sopa) de farinha de
+      rosca\"},{\"step\":\"Alm\xF4ndega\",\"name\":\"1/2 cebola picada\"},{\"step\":\"Alm\xF4ndega\",\"name\":\"sal
+      e pimenta a gosto\"},{\"step\":\"Molho\",\"name\":\"1/2 cebola picada\"},{\"step\":\"Molho\",\"name\":\"1/2
+      alho picado\"},{\"step\":\"Molho\",\"name\":\"3 colheres (sopa) \xF3leo\"},{\"step\":\"Molho\",\"name\":\"1
+      lata de molho de tomate\"},{\"step\":\"Molho\",\"name\":\"1/2 lata de \xE1gua\"},{\"step\":\"Molho\",\"name\":\"1
+      cubo de caldo de galinha\"},{\"step\":\"Molho\",\"name\":\"1 pitada de a\xE7\xFAcar\"},{\"step\":\"Molho\",\"name\":\"sal,
+      pimenta, salsinha a gosto\"}],\"directions\":[{\"step\":\"Alm\xF4ndegas\",\"name\":\"Junte
+      todos os ingredientes em uma vasilha e misture bem.\"},{\"step\":\"Alm\xF4ndegas\",\"name\":\"Pegue
+      uma colher de sobremesa como medida e fa\xE7a as bolinhas (rende em torno de
+      umas 45 unidades).\"},{\"step\":\"Alm\xF4ndegas\",\"name\":\"Esquente uma panela
+      com 2 a 3 dedos de \xF3leo e frite as alm\xF4ndegas at\xE9 que fiquem levemente
+      douradas (dentro poder\xE1 ficar cr\xFA, pois elas terminar\xE3o de cozinhar
+      junto ao molho de tomate e ficar\xE3o mais suculentas).\"},{\"step\":\"Alm\xF4ndegas\",\"name\":\"Reserve-as.\"},{\"step\":\"Molho\",\"name\":\"Refogue
+      a cebola e o alho no \xF3leo.\"},{\"step\":\"Molho\",\"name\":\"Junte o molho
+      de tomate, a \xE1gua, o caldo de galinha, os temperos a gosto e deixe ferventar
+      em fogo m\xE9dio.\"},{\"step\":\"Molho\",\"name\":\"Assim que o molho come\xE7ar
+      a borbulhar, junte as alm\xF4ndegas (coloque tamb\xE9m o caldinho que elas devem
+      ter soltado no recipiente em que ficaram reservadas), tampe a panela e deixe
+      em fogo baixo/m\xE9dio por mais 5 minutos.\"},{\"step\":\"Molho\",\"name\":\"Coloque
+      em um prato, decore com salsinha desidratada e bom apetite!\"}],\"pictures\":[{\"description\":\"Imagem
+      enviada por TudoGostoso\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/98762/98762_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400},{\"description\":\"Imagem
+      enviada por Thayna\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/92787/92787_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400},{\"description\":\"Imagem
+      enviada por Tiago Veras Falangola\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/86896/86896_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400},{\"description\":\"Imagem
+      enviada por Isabel Kede\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/60081/60081_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400},{\"description\":\"Imagem
+      enviada por C\xEDntia Aparecida de Souza\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/78053/78053_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400},{\"description\":\"Imagem
+      enviada por Isabel Kede\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/60080/60080_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400}],\"total_ratings\":202,\"rating\":4.5,\"servings\":\"4
+      por\xE7\xF5es\",\"servings_value\":4.0,\"servings_unit\":\"por\xE7\xF5es\",\"total_cooking_time\":\"20
+      min\",\"total_cooking_time_value\":20.0,\"total_cooking_time_unit\":\"min\",\"author_name\":\"Carol
+      Ariat\",\"picture_count\":6,\"directions_count\":8,\"ingredients_count\":13,\"created_at\":\"2021-06-03T01:10:03.679358\",\"updated_at\":\"2021-08-12T20:27:49.072379\"}"
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      user-agent:
+      - elasticsearch-py/7.13.0 (Python 3.7.3)
+      x-elastic-client-meta:
+      - es=7.13.0,py=3.7.3,t=7.13.0,ur=1.26.6
+    method: PUT
+    uri: http://elasticsearch-master.ci-butler-data:9200/recipes/_doc/21122
+  response:
+    body:
+      string: '{"_index":"recipes","_type":"_doc","_id":"21122","_version":4,"result":"updated","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":398527,"_primary_term":8}'
+    headers:
+      content-length:
+      - '164'
+      content-type:
+      - application/json; charset=UTF-8
+    status:
+      code: 200
+      message: OK
 version: 1
