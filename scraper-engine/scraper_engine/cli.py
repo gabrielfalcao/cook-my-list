@@ -1,28 +1,25 @@
+import json
+import logging
 import multiprocessing
-import gevent.monkey
-
-gevent.monkey.patch_all()
 import os
 import time
-import json
-import click
-import logging
-import requests
-from gevent.pool import Pool
-from typing import Optional
-from uiclasses import Model
-from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
-from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
-from scraper_engine import sql
-from scraper_engine.logs import logger, get_logger
-from scraper_engine.sites.tudo_gostoso.models import Recipe
-from scraper_engine.web import app
-from scraper_engine.workers import GetRecipeWorker
-from scraper_engine.workers import QueueServer, QueueClient
-from scraper_engine.es import connect_to_elasticsearch
-from scraper_engine.sql import config
+from pathlib import Path
+from typing import Optional
 
+import click
+import requests
+from uiclasses import Model
+
+from scraper_engine import sql
+from scraper_engine.es import connect_to_elasticsearch
+from scraper_engine.logs import get_logger, logger
+from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
+from scraper_engine.sites.tudo_gostoso.models import Recipe
+from scraper_engine.sql import config
+from scraper_engine.web.core import app
+from scraper_engine.workers import GetRecipeWorker, QueueClient, QueueServer
 
 DEFAULT_QUEUE_ADDRESS = "tcp://127.0.0.1:5000"
 DEFAULT_PUSH_ADDRESS = "tcp://127.0.0.1:6000"
@@ -42,22 +39,18 @@ def main(ctx):
 @click.option("-m", "--max-workers", default=DEFAULT_MAX_WORKERS, type=int)
 @click.pass_context
 def workers(ctx, queue_address, max_workers):
-    pool = Pool()
+    pool = ThreadPoolExecutor()
+    loop = asyncio.get_running_loop()
+
     queue_server = QueueServer(queue_address, "inproc://recipe-info")
 
-    pool.spawn(queue_server.run)
+    loop.run_in_executor(pool, recipe_info_worker.run)
     for worker_id in range(max_workers):
         recipe_info_worker = GetRecipeWorker(
             "inproc://recipe-info", worker_id, **ctx.obj
         )
-        pool.spawn(recipe_info_worker.run)
-
-    while True:
-        try:
-            pool.join(1)
-        except KeyboardInterrupt:
-            pool.kill()
-            raise SystemExit(1)
+        loop.run_in_executor(pool, recipe_info_worker.run)
+    import ipdb;ipdb.set_trace()  # fmt: skip
 
 
 @main.command("worker:get_recipe")
