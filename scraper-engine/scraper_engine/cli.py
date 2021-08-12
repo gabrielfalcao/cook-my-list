@@ -1,20 +1,21 @@
+import asyncio
 import json
 import logging
 import multiprocessing
 import os
 import time
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
 import click
 import requests
+import tqdm.asyncio
 from uiclasses import Model
 
 from scraper_engine import sql
-from scraper_engine.es import connect_to_elasticsearch
 from scraper_engine.logs import get_logger, logger
+from scraper_engine.networking import connect_to_elasticsearch
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine.sites.tudo_gostoso.models import Recipe
 from scraper_engine.sql import config
@@ -39,26 +40,30 @@ def main(ctx):
 @click.option("-m", "--max-workers", default=DEFAULT_MAX_WORKERS, type=int)
 @click.pass_context
 def workers(ctx, queue_address, max_workers):
-    pool = ThreadPoolExecutor()
-    loop = asyncio.get_running_loop()
+    async def main():
+        loop = asyncio.get_event_loop()
 
-    queue_server = QueueServer(queue_address, "inproc://recipe-info")
+        queue_server = QueueServer(queue_address, "inproc://recipe-info")
 
-    loop.run_in_executor(pool, recipe_info_worker.run)
-    for worker_id in range(max_workers):
-        recipe_info_worker = GetRecipeWorker(
-            "inproc://recipe-info", worker_id, **ctx.obj
-        )
-        loop.run_in_executor(pool, recipe_info_worker.run)
-    import ipdb;ipdb.set_trace()  # fmt: skip
+        tasks = [asyncio.create_task(queue_server.run())]
+        for worker_id in range(max_workers):
+            recipe_info_worker = GetRecipeWorker(
+                "inproc://recipe-info", worker_id, **ctx.obj
+            )
+            tasks.append(asyncio.create_task(recipe_info_worker.run()))
+
+        asyncio.gather(*tasks, loop=loop)
+
+    asyncio.run(main())
 
 
 @main.command("worker:get_recipe")
 @click.option("-c", "--pull-connect-address", default=DEFAULT_PUSH_ADDRESS)
 @click.pass_context
 def worker_get_recipe(ctx, pull_connect_address):
-    worker = GetRecipeWorker(pull_connect_address)
-    worker.run()
+    worker_id = "1"
+    worker = GetRecipeWorker(pull_connect_address, worker_id)
+    asyncio.run(worker.run())
 
 
 @main.command("worker:queue")
@@ -66,7 +71,8 @@ def worker_get_recipe(ctx, pull_connect_address):
 @click.option("-p", "--push-bind-address", default=DEFAULT_PUSH_ADDRESS)
 @click.pass_context
 def worker_queue(ctx, rep_bind_address, push_bind_address):
-    worker.run()
+    queue_server = QueueServer(rep_bind_address, push_bind_address)
+    asyncio.run(queue_server.run())
 
 
 @main.command("crawler")

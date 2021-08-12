@@ -1,10 +1,12 @@
-import json
 import io
-import requests
-from chemist import Model, db
-from dateutil.parser import parse as parse_date
+import json
 from datetime import datetime
-from scraper_engine.es import connect_to_elasticsearch
+
+import requests
+from chemist import db, Model
+from dateutil.parser import parse as parse_date
+from scraper_engine.networking import connect_to_elasticsearch
+
 from .base import metadata
 
 es = connect_to_elasticsearch()

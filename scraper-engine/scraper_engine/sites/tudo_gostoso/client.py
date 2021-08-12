@@ -1,13 +1,12 @@
 from typing import List, Optional
-from lxml import html as xml
-from defusedxml.lxml import RestrictedElement
 
-from scraper_engine.logs import get_logger
+from defusedxml.lxml import RestrictedElement
+from lxml import html as xml
 from scraper_engine.http.client import HttpClient
+from scraper_engine.logs import get_logger
 
 from .models import Recipe, SiteMap
 from .scrapers import RecipeScraper
-
 
 logger = get_logger("TudoGostosoClient")
 
@@ -53,5 +52,5 @@ class TudoGostosoClient(HttpClient):
         recipe_urls = []
         for sitemap in self.get_sitemap(max_pages=max_pages):
             recipe_urls.extend(self.get_recipe_urls(sitemap.url))
-
+            break
         return sorted(recipe_urls, reverse=True)

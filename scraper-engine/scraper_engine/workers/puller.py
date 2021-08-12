@@ -1,7 +1,7 @@
-import gevent
-import zmq.green as zmq
+import asyncio
 from collections import defaultdict
 
+import zmq
 from scraper_engine.logs import get_logger
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 
@@ -21,7 +21,7 @@ class PullerWorker(object):
 
         self.pull_connect_address = pull_connect_address
         self.should_run = True
-        self.poller = zmq.Poller()
+        self.poller = zmq.asyncio.Poller()
         self.queue = context.socket(zmq.PULL)
         self.queue.set_hwm(high_watermark)
 
@@ -35,32 +35,32 @@ class PullerWorker(object):
         self.logger.info(f"Connecting to pull address: {self.pull_connect_address}")
         self.queue.connect(self.pull_connect_address)
 
-    def run(self):
+    async def run(self):
         self.connect()
         self.logger.info(f"Starting worker")
         while self.should_run:
             try:
-                self.loop_once()
+                await self.loop_once()
             except Exception as e:
                 self.handle_exception(e)
                 break
 
-    def loop_once(self):
-        self.process_queue()
+    async def loop_once(self):
+        await self.process_queue()
 
-    def pull_queue(self):
+    async def pull_queue(self):
         self.logger.debug(f"Waiting for job")
-        socks = dict(self.poller.poll())
+        socks = dict(await self.poller.poll())
         if self.queue in socks and socks[self.queue] == zmq.POLLIN:
-            return self.queue.recv_json()
+            return await self.queue.recv_json()
 
-    def process_queue(self):
-        info = self.pull_queue()
+    async def process_queue(self):
+        info = await self.pull_queue()
         self.logger.debug(f"processing job")
         try:
-            self.process_job(info)
+            await self.process_job(info)
         except Exception:
             self.logger.exception(f"failed to process job {info}")
 
-    def process_job(self, job):
+    async def process_job(self, job):
         raise NotImplementedError

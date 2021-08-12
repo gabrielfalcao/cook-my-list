@@ -1,10 +1,10 @@
 from blinker import signal
-from requests import Request, Response
 from humanfriendly.text import pluralize
+from requests import Request, Response
 
 from scraper_engine.logs import get_logger
+from scraper_engine.networking import connect_to_elasticsearch
 from scraper_engine.sites.tudo_gostoso.models import Recipe
-from scraper_engine.es import connect_to_elasticsearch
 
 es = connect_to_elasticsearch()
 

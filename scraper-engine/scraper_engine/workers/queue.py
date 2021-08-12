@@ -1,14 +1,14 @@
-import time
+import asyncio
 import logging
-import gevent
-import zmq.green as zmq
+import time
 from collections import defaultdict
 
+import zmq
+import zmq.asyncio
 from scraper_engine.logs import get_logger
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 
 from .base import context
-
 
 # QueueServer is inspired by
 # https://zguide.zeromq.org/docs/chapter5/#High-Speed-Subscribers-Black-Box-Pattern
@@ -27,7 +27,8 @@ class QueueClient(object):
     ):
         self.logger = get_logger("queue-client")
         self.rep_connect_address = rep_connect_address
-        self.socket = context.socket(zmq.REQ)
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REQ)
         self.socket.set_hwm(rep_high_watermark)
         self.__connected__ = False
 
@@ -70,7 +71,7 @@ class QueueServer(object):
         self.push_bind_address = push_bind_address
         self.should_run = True
         self.sleep_timeout = sleep_timeout
-        self.poller = zmq.Poller()
+        self.poller = zmq.asyncio.Poller()
         self.push = context.socket(zmq.PUSH)
         self.rep = context.socket(zmq.REP)
         self.poller.register(self.push, zmq.POLLOUT)
@@ -93,46 +94,48 @@ class QueueServer(object):
         self.rep.disconnect(self.rep_bind_address)
         self.push.disconnect(self.push_bind_address)
 
-    def run(self):
+    async def run(self):
         self.listen()
         self.logger.info(f"Starting {self.__class__.__name__}")
         while self.should_run:
             try:
-                self.loop_once()
-                gevent.sleep()
+                await self.loop_once()
+                asyncio.sleep()
             except Exception as e:
                 self.handle_exception(e)
                 break
         self.disconnect()
 
-    def loop_once(self):
-        self.process_queue()
+    async def loop_once(self):
+        await self.process_queue()
 
-    def push_job(self, data: dict):
+    async def push_job(self, data: dict):
         self.logger.info(f"Waiting for socket to become available to push job")
-        socks = dict(self.poller.poll())
+        socks = dict(await self.poller.poll())
         if self.push in socks and socks[self.push] == zmq.POLLOUT:
-            self.push.send_json(data)
+            await self.push.send_json(data)
             return True
 
-    def handle_request(self):
-        socks = dict(self.poller.poll())
+    async def handle_request(self):
+        socks = dict(await self.poller.poll())
         if self.rep in socks and socks[self.rep] == zmq.POLLIN:
-            data = self.rep.recv_json()
+            data = await self.rep.recv_json()
             if data:
                 self.logger.info(f"processing job {data}")
                 while not self.push_job(data):
-                    gevent.sleep(self.sleep_timeout)
-                self.rep.send_json(data)
+                    await asyncio.sleep(self.sleep_timeout)
+                await self.rep.send_json(data)
                 return data
 
-    def process_queue(self):
-        data = self.handle_request()
+    async def process_queue(self):
+        data = await self.handle_request()
         if not data:
-            gevent.sleep()
+            await asyncio.sleep()
             return
 
-    def process_job(self, info: dict):
+        await self.process_job(data)
+
+    async def process_job(self, info: dict):
         recipe_url = info.get("recipe_url")
 
         missing_fields = []
@@ -147,8 +150,8 @@ class QueueServer(object):
         api = TudoGostosoClient(
             url=url,
         )
-        self.fetch_data(api, repo, owner)
+        await self.fetch_data(api, repo, owner)
 
-    def fetch_data(self, api: TudoGostosoClient, recipe_url: str):
+    async def fetch_data(self, api: TudoGostosoClient, recipe_url: str):
         recipe = api.get_recipe(recipe_url)
         self.logger.info(f"retrieved recipe: {recipe}")

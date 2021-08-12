@@ -87,6 +87,12 @@ functional:| $(VENV)/bin/nosetests  # runs functional tests
 web workers crawler: | $(MAIN_CLI_PATH)
 	@$(MAIN_CLI_PATH) $@
 
+worker-get-recipe:
+	@$(MAIN_CLI_PATH) worker:get_recipe
+
+queue:
+	@$(MAIN_CLI_PATH) worker:queue
+
 # Pushes release of this package to pypi
 push-release:  # pushes distribution tarballs of the current version
 	$(VENV)/bin/twine upload dist/*.tar.gz
@@ -145,7 +151,7 @@ $(VENV)/bin/python $(VENV)/bin/pip: # installs latest pip
 	@test -e $(VENV)/bin/python || $(MAKE) $(VENV)
 	@test -e $(VENV)/bin/pip || $(MAKE) $(VENV)
 	@echo "Installing latest version of pip and setuptools"
-	@$(VENV)/bin/pip install -U pip setuptools
+	@echo $(VENV)/bin/pip install -U pip setuptools
 
  # installs latest version of the "black" code formatting tool
 $(VENV)/bin/black: | $(VENV)/bin/pip
