@@ -1,22 +1,19 @@
 import re
-from typing import Tuple, Optional
-from requests import Response
-from functools import lru_cache
-from decimal import Decimal
-from urllib.parse import urlparse, parse_qsl
 from collections import defaultdict
-from lxml import html
-
-from itertools import chain
-
 from datetime import datetime
+from decimal import Decimal
+from functools import lru_cache
+from itertools import chain
+from typing import Optional, Tuple
+from urllib.parse import parse_qsl, urlparse
 
-from uiclasses import Model
-from .models import Recipe, Ingredient, Direction, Picture
-
+from lxml import html
+from requests import Response
+from scraper_engine.http.exceptions import ElementNotFound, TooManyElementsFound
 from scraper_engine.logs import get_logger
-from scraper_engine.http.exceptions import ElementNotFound
-from scraper_engine.http.exceptions import TooManyElementsFound
+from uiclasses import Model
+
+from .models import Direction, Ingredient, Picture, Recipe
 
 recipe_id_regex = re.compile(r"[/](?P<id>\d+)[-][^/]+")
 
@@ -237,7 +234,7 @@ class RecipeScraper(object):
     def get_servings_value(self) -> Decimal:
         servings = self.get_servings()
         found = servings_regex.search(servings)
-        if found:
+        if found and found.group("value"):
             return Decimal(found.group("value"))
 
         return Decimal("-1")
@@ -246,7 +243,7 @@ class RecipeScraper(object):
     def get_servings_unit(self) -> str:
         servings = self.get_servings()
         found = servings_regex.search(servings)
-        if found:
+        if found and found.group("unit"):
             return found.group("unit")
 
         return servings
@@ -259,7 +256,7 @@ class RecipeScraper(object):
     def get_total_cooking_time_value(self) -> Decimal:
         total_cooking_time = self.get_total_cooking_time()
         found = total_cooking_time_regex.search(total_cooking_time)
-        if found:
+        if found and found.group("value"):
             return Decimal(found.group("value"))
 
         return Decimal("-1")
@@ -268,7 +265,7 @@ class RecipeScraper(object):
     def get_total_cooking_time_unit(self) -> str:
         total_cooking_time = self.get_total_cooking_time()
         found = total_cooking_time_regex.search(total_cooking_time)
-        if found:
+        if found and found.group("unit"):
             return found.group("unit")
 
         return total_cooking_time
