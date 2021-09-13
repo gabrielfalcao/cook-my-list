@@ -19,8 +19,22 @@ from scraper_engine.sites.tudo_gostoso import (
 from scraper_engine.sql.models import ScrapedRecipe
 
 functional_tests_path = Path(__file__).parent.absolute()
+
+
+def before_record_cb(request):
+    if (
+        "elasticsearch" in request.host
+        or "9200" in request.host
+        or "/_doc" in request.path
+    ):
+        return None
+
+    return request
+
+
 vcr = VCR(
     cassette_library_dir=str(functional_tests_path.joinpath(".cassetes")),
+    before_record_request=before_record_cb,
     # record_mode="none",
     # record_mode="new_episodes",
     record_mode="once",
