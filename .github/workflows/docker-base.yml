@@ -19,7 +19,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: gabrielfalcao/cookmylist-server-base
+        repository: gabrielfalcao/cook-my-list-base
         dockerfile: scraper-engine/Dockerfile.base
         path: scraper-engine
         tag_with_ref: true
