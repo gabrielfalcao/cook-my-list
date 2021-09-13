@@ -11,6 +11,7 @@ from typing import Optional
 import click
 import requests
 import tqdm.asyncio
+import uvicorn
 from uiclasses import Model
 
 from scraper_engine import sql
@@ -118,7 +119,7 @@ def crawl_sitemap_for_recipes(ctx, rep_connect_address, max_pages, urls_file):
 @click.option("-d", "--debug", is_flag=True, default=False)
 @click.pass_context
 def web_server(ctx, host, port, debug):
-    app.run(host=host, port=port, debug=debug)
+    uvicorn.run(app, host=host, port=port, debug=debug)
 
 
 @main.command("purge")
