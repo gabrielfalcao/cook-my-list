@@ -20019,11 +20019,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '503'
+      - '1280'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 68e389bc8fc758fc-TXL
+      - 68e39cb58ae458ea-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -20031,18 +20031,18 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:46:23 GMT
+      - Mon, 13 Sep 2021 18:59:20 GMT
       ETag:
       - W/"abf9b88c82d947c359c6097297faa3c6"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:46:23 GMT
+      - Mon, 13 Sep 2021 23:59:20 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=mC4FiHkqb5h7mRO3ivMqnYVu_dWIeheYMtGOxgGavkg-1631558783-0-AVbJD/JxInDq3UIq+qwdATEBNc8VChLsVGQoW3s5NSDSc5U2nMvSqKGPBglzwSjXsVv8cLZF4yXotWAee22/794=;
-        path=/; expires=Mon, 13-Sep-21 19:16:23 GMT; domain=.tudogostoso.com.br; HttpOnly;
+      - __cf_bm=XXObCTtoRZqiGIWRyaRG9s9_VGO0J6qK1aD.IpTt9XI-1631559560-0-AdLU/chJrMrtADngdXUhHQjKajxWGYJH41pwK8zu4RpKfZs8mXOBEQAGkolhWmlSEqJP8aorRq32V2Faz87R3kU=;
+        path=/; expires=Mon, 13-Sep-21 19:29:20 GMT; domain=.tudogostoso.com.br; HttpOnly;
         Secure; SameSite=None
       Status:
       - 200 OK

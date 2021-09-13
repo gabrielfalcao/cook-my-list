@@ -37,8 +37,8 @@ vcr = VCR(
     before_record_request=before_record_cb,
     # record_mode="none",
     # record_mode="new_episodes",
-    record_mode="once",
-    # record_mode="all",
+    # record_mode="once",
+    record_mode="all",
 )
 
 
