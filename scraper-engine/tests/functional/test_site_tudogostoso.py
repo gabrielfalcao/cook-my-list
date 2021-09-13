@@ -37,8 +37,8 @@ vcr = VCR(
     before_record_request=before_record_cb,
     # record_mode="none",
     # record_mode="new_episodes",
-    # record_mode="once",
-    record_mode="all",
+    record_mode="once",
+    # record_mode="all",
 )
 
 
@@ -257,7 +257,7 @@ def test_tudogostoso_get_single_recipe(context):
     )
 
     recipe.rating.should.equal(Decimal("4.5"))
-    recipe.total_ratings.should.equal(202)
+    recipe.total_ratings.should.equal(203)
 
     recipe.total_cooking_time.should.equal("20 min")
     recipe.servings.should.equal("4 porções")

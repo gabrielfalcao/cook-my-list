@@ -1,14 +1,15 @@
 import logging
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Union
 from urllib.parse import urljoin
 
-from datetime import datetime, timedelta
 from requests import Response, Session
+
 from scraper_engine import events
+from scraper_engine.http.cache import DummyCache, HttpCache
+from scraper_engine.http.exceptions import ClientError, invalid_response
 from scraper_engine.logs import get_logger
 from scraper_engine.version import version
-from scraper_engine.http.cache import HttpCache
-
-from scraper_engine.http.exceptions import invalid_response, ClientError
 
 logger = get_logger(__name__)
 
@@ -20,7 +21,7 @@ class HttpClient(object):
         self.http.headers = {
             "User-Agent": user_agent,
         }
-        self.cache = HttpCache()
+        self.cache = DummyCache()
 
     def request(
         self,
@@ -45,6 +46,9 @@ class HttpClient(object):
             return response
 
         interaction = self.cache.set(response.request, response)
+        if not interaction:
+            return response
+
         return interaction.response()
 
     def close(self):

@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Mon, 13 Sep 2021 18:59:21 GMT
+      - Mon, 13 Sep 2021 19:08:43 GMT
       Location:
       - https://www.tudogostoso.com.br//sitemap.xml
       X-Cache-V:
@@ -1634,11 +1634,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '1190'
+      - '1752'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 68e39cbaae0a451c-TXL
+      - 68e3aa7629cc453a-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -1646,18 +1646,18 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:59:21 GMT
+      - Mon, 13 Sep 2021 19:08:43 GMT
       ETag:
       - W/"bd98b5f98d5b13dff10693be771dacf0"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:59:21 GMT
+      - Tue, 14 Sep 2021 00:08:43 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=xzOfgj_YuUid6_hx82923AIe7aVCqGEDDEVPKBskl6k-1631559561-0-ATpI5jg/1bu1rEaKHV0MfKX4VkJVpDdnXbFaTXuSlg5hbDzpBcs7bdCEe7LF6zmoEVMmyB5ZkRH9BzCRgWYynSE=;
-        path=/; expires=Mon, 13-Sep-21 19:29:21 GMT; domain=.tudogostoso.com.br; HttpOnly;
+      - __cf_bm=3YwRuRHr80UzON1jh4uZbyx2RdCrAJEXRaNKBNQwDkA-1631560123-0-ARQ+5SAILqQfQ5AJuFSnC3wRykzhj0aRapLe4dX2XdegpmhqlytmeiyOWSB8VSUizJl2/snEJCdkfp0WrvvInG0=;
+        path=/; expires=Mon, 13-Sep-21 19:38:43 GMT; domain=.tudogostoso.com.br; HttpOnly;
         Secure; SameSite=None
       Status:
       - 200 OK

@@ -1,8 +1,11 @@
-import json
-import requests
 import hashlib
-from scraper_engine.sql import HttpInteraction
+import json
+from typing import Dict, List, Optional, Union
+
+import requests
+
 from scraper_engine import events
+from scraper_engine.sql import HttpInteraction
 
 
 def hash_dict(data: dict, algo: callable) -> str:
@@ -45,8 +48,21 @@ def generate_cache_key(
     return ".".join(parts)
 
 
+class DummyCache(object):
+    def get(self, request: requests.Request) -> Optional[HttpInteraction]:
+        return None
+
+    def get_by_url_and_method(self, url: str, method: str) -> Optional[HttpInteraction]:
+        return None
+
+    def set(
+        self, request: requests.Request, response: requests.Response
+    ) -> Optional[HttpInteraction]:
+        return
+
+
 class HttpCache(object):
-    def get(self, request: requests.Request) -> HttpInteraction:
+    def get(self, request: requests.Request) -> Optional[HttpInteraction]:
         found = HttpInteraction.get_by_requests_request(request)
         if found:
             events.http_cache_hit.send(
@@ -55,10 +71,12 @@ class HttpCache(object):
 
         return found
 
-    def get_by_url_and_method(self, url: str, method: str):
+    def get_by_url_and_method(self, url: str, method: str) -> Optional[HttpInteraction]:
         return HttpInteraction.get_by_url_and_method(url=url, method=method)
 
-    def set(self, request: requests.Request, response: requests.Response):
+    def set(
+        self, request: requests.Request, response: requests.Response
+    ) -> Optional[HttpInteraction]:
         if request.method != "GET":
             return
 
