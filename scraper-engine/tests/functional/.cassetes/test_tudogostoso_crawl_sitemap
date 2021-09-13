@@ -14,7 +14,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '0'
+      - '1'
       Connection:
       - keep-alive
       Content-Length:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Thu, 27 May 2021 22:02:56 GMT
+      - Mon, 13 Sep 2021 18:39:31 GMT
       Location:
       - https://www.tudogostoso.com.br//sitemap.xml
       X-Cache-V:
-      - MISS
+      - HIT
     status:
       code: 302
       message: Moved Temporarily
@@ -53,7 +53,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -69,7 +69,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -85,7 +85,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -101,7 +101,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -117,7 +117,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -133,7 +133,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -149,7 +149,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -165,7 +165,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -181,7 +181,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -197,7 +197,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -213,7 +213,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -229,7 +229,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -245,7 +245,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -261,7 +261,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -277,7 +277,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -293,7 +293,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -309,7 +309,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -325,7 +325,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -341,7 +341,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -357,7 +357,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -373,7 +373,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -389,7 +389,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -405,7 +405,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -421,7 +421,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -437,7 +437,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -453,7 +453,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -469,7 +469,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -485,7 +485,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -501,7 +501,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -517,7 +517,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -533,7 +533,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -549,7 +549,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -565,7 +565,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -581,7 +581,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -597,7 +597,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -613,7 +613,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -629,7 +629,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -645,7 +645,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -661,7 +661,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -677,7 +677,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -693,7 +693,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -709,7 +709,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -725,7 +725,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -741,7 +741,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -757,7 +757,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -773,7 +773,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -789,7 +789,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -805,7 +805,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -821,7 +821,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -837,7 +837,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -853,7 +853,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -869,7 +869,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -885,7 +885,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -901,7 +901,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -917,7 +917,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -933,7 +933,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -949,7 +949,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -965,7 +965,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -981,7 +981,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -997,7 +997,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1013,7 +1013,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1029,7 +1029,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1045,7 +1045,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1061,7 +1061,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1077,7 +1077,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1093,7 +1093,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1109,7 +1109,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1125,7 +1125,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1141,7 +1141,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1157,7 +1157,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1173,7 +1173,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1189,7 +1189,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1205,7 +1205,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1221,7 +1221,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1237,7 +1237,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1253,7 +1253,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1269,7 +1269,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1285,7 +1285,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1301,7 +1301,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1317,7 +1317,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1333,7 +1333,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1349,7 +1349,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1365,7 +1365,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1381,7 +1381,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1397,7 +1397,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1413,7 +1413,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1429,7 +1429,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1445,7 +1445,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1461,7 +1461,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1477,7 +1477,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1493,7 +1493,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1509,7 +1509,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1525,7 +1525,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1541,7 +1541,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1557,7 +1557,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1573,7 +1573,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1589,7 +1589,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1605,7 +1605,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1621,7 +1621,7 @@ interactions:
 
         <lastmod>
 
-        2021-05-29
+        2021-09-15
 
         </lastmod>
 
@@ -1634,11 +1634,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '575'
+      - '1'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 656287ca6fe12675-TXL
+      - 68e37fb17b1b58e4-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -1646,18 +1646,18 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Thu, 27 May 2021 22:02:57 GMT
+      - Mon, 13 Sep 2021 18:39:32 GMT
       ETag:
-      - W/"4abd356e13178664b55b486c68cc3a02"
+      - W/"bd98b5f98d5b13dff10693be771dacf0"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Fri, 28 May 2021 03:02:57 GMT
+      - Mon, 13 Sep 2021 23:39:32 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=;
-        path=/; expires=Thu, 27-May-21 22:32:57 GMT; domain=.tudogostoso.com.br; HttpOnly;
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=;
+        path=/; expires=Mon, 13-Sep-21 19:09:32 GMT; domain=.tudogostoso.com.br; HttpOnly;
         Secure; SameSite=None
       Status:
       - 200 OK
@@ -1668,15 +1668,14 @@ interactions:
       X-Cache-V:
       - MISS
       X-Request-Id:
-      - 40ed8332650b9c560a62dd26fbbf550d
+      - a77d1941f83ee8b9ddfdf14a23aed868
       X-Runtime:
-      - '0.750362'
+      - '0.714670'
       X-UA-Compatible:
       - IE=Edge,chrome=1
       alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a51733280000026754c269000000001
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
     status:
       code: 200
       message: OK
@@ -1684,7 +1683,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -10740,16 +10739,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/1076-toucinho-do-ceu-de-liquidificador.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/1077-bolo-da-ca.html
 
         </loc>
 
@@ -21695,70 +21684,6 @@ interactions:
 
         </url>
 
-        </urlset>
-
-        '
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Age:
-      - '2755'
-      CF-Cache-Status:
-      - HIT
-      CF-RAY:
-      - 656287cad8a52675-TXL
-      Cache-Control:
-      - public, max-age=18000
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/xml; charset=utf-8
-      Date:
-      - Thu, 27 May 2021 22:02:57 GMT
-      ETag:
-      - W/"67568d974c0ce40bd36db7588cc0ff94"
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Expires:
-      - Fri, 28 May 2021 03:02:57 GMT
-      Server:
-      - cloudflare
-      Status:
-      - 200 OK
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Cache-V:
-      - HIT
-      X-Request-Id:
-      - f18cfde724fa55741b361747025d2eb0
-      X-Runtime:
-      - '4.396803'
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a517332c3000026752685f000000001
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=
-      User-Agent:
-      - AdsBot-Google
-    method: GET
-    uri: https://www.tudogostoso.com.br/sitemap-2.xml
-  response:
-    body:
-      string: '<?xml version="1.0" encoding="utf-8" ?>
-
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
         <url>
 
         <loc>
@@ -21768,6 +21693,67 @@ interactions:
         </loc>
 
         </url>
+
+        </urlset>
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 68e37fb27dbb58e4-TXL
+      Cache-Control:
+      - public, max-age=18000
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Mon, 13 Sep 2021 18:39:37 GMT
+      ETag:
+      - W/"3c77dcbc8f1d9a794f015b28aaeafa7b"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Mon, 13 Sep 2021 23:39:37 GMT
+      Server:
+      - cloudflare
+      Status:
+      - 200 OK
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-V:
+      - MISS
+      X-Request-Id:
+      - f891f1aeb99dafb1fe84e7f3eb93168e
+      X-Runtime:
+      - '5.006619'
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Cookie:
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      User-Agent:
+      - AdsBot-Google
+    method: GET
+    uri: https://www.tudogostoso.com.br/sitemap-2.xml
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="utf-8" ?>
+
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
         <url>
 
@@ -34853,16 +34839,6 @@ interactions:
 
         <loc>
 
-        https://www.tudogostoso.com.br/receita/3600-nega-maluca.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
         https://www.tudogostoso.com.br/receita/3601-sopa-de-feijao.html
 
         </loc>
@@ -36394,16 +36370,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/3760-mousse-de-chocolate.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/3761-nega-maluca.html
 
         </loc>
 
@@ -39773,16 +39739,6 @@ interactions:
 
         <loc>
 
-        https://www.tudogostoso.com.br/receita/4105-nega-maluca.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
         https://www.tudogostoso.com.br/receita/4106-doce-portugues.html
 
         </loc>
@@ -41759,70 +41715,6 @@ interactions:
 
         </url>
 
-        </urlset>
-
-        '
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Age:
-      - '37'
-      CF-Cache-Status:
-      - HIT
-      CF-RAY:
-      - 656287cb89ce2675-TXL
-      Cache-Control:
-      - public, max-age=18000
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/xml; charset=utf-8
-      Date:
-      - Thu, 27 May 2021 22:02:57 GMT
-      ETag:
-      - W/"7b47c294d4f8921e605cd34b3d9d5e11"
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Expires:
-      - Fri, 28 May 2021 03:02:57 GMT
-      Server:
-      - cloudflare
-      Status:
-      - 200 OK
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Cache-V:
-      - MISS
-      X-Request-Id:
-      - 82e1ff3be7348ebd572d7eff964673eb
-      X-Runtime:
-      - '6.206354'
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a5173333200002675603a2000000001
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=
-      User-Agent:
-      - AdsBot-Google
-    method: GET
-    uri: https://www.tudogostoso.com.br/sitemap-3.xml
-  response:
-    body:
-      string: '<?xml version="1.0" encoding="utf-8" ?>
-
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
         <url>
 
         <loc>
@@ -41862,6 +41754,67 @@ interactions:
         </loc>
 
         </url>
+
+        </urlset>
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 68e37fd4bbc158e4-TXL
+      Cache-Control:
+      - public, max-age=18000
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Mon, 13 Sep 2021 18:39:43 GMT
+      ETag:
+      - W/"6e026f9565ed2f0681d951f30725aa8c"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Mon, 13 Sep 2021 23:39:43 GMT
+      Server:
+      - cloudflare
+      Status:
+      - 200 OK
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-V:
+      - MISS
+      X-Request-Id:
+      - 08506b9bf8bd8fe87d0a2f3c63b5d8ff
+      X-Runtime:
+      - '4.808419'
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Cookie:
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      User-Agent:
+      - AdsBot-Google
+    method: GET
+    uri: https://www.tudogostoso.com.br/sitemap-3.xml
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="utf-8" ?>
+
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
         <url>
 
@@ -43948,16 +43901,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/4526-lombo-de-porco-pra-festa.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/4527-bolo-nega-maluca.html
 
         </loc>
 
@@ -61823,70 +61766,6 @@ interactions:
 
         </url>
 
-        </urlset>
-
-        '
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Age:
-      - '30'
-      CF-Cache-Status:
-      - HIT
-      CF-RAY:
-      - 656287cc3b492675-TXL
-      Cache-Control:
-      - public, max-age=18000
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/xml; charset=utf-8
-      Date:
-      - Thu, 27 May 2021 22:02:57 GMT
-      ETag:
-      - W/"6e1ad6f482573ee8371c7c90a250c70e"
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Expires:
-      - Fri, 28 May 2021 03:02:57 GMT
-      Server:
-      - cloudflare
-      Status:
-      - 200 OK
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Cache-V:
-      - MISS
-      X-Request-Id:
-      - 022a316ed724f50db28d9248ce4d7128
-      X-Runtime:
-      - '6.213400'
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a5173339e0000267567180000000001
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=
-      User-Agent:
-      - AdsBot-Google
-    method: GET
-    uri: https://www.tudogostoso.com.br/sitemap-4.xml
-  response:
-    body:
-      string: '<?xml version="1.0" encoding="utf-8" ?>
-
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
         <url>
 
         <loc>
@@ -61936,6 +61815,67 @@ interactions:
         </loc>
 
         </url>
+
+        </urlset>
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 68e37ff7bb3758e4-TXL
+      Cache-Control:
+      - public, max-age=18000
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Mon, 13 Sep 2021 18:39:48 GMT
+      ETag:
+      - W/"4ea0b8341575740a037d01ec9c16ba23"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Mon, 13 Sep 2021 23:39:48 GMT
+      Server:
+      - cloudflare
+      Status:
+      - 200 OK
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-V:
+      - MISS
+      X-Request-Id:
+      - 4b79ec2dbf724809c4000b4b13f2f54e
+      X-Runtime:
+      - '5.386768'
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Cookie:
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      User-Agent:
+      - AdsBot-Google
+    method: GET
+    uri: https://www.tudogostoso.com.br/sitemap-4.xml
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="utf-8" ?>
+
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
         <url>
 
@@ -70051,16 +69991,6 @@ interactions:
 
         <loc>
 
-        https://www.tudogostoso.com.br/receita/7213-nega-maluca.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
         https://www.tudogostoso.com.br/receita/7214-massa-de-bolo-comum.html
 
         </loc>
@@ -74031,16 +73961,6 @@ interactions:
 
         <loc>
 
-        https://www.tudogostoso.com.br/receita/7624-torta-nega-maluca-da-minha-sogra-maria.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
         https://www.tudogostoso.com.br/receita/7625-bavaroise-tricolor.html
 
         </loc>
@@ -75732,16 +75652,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/7797-frango-na-cerveja-preta.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/7798-bolo-nega-maluca.html
 
         </loc>
 
@@ -78531,16 +78441,6 @@ interactions:
 
         <loc>
 
-        https://www.tudogostoso.com.br/receita/8079-nega-maluca.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
         https://www.tudogostoso.com.br/receita/8080-bolo-de-chocolate-molhado.html
 
         </loc>
@@ -79052,16 +78952,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/8131-ovo-de-pascoa-trufado-e-barra-ou-com-marshmellow.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/8132-nega-pra-la-de-maluca-sem-ovos-e-ja-assa-com-a-calda.html
 
         </loc>
 
@@ -81887,70 +81777,6 @@ interactions:
 
         </url>
 
-        </urlset>
-
-        '
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Age:
-      - '16'
-      CF-Cache-Status:
-      - HIT
-      CF-RAY:
-      - 656287ccdc2f2675-TXL
-      Cache-Control:
-      - public, max-age=18000
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/xml; charset=utf-8
-      Date:
-      - Thu, 27 May 2021 22:02:57 GMT
-      ETag:
-      - W/"b5228a654a4673a1d8e1ceda4327ec81"
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Expires:
-      - Fri, 28 May 2021 03:02:57 GMT
-      Server:
-      - cloudflare
-      Status:
-      - 200 OK
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Cache-V:
-      - MISS
-      X-Request-Id:
-      - d75645e3d9725611f20f87f2c1092721
-      X-Runtime:
-      - '13.984477'
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a51733408000026753e166000000001
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Cookie:
-      - __cf_bm=8e1f99e35d155c04f2421f57ce60d3e562c93325-1622152977-1800-AcZhLDy3SBthzhyWDBPSqaMs4zMoCxVVgpvjnBeBaWedtGhtCj7+XrUphlVGnCy7Fn9//VCBiEcr1330cB5Xwn0=
-      User-Agent:
-      - AdsBot-Google
-    method: GET
-    uri: https://www.tudogostoso.com.br/sitemap-5.xml
-  response:
-    body:
-      string: '<?xml version="1.0" encoding="utf-8" ?>
-
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
         <url>
 
         <loc>
@@ -82050,6 +81876,67 @@ interactions:
         </loc>
 
         </url>
+
+        </urlset>
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 68e3801af8ff58e4-TXL
+      Cache-Control:
+      - public, max-age=18000
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Mon, 13 Sep 2021 18:39:54 GMT
+      ETag:
+      - W/"145558b5d118002d2dd58ecfee71a978"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Mon, 13 Sep 2021 23:39:54 GMT
+      Server:
+      - cloudflare
+      Status:
+      - 200 OK
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-V:
+      - MISS
+      X-Request-Id:
+      - 0f50b6cd66b749eafdb4578a3f12c1c6
+      X-Runtime:
+      - '4.985523'
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Cookie:
+      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      User-Agent:
+      - AdsBot-Google
+    method: GET
+    uri: https://www.tudogostoso.com.br/sitemap-5.xml
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="utf-8" ?>
+
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
         <url>
 
@@ -82556,16 +82443,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/8480-carne-de-panela-a-brasileira.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/8481-bolo-nega-maluca-delicioso.html
 
         </loc>
 
@@ -90536,16 +90413,6 @@ interactions:
         <loc>
 
         https://www.tudogostoso.com.br/receita/9293-bolo-creme-de-fuba.html
-
-        </loc>
-
-        </url>
-
-        <url>
-
-        <loc>
-
-        https://www.tudogostoso.com.br/receita/9294-nega-maluca-da-angela.html
 
         </loc>
 
@@ -101951,6 +101818,126 @@ interactions:
 
         </url>
 
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10460-salsicha-empanada-facil.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10461-moelas-com-batatas-na-panela-de-pedra.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10462-picada-de-abelha.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10463-brigadeiro-de-ovomaltine-com-coco.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10464-pudim-com-calda-de-chocolate.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10465-sopa-de-feijao-mexicano.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10466-bolo-de-cenoura.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10467-gelatina-rapida.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10468-bolo-de-milho-cremoso-como-pudim.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10469-bolo-cremoso-de-laranja.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10470-pave-de-chocolate.html
+
+        </loc>
+
+        </url>
+
+        <url>
+
+        <loc>
+
+        https://www.tudogostoso.com.br/receita/10471-bolo-de-banana-caramelada.html
+
+        </loc>
+
+        </url>
+
         </urlset>
 
         '
@@ -101958,9 +101945,9 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       CF-Cache-Status:
-      - REVALIDATED
+      - MISS
       CF-RAY:
-      - 656287cd8d552675-TXL
+      - 68e3803d5ecf58e4-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -101968,13 +101955,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Thu, 27 May 2021 22:03:18 GMT
+      - Mon, 13 Sep 2021 18:39:59 GMT
       ETag:
-      - W/"f3e589a2e580be6fa6f1dc0ec6853b89"
+      - W/"2aa045197ab667a193b8ad9288f8d12e"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Fri, 28 May 2021 03:03:18 GMT
+      - Mon, 13 Sep 2021 23:39:59 GMT
       Server:
       - cloudflare
       Status:
@@ -101986,15 +101973,14 @@ interactions:
       X-Cache-V:
       - MISS
       X-Request-Id:
-      - 103b9bf9d7b5c3f1778f51f16e003c78
+      - bf8176e32e5d8c093d075950c279df39
       X-Runtime:
-      - '9.602624'
+      - '5.230191'
       X-UA-Compatible:
       - IE=Edge,chrome=1
       alt-svc:
-      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
-      cf-request-id:
-      - 0a5173347000002675603b9000000001
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
     status:
       code: 200
       message: OK

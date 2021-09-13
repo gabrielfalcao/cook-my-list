@@ -21,7 +21,8 @@ from scraper_engine.sql.models import ScrapedRecipe
 functional_tests_path = Path(__file__).parent.absolute()
 vcr = VCR(
     cassette_library_dir=str(functional_tests_path.joinpath(".cassetes")),
-    record_mode="new_episodes",
+    record_mode="none",
+    # record_mode="new_episodes",
 )
 
 

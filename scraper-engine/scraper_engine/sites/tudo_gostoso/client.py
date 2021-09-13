@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from defusedxml.lxml import RestrictedElement
 from lxml import html as xml
+
 from scraper_engine.http.client import HttpClient
 from scraper_engine.logs import get_logger
 
@@ -23,7 +24,7 @@ class TudoGostosoClient(HttpClient):
             response = self.request("GET", sitemap_url, **kw)
         except Exception:
             logger.exception(f"failed request {sitemap_url}")
-
+            raise
         try:
             return xml.fromstring(bytes(response.text, "utf-8"))
         except Exception:
