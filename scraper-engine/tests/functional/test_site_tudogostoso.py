@@ -2,6 +2,11 @@ from decimal import Decimal
 from pathlib import Path
 
 import httpretty
+import pytest
+from sure import scenario
+from uiclasses import DataBag
+from vcr import VCR
+
 from scraper_engine import sql
 from scraper_engine.sites.tudo_gostoso import (
     Direction,
@@ -12,8 +17,6 @@ from scraper_engine.sites.tudo_gostoso import (
     TudoGostosoClient,
 )
 from scraper_engine.sql.models import ScrapedRecipe
-from sure import scenario
-from vcr import VCR
 
 functional_tests_path = Path(__file__).parent.absolute()
 vcr = VCR(
@@ -22,16 +25,17 @@ vcr = VCR(
 )
 
 
-def prepare_client(context):
+def prepare_client():
     sql.context.set_default_uri(sql.config.SQLALCHEMY_URI)
-    context.client = TudoGostosoClient()
+    return TudoGostosoClient()
 
 
-def disconnect_client(context):
-    context.client.close()
+@pytest.fixture
+def context():
+    client = prepare_client()
+    yield type("context", (DataBag,), locals())(locals())
+    client.close()
 
-
-with_client = scenario(prepare_client, disconnect_client)
 
 # TODO:
 # - https://tudogostoso.com.br/receita/137721-molho-verde-delicioso-para-churrasco.html - missing picture
@@ -43,7 +47,6 @@ with_client = scenario(prepare_client, disconnect_client)
 
 
 @vcr.use_cassette
-@with_client
 def test_recipe_with_h3_for_direction_steps(context):
     "TudoGostosoClient.get_recipe() with a recipe that uses <h3> for direction titles"
 
@@ -99,7 +102,6 @@ def test_recipe_with_h3_for_direction_steps(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_recipe_with_links_in_directions(context):
     "TudoGostosoClient.get_recipe() with a recipe that contains <a> for direction step"
 
@@ -156,7 +158,6 @@ def test_recipe_with_links_in_directions(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_recipe_with_h3_for_ingredient_steps(context):
     "TudoGostosoClient.get_recipe() with a recipe that uses <h3> for ingredient titles"
 
@@ -196,7 +197,6 @@ def test_recipe_with_h3_for_ingredient_steps(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_recipe_without_steps(context):
     "TudoGostosoClient.get_recipe() with a recipe without steps"
 
@@ -219,7 +219,6 @@ def test_recipe_without_steps(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_tudogostoso_get_single_recipe(context):
     "TudoGostosoClient.get_recipe() with a basic recipe"
 
@@ -352,7 +351,6 @@ def test_tudogostoso_get_single_recipe(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_tudogostoso_get_recipe_urls_from_sitemap(context):
     "TudoGostosoClient.get_recipe_urls() from a valid sitemap url"
 
@@ -366,7 +364,6 @@ def test_tudogostoso_get_recipe_urls_from_sitemap(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_tudogostoso_get_sitemap(context):
     "TudoGostosoClient.get_sitemap() paginates"
 
@@ -380,7 +377,6 @@ def test_tudogostoso_get_sitemap(context):
 
 
 @vcr.use_cassette
-@with_client
 def test_tudogostoso_crawl_sitemap(context):
     "TudoGostosoClient.crawl_sitemap() retrieves thousands of recipes"
 

@@ -8,6 +8,7 @@ REQUIREMENTS_FILE	:= development.txt
 
 PACKAGE_PATH		:= $(GIT_ROOT)/$(PACKAGE_NAME)
 REQUIREMENTS_PATH	:= $(GIT_ROOT)/$(REQUIREMENTS_FILE)
+PYTEST			:= $(VENV_ROOT)/bin/pytest
 MAIN_CLI_PATH		:= $(VENV_ROOT)/bin/$(MAIN_CLI_NAME)
 
 BASE_TAG		:= latest
@@ -76,12 +77,8 @@ dependencies:
 tests: unit functional | $(MAIN_CLI_PATH)  # runs all tests
 
 # -> unit tests
-unit: | $(VENV)/bin/nosetests  # runs only unit tests
-	@$(VENV)/bin/nosetests --cover-erase tests/unit
-
-# -> functional tests
-functional:| $(VENV)/bin/nosetests  # runs functional tests
-	@$(VENV)/bin/nosetests tests/functional
+unit functional: | $(VENV)/bin/pytest  # runs only unit tests
+	$(PYTEST) tests/$@
 
 # run main command-line tool
 web workers crawler: | $(MAIN_CLI_PATH)
@@ -158,7 +155,7 @@ $(VENV)/bin/black: | $(VENV)/bin/pip
 	$(VENV)/bin/pip install -U black
 
 # installs this package in "edit" mode after ensuring its requirements are installed
-$(VENV)/bin/alembic $(VENV)/bin/nosetests $(MAIN_CLI_PATH): | $(VENV) $(VENV)/bin/pip $(VENV)/bin/python $(REQUIREMENTS_PATH)
+$(VENV)/bin/alembic $(VENV)/bin/pytest $(MAIN_CLI_PATH): | $(VENV) $(VENV)/bin/pip $(VENV)/bin/python $(REQUIREMENTS_PATH)
 	$(VENV)/bin/pip install -r $(REQUIREMENTS_PATH)
 	$(VENV)/bin/pip install -e .
 
