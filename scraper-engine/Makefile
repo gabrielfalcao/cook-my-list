@@ -8,8 +8,6 @@ REQUIREMENTS_FILE	:= development.txt
 
 PACKAGE_PATH		:= $(GIT_ROOT)/$(PACKAGE_NAME)
 REQUIREMENTS_PATH	:= $(GIT_ROOT)/$(REQUIREMENTS_FILE)
-PYTEST			:= $(VENV_ROOT)/bin/pytest
-MAIN_CLI_PATH		:= $(VENV_ROOT)/bin/$(MAIN_CLI_NAME)
 
 BASE_TAG		:= latest
 PROD_TAG		?= $(shell git log --pretty="format:%H" -n1 . | tail -1)
@@ -25,6 +23,8 @@ POSTGRES_PASSWORD	?= scraper_engine
 POSTGRES_DB		?= scraper_engine
 SQLALCHEMY_URI		?= postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)
 export VENV		?= $(VENV_ROOT)
+PYTEST			:= $(VENV)/bin/pytest
+MAIN_CLI_PATH		:= $(VENV)/bin/$(MAIN_CLI_NAME)
 export SQLALCHEMY_URI
 export ALEMBIC_CONFIG
 export POSTGRES_HOST
@@ -141,7 +141,7 @@ docker-push-all: docker-push
 
 # creates virtual env if necessary and installs pip and setuptools
 $(VENV): | $(REQUIREMENTS_PATH)  # creates $(VENV) folder if does not exist
-	echo "Creating virtualenv in $(VENV_ROOT)" && python3 -mvenv $(VENV)
+	echo "Creating virtualenv in $(VENV)" && python3 -mvenv $(VENV)
 
 # installs pip and setuptools in their latest version, creates virtualenv if necessary
 $(VENV)/bin/python $(VENV)/bin/pip: # installs latest pip
