@@ -3,8 +3,8 @@
 
 import ast
 import os
-from setuptools import setup, find_packages
 
+from setuptools import find_packages, setup
 
 PACKAGE_NAME = "scraper-engine"  # used by "pip install ..."
 MODULE_NAME = "scraper_engine"  # used by "import ..."
@@ -42,7 +42,12 @@ setup(
     version=read_version(),
     description="The scraper of recipes of the cook-my-list app",
     long_description=local_file("README.rst"),
-    entry_points={"console_scripts": [f"{PACKAGE_NAME} = {MODULE_NAME}.cli:main"]},
+    entry_points={
+        "console_scripts": [
+            f"{PACKAGE_NAME} = {MODULE_NAME}.cli:main",
+            f"cookmylist-scraper = {MODULE_NAME}.cli:main",
+        ]
+    },
     packages=find_packages(exclude=["*tests*"]),
     include_package_data=True,
     package_data={

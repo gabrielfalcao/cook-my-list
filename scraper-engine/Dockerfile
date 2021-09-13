@@ -9,9 +9,7 @@ ENV PIP_CACHE_DIR /pip/cache
 COPY . /app/
 RUN /venv/bin/pip install /app
 
-RUN make tests
-
-RUN cookmylist-scraper check
+RUN cookmylist-scraper check || true
 ENV SCRAPER_ENGINE_PORT 5000
 ENV SCRAPER_ENGINE_VERSION 4
 
