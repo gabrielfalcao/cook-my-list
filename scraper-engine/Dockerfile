@@ -2,8 +2,6 @@ FROM gabrielfalcao/cookmylist-server-base
 
 VOLUME /cookmylist.com
 
-ENV VENV /venv/
-ENV PATH "/venv/bin:${PATH}"
 ENV PYTHONPATH /app/
 ENV UPLOAD_FOLDER /cookmylist.com/file-uploads
 ENV PIP_CACHE_DIR /pip/cache

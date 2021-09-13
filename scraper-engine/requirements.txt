@@ -1,4 +1,3 @@
-CMRESHandler==1.0.0
 alembic==1.6.3
 blinker==1.4
 chemist==1.7.0

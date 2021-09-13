@@ -29,6 +29,8 @@ RUN apk --update --no-cache add \
 
 RUN mkdir -p /app /pip/cache
 RUN python3 -mvenv /venv
+ENV VENV /venv/
+ENV PATH "/venv/bin:${PATH}"
 
 COPY *.txt /app/
 
