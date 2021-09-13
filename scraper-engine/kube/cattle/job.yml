@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: enqueue-builds-in-redis
+spec:
+  template:
+    labels:
+      cook-my-list/role: application
+    spec:
+      containers:
+      - image: "gabrielfalcao/cook-my-list:latest"
+        imagePullPolicy: IfNotPresent
+        name: retrieve-drone-builds
+        command: ['cook-my-list', 'builds', '--redis-only']
+        envFrom:
+          - configMapRef:
+              name: env
+        volumeMounts:
+        - name: yaml-config
+          mountPath: /butler/cook-my-list.yml
+          subPath: cook-my-list.yml
+      restartPolicy: Never
+      volumes:
+        - name: yaml-config
+          configMap:
+            name: config
+            items:
+              - key: cook-my-list.yml
+                path: cook-my-list.yml
+  backoffLimit: 4

@@ -46,6 +46,7 @@ setup(
         "console_scripts": [
             f"{PACKAGE_NAME} = {MODULE_NAME}.cli:main",
             f"cookmylist-scraper = {MODULE_NAME}.cli:main",
+            f"cook-my-list = {MODULE_NAME}.cli:main",
         ]
     },
     packages=find_packages(exclude=["*tests*"]),

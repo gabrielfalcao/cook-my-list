@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kibana
+  namespace: ci-butler-data
+
+spec:
+  tls:
+  - hosts:
+      - kibana.ci-butler.news.dev.nyt.net
+    secretName: ci-butler-tls
+  rules:
+  - host: kibana.ci-butler.news.dev.nyt.net
+    http:
+      paths:
+      - backend:
+          serviceName: kibana-kibana
+          servicePort: http

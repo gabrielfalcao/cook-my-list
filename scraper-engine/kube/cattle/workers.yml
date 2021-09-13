@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: build-info-worker
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  minReadySeconds: 5
+  # progressDeadlineSeconds: 180
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cook-my-list
+      cook-my-list/role: application
+      app.kubernetes.io/svc: workers
+  template:
+    metadata:
+      labels:
+        cook-my-list/role: application
+        app.kubernetes.io/svc: workers
+    spec:
+      volumes:
+        - name: yaml-config
+          configMap:
+            name: config
+            items:
+              - key: cook-my-list.yml
+                path: cook-my-list.yml
+
+      initContainers:
+      - image: "gabrielfalcao/cook-my-list:latest"
+        imagePullPolicy: IfNotPresent
+        name: check-network-services
+        command: ['cook-my-list', 'test-connections']
+        envFrom:
+          - configMapRef:
+              name: env
+        volumeMounts:
+        - name: yaml-config
+          mountPath: /butler/cook-my-list.yml
+          subPath: cook-my-list.yml
+
+      containers:
+      - image: "gabrielfalcao/cook-my-list:latest"
+        imagePullPolicy: IfNotPresent
+        name: workers
+        command: ['cook-my-list', 'worker:get_recipe']
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 2Gi
+
+        envFrom:
+          - configMapRef:
+              name: env
+        volumeMounts:
+        - name: yaml-config
+          mountPath: /butler/cook-my-list.yml
+          subPath: cook-my-list.yml

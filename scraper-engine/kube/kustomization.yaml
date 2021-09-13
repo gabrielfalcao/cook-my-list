@@ -1,0 +1,42 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: cook-my-list
+
+namespace: ci-butler-ns
+namePrefix: cook-my-list-
+
+# Example configuration for the webserver
+# at https://github.com/monopole/hello
+commonLabels:
+  app-name: cook-my-list
+  app-runtime: python3.7
+  app.kubernetes.io/instance: fadee85f037537c2d13c9dc7e66ba9f97d364bcb
+  app.kubernetes.io/name: cook-my-list
+  git-revision: fadee85f037537c2d13c9dc7e66ba9f97d364bcb
+
+# kustomization.yaml
+
+configMapGenerator:
+- envs:
+  - kube.env
+  name: env
+- envs:
+  - kube.env
+  name: ngrok
+- files:
+  - cook-my-list.yml
+  name: config
+
+resources:
+- redis.yml
+- queue.yml
+- workers.yml
+- web.yml
+# # # pets
+# # - certs.yml
+
+images:
+- name: gabrielfalcao/cook-my-list
+  newName: gabrielfalcao/cook-my-list
+  newTag: 06444b5cc3e5b40579bb8744b553a21706b75c63

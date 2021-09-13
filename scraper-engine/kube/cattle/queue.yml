@@ -1,0 +1,120 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue
+spec:
+  # serviceAccountName: user
+  minReadySeconds: 5
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cook-my-list
+      app.kubernetes.io/svc: queue
+  template:
+    metadata:
+      labels:
+        cook-my-list/role: application
+        app.kubernetes.io/svc: queue
+    spec:
+      volumes:
+        - name: yaml-config
+          configMap:
+            name: config
+            items:
+              - key: cook-my-list.yml
+                path: cook-my-list.yml
+
+      # initContainers:
+      # - image: "gabrielfalcao/cook-my-list:latest"
+      #   imagePullPolicy: IfNotPresent
+      #   name: purge-redis-queues
+      #   command:
+      #     - "cook-my-list"
+      #     - "purge"
+      #     - "--redis-queue"
+      #   envFrom:
+      #     - configMapRef:
+      #         name: env
+
+      #   volumeMounts:
+      #   - name: yaml-config
+      #     mountPath: /butler/cook-my-list.yml
+      #     subPath: cook-my-list.yml
+
+      # - image: "gabrielfalcao/cook-my-list:latest"
+      #   imagePullPolicy: IfNotPresent
+      #   name: schedule-builds-for-analysis
+      #   command:
+      #     - "cook-my-list"
+      #     - "builds"
+      #     - "--redis-only"
+      #     - "--strict-filters"
+      #   envFrom:
+      #     - configMapRef:
+      #         name: env
+
+      #   volumeMounts:
+      #   - name: yaml-config
+      #     mountPath: /butler/cook-my-list.yml
+      #     subPath: cook-my-list.yml
+
+      containers:
+      - image: "gabrielfalcao/cook-my-list:latest"
+        imagePullPolicy: IfNotPresent
+        name: queue
+        command: ['cook-my-list', 'worker:queue']
+        envFrom:
+          - configMapRef:
+              name: env
+
+        ports:
+        - containerPort: 5555
+          name: reply
+        - containerPort: 6666
+          name: pull
+        - containerPort: 7777
+          name: push
+        - containerPort: 7772
+          name: monitor
+        volumeMounts:
+        - name: yaml-config
+          mountPath: /butler/cook-my-list.yml
+          subPath: cook-my-list.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: queue
+  labels:
+    cook-my-list/role: application
+    app.kubernetes.io/svc: queue
+
+spec:
+  type: NodePort
+  ports:
+    - port: 5555
+      targetPort: 5555
+      protocol: TCP
+      name: reply
+
+    - port: 6666
+      targetPort: 6666
+      protocol: TCP
+      name: pull
+
+    - port: 7777
+      targetPort: 7777
+      protocol: TCP
+      name: push
+
+    - port: 7772
+      targetPort: 7772
+      protocol: TCP
+      name: monitor
+
+
+  selector:
+    app.kubernetes.io/svc: queue

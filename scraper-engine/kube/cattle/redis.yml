@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: redis
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        cook-my-list/role: infra
+        app.kubernetes.io/svc: redis
+    spec:
+      initContainers: # https://faun.pub/digitalocean-kubernetes-and-volume-permissions-820f46598965
+      - name: volume-permission-fix
+        image: busybox
+        command: ["/bin/chmod","-R","777", "/data"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      containers:
+      - name: redis
+        image: redis:6.2.4-alpine
+        command: ["redis-server", "--appendonly", "yes"]
+        envFrom:
+          - configMapRef:
+              name: env
+        readinessProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 5
+          exec:
+            command: ["redis-cli", "info", "|", "grep loading:", "|", "grep 0"]
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - name: data
+          mountPath: /data
+
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    cook-my-list/role: infra
+    app.kubernetes.io/svc: redis
+
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+      name: redis
+
+  selector:
+    app.kubernetes.io/svc: redis

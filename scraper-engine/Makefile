@@ -3,7 +3,7 @@ GIT_ROOT		:= $(shell dirname $(MAKEFILE_PATH))
 VENV_ROOT		:= $(GIT_ROOT)/.venv
 
 PACKAGE_NAME		:= scraper_engine
-MAIN_CLI_NAME		:= scraper-engine
+MAIN_CLI_NAME		:= cook-my-list
 REQUIREMENTS_FILE	:= development.txt
 
 PACKAGE_PATH		:= $(GIT_ROOT)/$(PACKAGE_NAME)
@@ -12,8 +12,30 @@ REQUIREMENTS_PATH	:= $(GIT_ROOT)/$(REQUIREMENTS_FILE)
 BASE_TAG		:= latest
 PROD_TAG		?= $(shell git log --pretty="format:%H" -n1 . | tail -1)
 DOCKER_AUTHOR		:= gabrielfalcao
-BASE_IMAGE		:= cookmylist-server-base
-PROD_IMAGE		:= k8s-cookmylist-server
+BASE_IMAGE		:= cook-my-list-base
+PROD_IMAGE		:= cook-my-list
+
+DOCKER_ENV		:= $(GIT_ROOT)/tools/docker.env
+KUBE_ENV_CATTLE		:= $(GIT_ROOT)/kube/cattle/kube.env
+KUBE_ENV_PET		:= $(GIT_ROOT)/kube/pets/kube.env
+KUBE_ENV		:= $(KUBE_ENV_CATTLE) $(KUBE_ENV_PET)
+
+KUBE_BUTLER_YML_CATTLE	:= $(GIT_ROOT)/kube/cattle/cook-my-list.yml
+KUBE_BUTLER_YML_PET	:= $(GIT_ROOT)/kube/pets/cook-my-list.yml
+KUBE_BUTLER_YML		:= $(KUBE_BUTLER_YML_CATTLE) $(KUBE_BUTLER_YML_PET)
+BUILD_PATHS		:= build docs/build frontend/build
+DOCKER_IMAGE_NAME	:= gabrielfalcao/cook-my-list
+BRANCH_NAME		:= $(shell git branch | grep '^[*]' | awk '{print $$2}')
+DOCKER_IMAGE_TAG	:= $(shell git rev-parse origin/$(BRANCH_NAME))
+TMP_KUBE		:= $(GIT_ROOT)/wip/cattle.yml
+K8S_NAMESPACE		:= cook-my-list-ns
+KUSTOMIZATION_PATH	:= $(GIT_ROOT)/kube
+KUSTOMIZATION_CATTLE_YML:= $(KUSTOMIZATION_PATH)/cattle/kustomization.yml
+KUSTOMIZATION_PET_YML	:= $(KUSTOMIZATION_PATH)/pets/kustomization.yml
+KUSTOMIZATION_YML	:= $(KUSTOMIZATION_CATTLE_YML) $(KUSTOMIZATION_PET_YML)
+
+K8S_MAX_LOG_REQUESTS	:= 100
+
 
 # database env vars
 ALEMBIC_CONFIG		?= $(PACKAGE_PATH)/alembic.ini
@@ -168,6 +190,122 @@ $(REQUIREMENTS_PATH):
 	@echo "  $(MAKEFILE_PATH)."
 	@echo ""
 	@exit 1
+
+
+port-forward:
+	kubectl -n $(K8S_NAMESPACE) port-forward service/cook-my-list-queue 5555:5555
+
+kube: clean $(TMP_KUBE) $(KUSTOMIZATION_YML)
+
+undeploy: undeploy-application undeploy-infra
+
+undeploy-application:
+	kubectl -n $(K8S_NAMESPACE) delete service -l app.kubernetes.io/name=cook-my-list
+	kubectl -n $(K8S_NAMESPACE) delete statefulset -l app.kubernetes.io/name=cook-my-list
+	kubectl -n $(K8S_NAMESPACE) delete deployment -l app.kubernetes.io/name=cook-my-list
+
+undeploy-infra:
+	kubectl -n $(K8S_NAMESPACE) delete service -l cook-my-list/role=infra
+	kubectl -n $(K8S_NAMESPACE) delete statefulset -l cook-my-list/role=infra
+	kubectl -n $(K8S_NAMESPACE) delete deployment -l cook-my-list/role=infra
+
+
+undeploy-all:
+	kubectl -n $(K8S_NAMESPACE) delete deployment,service,statefulset --all
+
+undeploy-volume-claims:
+	kubectl -n $(K8S_NAMESPACE) delete pvc -l app.kubernetes.io/name=cook-my-list
+	kubectl -n $(K8S_NAMESPACE) delete pv -l app.kubernetes.io/name=cook-my-list
+
+k8s-delete-all-resources:
+	test -f $(TMP_KUBE) && kubectl -n $(K8S_NAMESPACE) delete -f $(TMP_KUBE)
+
+k8s-delete-pvs:
+	kubectl -n $(K8S_NAMESPACE) get pvc --field-selector metadata.namespace=$(K8S_NAMESPACE) -o yaml | kubectl -n $(K8S_NAMESPACE)  delete -f -
+
+k8s-delete-ns:
+	kubectl delete ns $(K8S_NAMESPACE)
+	$(MAKE) k8s-resources
+logs-web:
+	kubectl -n cook-my-list-ns logs --max-log-requests $(K8S_MAX_LOG_REQUESTS) --prefix --ignore-errors=true deployment/cook-my-list-web -f --all-containers
+
+logs-workers:
+	kubectl -n cook-my-list-ns logs --max-log-requests $(K8S_MAX_LOG_REQUESTS) --prefix --ignore-errors=true deployment/cook-my-list-build-info-worker -f --all-containers
+
+logs-queue:
+	kubectl -n cook-my-list-ns logs --max-log-requests $(K8S_MAX_LOG_REQUESTS) --prefix --ignore-errors=true deployment/cook-my-list-queue -f --all-containers
+
+k8s-resources:
+	kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl -n $(K8S_NAMESPACE) get --show-kind --ignore-not-found -n $(K8S_NAMESPACE)
+
+k8s-purge-redis:
+	 kubectl -n $(K8S_NAMESPACE) exec deployment/cook-my-list-queue -- bash -c "cook-my-list purge --redis-queue"
+
+k8s-purge-all:
+	 kubectl -n $(K8S_NAMESPACE) exec deployment/cook-my-list-queue -- bash -c "cook-my-list purge --elasticsearch --redis-queue --http-cache"
+
+k8s-shell-queue:
+	 kubectl -n $(K8S_NAMESPACE) exec -ti deployment/cook-my-list-queue -- bash
+
+k8s-shell-kibana:
+	 kubectl -n $(K8S_NAMESPACE) exec -ti service/cook-my-list-kibana -- bash
+
+k8s-shell-redis:
+	 kubectl -n $(K8S_NAMESPACE) exec -ti service/cook-my-list-redis -- bash
+
+k8s-job:
+	 kubectl -n $(K8S_NAMESPACE) exec deployment/cook-my-list-queue -- bash -c "cook-my-list builds --redis-only > /dev/null 2> /dev/null &"
+
+redeploy:
+	$(MAKE) undeploy
+	$(MAKE) deploy
+
+python-format:
+	find drone_ci_butler -name '*.py' | xargs $(VENV)/bin/isort --profile=attrs --fass --star-first --honor-noqa . # --profile=attrs
+	$(VENV)/bin/autoflake -ir drone_ci_butler
+	$(VENV)/bin/autoflake -ir tests
+	$(VENV)/bin/black drone_ci_butler
+	$(VENV)/bin/black tests
+
+# generates environment variables with secrets
+$(DOCKER_ENV) $(KUBE_ENV): clean
+	-$(ITERM2) name $(shell basename $(shell dirname $@)) env && $(ITERM2) color yellow 3
+	@$(MAIN_CLI_PATH) env > $@
+	@echo "\033[1;37mCREATED \033[1;32m$@\033[0m"
+
+$(KUBE_BUTLER_YML):
+	-$(ITERM2) name $(shell basename $@) && $(ITERM2) color grey 6
+	@cp -f ~/.cook-my-list.yml $@
+	@echo "\033[1;37mUPDATED \033[1;32m$@\033[0m"
+
+$(TMP_KUBE): $(KUBE_ENV) $(KUBE_BUTLER_YML) $(KUSTOMIZATION_YML)
+	-$(ITERM2) name $(shell basename $@) && $(ITERM2) color blue 3
+	@kustomize build kube/cattle > $@
+	@echo "\033[1;37mCREATED \033[1;32m$(TMP_KUBE)\033[0m"
+	@echo "\t⬆️️ \033[1;34mthis is the 'kubernetes' file\033[0m"
+
+deploy: $(TMP_KUBE)
+	-$(ITERM2) name deploy && $(ITERM2) color grey 6
+	@echo "\033[0;34mImage \033[1;35m$(DOCKER_IMAGE_NAME)\033[0m"
+	@echo "\033[0;34mTag \033[1;36m$(DOCKER_IMAGE_TAG)\033[0m"
+	@kubectl get ns $(K8S_NAMESPACE) || kubectl create ns $(K8S_NAMESPACE)
+	@kubectl -n $(K8S_NAMESPACE) apply -f $(TMP_KUBE)
+
+k9s:
+	-@$(ITERM2) name k8s 🛳 && $(ITERM2) color k
+	k9s -n $(K8S_NAMESPACE)
+
+env-docker: | $(DOCKER_ENV)
+
+compose: env-docker
+	docker-compose up #  --abort-on-container-exit
+
+check:
+	@$(MAIN_CLI_PATH) check
+	@$(MAIN_CLI_PATH) check-db
+	@$(MAIN_CLI_PATH) check-es
+	@$(MAIN_CLI_PATH) check-redis
+
 
 ###############################################################
 # Declare all target names that exist for convenience and don't

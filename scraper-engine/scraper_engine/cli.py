@@ -12,28 +12,66 @@ import click
 import requests
 import tqdm.asyncio
 import uvicorn
+from alembic import command as alembic_command
+from alembic.config import Config as AlembicConfig
 from uiclasses import Model
 
 from scraper_engine import sql
+from scraper_engine.config import config
 from scraper_engine.logs import get_logger, logger
-from scraper_engine.networking import connect_to_elasticsearch
+from scraper_engine.networking import (
+    check_database_is_reachable,
+    check_elasticsearch_is_reachable,
+    check_redis_is_reachable,
+    check_sqlalchemy_connection,
+    connect_to_elasticsearch,
+    connect_to_redis,
+    RedisQueueManager,
+)
 from scraper_engine.sites.tudo_gostoso import TudoGostosoClient
 from scraper_engine.sites.tudo_gostoso.models import Recipe
-from scraper_engine.sql import config
 from scraper_engine.web.core import app
 from scraper_engine.workers import GetRecipeWorker, QueueClient, QueueServer
 
 DEFAULT_QUEUE_ADDRESS = "tcp://127.0.0.1:5000"
 DEFAULT_PUSH_ADDRESS = "tcp://127.0.0.1:6000"
 DEFAULT_MAX_WORKERS = multiprocessing.cpu_count()
+alembic_ini_path = Path(__file__).parent.joinpath("alembic.ini").absolute()
 
 
 @click.group()
 @click.pass_context
 def main(ctx):
     print("Cook-My-List Scraper Engine")
-    sql.context.set_default_uri(config.SQLALCHEMY_URI)
+    sql.context.set_default_uri(config.sqlalchemy_uri)
     ctx.obj = {}
+
+
+@main.command("upgrade-db")
+@click.option("--target", default="head")
+@click.option("--alembic-ini", default=alembic_ini_path)
+@click.option("--retry-seconds", type=int, default=0)
+@click.pass_context
+def upgrade_db(ctx, target, alembic_ini, retry_seconds):
+    "runs the migrations"
+
+    started = time.time()
+    seconds_passed = time.time() - started
+    if retry_seconds:
+        while not check_database_is_reachable(verbose=True):
+            seconds_passed = time.time() - started
+            if seconds_passed < retry_seconds:
+                logger.info("waiting for database server")
+                time.sleep(1)
+            else:
+                break
+
+    if not check_database_is_reachable(verbose=False):
+        logger.error(f"cannot migrate db because database server is unreachable")
+        raise SystemExit(1)
+
+    sql.upgrade_db(config, target=target)
+    ensure_known_github_users_exist()
 
 
 @main.command("workers")
@@ -129,6 +167,16 @@ def purge_elasticsearch():
         print(es.indices.delete(index="recipes"))
     except Exception as e:
         logger.error(f'failed to purge index "recipes": {e}')
+
+
+@main.command("env")
+@click.option("-d", "--docker", is_flag=True)
+@click.pass_context
+def print_env_declaration(ctx, docker):
+    if docker:
+        print(config.to_docker_env_declaration())
+    else:
+        print(config.to_shell_env_declaration())
 
 
 @main.command("cleanup-workflows")

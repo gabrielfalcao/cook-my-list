@@ -1,4 +1,4 @@
-FROM gabrielfalcao/cookmylist-server-base
+FROM gabrielfalcao/cook-my-list-base
 
 VOLUME /cookmylist.com
 
