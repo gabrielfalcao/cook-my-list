@@ -5,6 +5,7 @@ from datetime import datetime
 import requests
 from chemist import db, Model
 from dateutil.parser import parse as parse_date
+
 from scraper_engine.networking import connect_to_elasticsearch
 
 from .base import metadata
@@ -40,9 +41,10 @@ class ScrapedRecipe(Model):
         self.updated_at = datetime.utcnow()
 
     def post_save(self, transaction):
-        """called right after executing a save.
-        This method can be overwritten by subclasses in order to take any domain-related action
-        """
+        if not es:
+            # ignore when elasticsearch is not available
+            return
+
         data = self.to_ui_dict()
         data.update(self.to_dict())
         data.pop("json_data", None)
