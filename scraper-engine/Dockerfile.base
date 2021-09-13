@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.7-alpine@sha256:deaefc5e07ef1f3420411dd5225b2fc2ab23ae7731e8cb216d9fe74557d81db5
 
 RUN apk --update --no-cache add \
     bash \
@@ -17,6 +17,7 @@ RUN apk --update --no-cache add \
     libzmq-static \
     cargo \
     rust \
+    rsync \
     npm \
     nodejs \
     postgresql-dev \
@@ -29,12 +30,11 @@ RUN apk --update --no-cache add \
 RUN mkdir -p /app /pip/cache
 RUN python3 -mvenv /venv
 
-WORKDIR /app
-
 COPY *.txt /app/
 
 ENV PIP_CACHE_DIR /pip/cache
 
-RUN /venv/bin/pip install -U pip
-RUN /venv/bin/pip install -U setuptools wheel
-RUN /venv/bin/pip install --no-binary :all: -r development.txt
+WORKDIR /app
+RUN /venv/bin/pip install -r development.txt
+
+WORKDIR /app

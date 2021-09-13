@@ -1,0 +1,91 @@
+name: 🐍 Drone CI Butler
+
+on:
+  push:
+    branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
+
+jobs:
+  build:
+    name: "Python Tests"
+    runs-on: ubuntu-latest
+    container: python:3.7.5-buster
+    env:
+      POSTGRES_PASSWORD: cook_my_list
+      POSTGRES_USER: cook_my_list
+      POSTGRES_DB: cook_my_list
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      ELASTICSEARCH_HOST: elasticsearch
+      ALEMBIC_CONFIG: /tmp/alembic.ini
+    strategy:
+      matrix:
+        python:
+          - 3.7.5
+    services:
+      postgres:
+        image: postgres:13
+        env:  # env needs to be duplicated here or else github fails
+          POSTGRES_PASSWORD: cook_my_list
+          POSTGRES_USER: cook_my_list
+          POSTGRES_DB: cook_my_list
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 1s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # - name: Configure sysctl limits
+    #   run: |
+    #     swapoff -a
+    #     sysctl -w vm.swappiness=1
+    #     sysctl -w fs.file-max=262144
+    #     sysctl -w vm.max_map_count=262144
+
+    - name: Runs Elasticsearch
+      uses: elastic/elastic-github-actions/elasticsearch@master
+      with:
+        stack-version: 7.13.1
+
+    - name: cache .venv
+      id: cache-venv
+      uses: actions/cache@v2
+      with:
+        path: ~/.venv
+        key: ${{ runner.os }}-pip-${{ hashFiles('**.txt') }}-${{ matrix.python }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: update apt
+      run: apt-get update
+
+    - name: install dependencies
+      run: apt-get install -y build-essential libxml2-dev libxslt1-dev libffi-dev libzmq3-dev
+
+    # - name: setup pyenv
+    #   uses: gabrielfalcao/pyenv-action@v7
+    #   with:
+    #     default: "${{ matrix.python }}"
+
+    - name: install dependencies
+      run: make develop setup
+
+    - name: run unit tests
+      run: make unit
+
+    - name: run db migrations
+      run: make db-migrate
+
+    # - name: run functional tests
+    #   run: make functional
+
+    - name: "Upload coverage results to codecov.io"
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml # optional
