@@ -1,13 +1,53 @@
 from decimal import Decimal
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
+from scraper_engine.networking import connect_to_elasticsearch
 from scraper_engine.sql.models import ScrapedRecipe
 
 app = FastAPI()
+
+
+class ElasticSearchClient(object):
+    def __init__(self):
+        self.es = connect_to_elasticsearch()
+
+    def search_recipes(self, text: str):
+        res = self.es.search(
+            index="recipes",
+            body={
+                "query": {
+                    "term": {
+                        "title": {
+                            "value": text,
+                            "boost": 1.0,
+                            "case_insensitive": True,
+                        },
+                        # "directions.step": {
+                        #     "value": text,
+                        #     "boost": 1.0,
+                        #     "case_insensitive": True,
+                        # },
+                        # "directions.name": {
+                        #     "value": text,
+                        #     "boost": 1.0,
+                        #     "case_insensitive": True,
+                        # },
+                    }
+                }
+            },
+        )
+        return res
+
+
+class ESMetadata(BaseModel):
+    _id: Optional[str]
+    _score: Optional[str]
+    _type: Optional[str]
+    _index: Optional[str]
 
 
 class Ingredient(BaseModel):
@@ -48,6 +88,9 @@ class Recipe(BaseModel):
     rating: Optional[Decimal]
 
 
+es = ElasticSearchClient()
+
+
 @app.get("/recipes/{recipe_id}", status_code=200, response_model=Recipe)
 async def get_recipe_by_id(recipe_id: int) -> Optional[Recipe]:
     recipe = ScrapedRecipe.find_one_by(id=recipe_id)
@@ -68,6 +111,18 @@ async def get_recipes(offset: int = 0, limit: int = 10) -> List[Recipe]:
         order_by="-id",
     )
     return [model.to_ui_dict() for model in recipes]
+
+
+@app.post(
+    "/recipes/search",
+    status_code=200,  # response_model=Union[List[Recipe], ESMetadata]
+)
+async def search_recipes(text: str, metadata: bool = False) -> Optional[Recipe]:
+    res = es.search_recipes(text)
+    if metadata:
+        return res
+
+    return [x.pop("_source", {}) for x in res["hits"]["hits"]]
 
 
 @app.get("/")
