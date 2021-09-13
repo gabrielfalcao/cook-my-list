@@ -100,7 +100,7 @@ class QueueServer(object):
         while self.should_run:
             try:
                 await self.loop_once()
-                asyncio.sleep()
+                await asyncio.sleep(self.sleep_timeout)
             except Exception as e:
                 self.handle_exception(e)
                 break
@@ -111,47 +111,23 @@ class QueueServer(object):
 
     async def push_job(self, data: dict):
         self.logger.info(f"Waiting for socket to become available to push job")
-        socks = dict(await self.poller.poll())
+        socks = dict(await self.poller.poll(1000 * self.sleep_timeout))
         if self.push in socks and socks[self.push] == zmq.POLLOUT:
             await self.push.send_json(data)
             return True
 
     async def handle_request(self):
-        socks = dict(await self.poller.poll())
+        socks = dict(await self.poller.poll(1000 * self.sleep_timeout))
         if self.rep in socks and socks[self.rep] == zmq.POLLIN:
             data = await self.rep.recv_json()
             if data:
-                self.logger.info(f"processing job {data}")
-                while not self.push_job(data):
-                    await asyncio.sleep(self.sleep_timeout)
                 await self.rep.send_json(data)
                 return data
 
     async def process_queue(self):
         data = await self.handle_request()
         if not data:
-            await asyncio.sleep()
+            await asyncio.sleep(self.sleep_timeout)
             return
-
-        await self.process_job(data)
-
-    async def process_job(self, info: dict):
-        recipe_url = info.get("recipe_url")
-
-        missing_fields = []
-
-        if not recipe_url:
-            missing_fields.append("recipe_url")
-
-        if missing_fields:
-            self.logger.error(f"missing fields: {missing_fields} in {info}")
-            return
-
-        api = TudoGostosoClient(
-            url=url,
-        )
-        await self.fetch_data(api, repo, owner)
-
-    async def fetch_data(self, api: TudoGostosoClient, recipe_url: str):
-        recipe = api.get_recipe(recipe_url)
-        self.logger.info(f"retrieved recipe: {recipe}")
+        self.logger.info(f"forwarding job {data}")
+        await self.push_job(data)

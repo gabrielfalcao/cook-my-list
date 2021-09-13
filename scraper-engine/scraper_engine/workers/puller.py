@@ -16,11 +16,13 @@ class PullerWorker(object):
         pull_connect_address: str,
         worker_id: str,
         high_watermark: int = 1,
+        wait_timeout: int = 5,
     ):
         self.logger = get_logger(f"{self.__log_name__}:{worker_id}")
 
         self.pull_connect_address = pull_connect_address
         self.should_run = True
+        self.wait_timeout = wait_timeout
         self.poller = zmq.asyncio.Poller()
         self.queue = context.socket(zmq.PULL)
         self.queue.set_hwm(high_watermark)
@@ -50,12 +52,15 @@ class PullerWorker(object):
 
     async def pull_queue(self):
         self.logger.debug(f"Waiting for job")
-        socks = dict(await self.poller.poll())
+        socks = dict(await self.poller.poll(1000 * self.wait_timeout))
         if self.queue in socks and socks[self.queue] == zmq.POLLIN:
             return await self.queue.recv_json()
 
     async def process_queue(self):
-        info = await self.pull_queue()
+        info = await self.pull_queue() or {}
+        if not info:
+            return
+
         self.logger.debug(f"processing job")
         try:
             await self.process_job(info)
