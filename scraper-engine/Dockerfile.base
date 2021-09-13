@@ -37,6 +37,7 @@ COPY *.txt /app/
 ENV PIP_CACHE_DIR /pip/cache
 
 WORKDIR /app
+RUN /venv/bin/pip install -U pip
 RUN /venv/bin/pip install -r development.txt
 
 WORKDIR /app
