@@ -14,7 +14,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '0'
+      - '413'
       Connection:
       - keep-alive
       Content-Length:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Mon, 13 Sep 2021 18:39:30 GMT
+      - Mon, 13 Sep 2021 18:46:24 GMT
       Location:
       - https://www.tudogostoso.com.br//sitemap.xml
       X-Cache-V:
-      - MISS
+      - HIT
     status:
       code: 302
       message: Moved Temporarily
@@ -1633,10 +1633,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '413'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e37fa6dd68452e-TXL
+      - 68e389c1ddf1d11d-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -1644,18 +1646,18 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:31 GMT
+      - Mon, 13 Sep 2021 18:46:24 GMT
       ETag:
       - W/"bd98b5f98d5b13dff10693be771dacf0"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:31 GMT
+      - Mon, 13 Sep 2021 23:46:24 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=FfqdcybZe5If_doxh94yC3YtL_QgU7fmMLW_JWAV00M-1631558371-0-Ae01SzrLON/YG/jIkfiGaTgFW31/5jgCoWKX7Sd14PUgllgEOsp2w16QYYU4sl/Nlt1Lo23BbtHkxfxLf0/enrM=;
-        path=/; expires=Mon, 13-Sep-21 19:09:31 GMT; domain=.tudogostoso.com.br; HttpOnly;
+      - __cf_bm=4iES4pnflFkaBza3kJhKo2VmjV.8bwB0Cv5RXv8VcYA-1631558784-0-Aco1IU8+Cu7gi6pcrcnPmLpMGdeZtmtW/XW4Xlywf6tTZtJp0a+/uLs6St6vTa4wupTnKhEx06+KeuErYVoZHKQ=;
+        path=/; expires=Mon, 13-Sep-21 19:16:24 GMT; domain=.tudogostoso.com.br; HttpOnly;
         Secure; SameSite=None
       Status:
       - 200 OK

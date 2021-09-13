@@ -14,7 +14,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '1'
+      - '414'
       Connection:
       - keep-alive
       Content-Length:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Mon, 13 Sep 2021 18:39:31 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       Location:
       - https://www.tudogostoso.com.br//sitemap.xml
       X-Cache-V:
@@ -1634,11 +1634,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '1'
+      - '414'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 68e37fb17b1b58e4-TXL
+      - 68e389c73c424528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -1646,18 +1646,18 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:32 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"bd98b5f98d5b13dff10693be771dacf0"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:32 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=;
-        path=/; expires=Mon, 13-Sep-21 19:09:32 GMT; domain=.tudogostoso.com.br; HttpOnly;
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=;
+        path=/; expires=Mon, 13-Sep-21 19:16:25 GMT; domain=.tudogostoso.com.br; HttpOnly;
         Secure; SameSite=None
       Status:
       - 200 OK
@@ -1683,7 +1683,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -21700,10 +21700,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '408'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e37fb27dbb58e4-TXL
+      - 68e389c83f1b4528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -21711,13 +21713,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:37 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"3c77dcbc8f1d9a794f015b28aaeafa7b"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:37 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Status:
@@ -21744,7 +21746,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -41761,10 +41763,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '402'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e37fd4bbc158e4-TXL
+      - 68e389c98a864528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -41772,13 +41776,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:43 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"6e026f9565ed2f0681d951f30725aa8c"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:43 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Status:
@@ -41805,7 +41809,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -61822,10 +61826,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '397'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e37ff7bb3758e4-TXL
+      - 68e389ca6cdd4528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -61833,13 +61839,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:48 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"4ea0b8341575740a037d01ec9c16ba23"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:48 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Status:
@@ -61866,7 +61872,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -81883,10 +81889,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '391'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e3801af8ff58e4-TXL
+      - 68e389cb3e9e4528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -81894,13 +81902,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:54 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"145558b5d118002d2dd58ecfee71a978"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:54 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Status:
@@ -81927,7 +81935,7 @@ interactions:
     body: null
     headers:
       Cookie:
-      - __cf_bm=gIDj9Wthg6UVx8sNR5VfFxRNR.b8n6FvYgH9ZMaTJIE-1631558372-0-AXwLjXPhRrfpUStRnlxIOzPRE2eF9bJ6oT6QPp2N7fo9yJy9jUFBK4vmP28zlYoM/a+jHfAI83/t5+pHjUPh8PU=
+      - __cf_bm=O8kOhc1s7lF0ku9o_ov5p6Lm55gKJiiJj5RdgUchG1c-1631558785-0-AfjPZaBGgxDgcdaS+46f88Z62OALGeDs3niJsh2inrZjP0kX6SqtO2r+yG76RKgXEG7s7zPjw6DalUOui3uMmsQ=
       User-Agent:
       - AdsBot-Google
     method: GET
@@ -101944,10 +101952,12 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '386'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 68e3803d5ecf58e4-TXL
+      - 68e389cc28b84528-TXL
       Cache-Control:
       - public, max-age=18000
       Connection:
@@ -101955,13 +101965,13 @@ interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Date:
-      - Mon, 13 Sep 2021 18:39:59 GMT
+      - Mon, 13 Sep 2021 18:46:25 GMT
       ETag:
       - W/"2aa045197ab667a193b8ad9288f8d12e"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
-      - Mon, 13 Sep 2021 23:39:59 GMT
+      - Mon, 13 Sep 2021 23:46:25 GMT
       Server:
       - cloudflare
       Status:

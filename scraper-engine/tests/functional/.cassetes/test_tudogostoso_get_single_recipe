@@ -31,7 +31,7 @@ interactions:
       enviada por Isabel Kede\",\"url\":\"https://img.itdg.com.br/tdg/images/recipes/000/080/799/60080/60080_original.jpg?mode=crop&width=710&height=400\",\"width\":710,\"height\":400}],\"total_ratings\":202,\"rating\":4.5,\"servings\":\"4
       por\xE7\xF5es\",\"servings_value\":4.0,\"servings_unit\":\"por\xE7\xF5es\",\"total_cooking_time\":\"20
       min\",\"total_cooking_time_value\":20.0,\"total_cooking_time_unit\":\"min\",\"author_name\":\"Carol
-      Ariat\",\"picture_count\":6,\"directions_count\":8,\"ingredients_count\":13,\"created_at\":\"2021-06-03T01:10:03.679358\",\"updated_at\":\"2021-09-13T18:39:29.647411\"}"
+      Ariat\",\"picture_count\":6,\"directions_count\":8,\"ingredients_count\":13,\"created_at\":\"2021-06-03T01:10:03.679358\",\"updated_at\":\"2021-09-13T18:46:23.253328\"}"
     headers:
       connection:
       - keep-alive
@@ -45,7 +45,7 @@ interactions:
     uri: http://elasticsearch-master.ci-butler-data:9200/recipes/_doc/21122
   response:
     body:
-      string: '{"_index":"recipes","_type":"_doc","_id":"21122","_version":6,"result":"updated","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":400624,"_primary_term":8}'
+      string: '{"_index":"recipes","_type":"_doc","_id":"21122","_version":8,"result":"updated","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":400626,"_primary_term":8}'
     headers:
       content-length:
       - '164'
